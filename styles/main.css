@@ -209,7 +209,7 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  left: 400px;
+  left: 280px;
   bottom: 0;
   height: 100%;
   padding: 20px 40px 0;
@@ -242,10 +242,12 @@ body {
   top: 0;
   left: 0;
   bottom: 0;
-  width: 400px;
+  width: 280px;
   height: 100%;
   overflow: hidden;
   background-color: #333;
+  background-image: url("https://tva1.sinaimg.cn/large/00831rSTgy1gdfrb1gzy2j30860asgnw.jpg");
+  background-repeat: repeat;
   color: #fff;
   text-align: right;
 }
@@ -275,10 +277,12 @@ body {
   display: table-cell;
   vertical-align: bottom;
 }
-.sidebar .info .content {
-  padding-left: 10px;
+.sidebar .content {
+  width: 250px;
+  padding-left: 30px;
 }
 .sidebar .author {
+  margin-bottom: 0px;
   margin-top: 0.5em;
 }
 .sidebar .description {
