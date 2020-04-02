@@ -5,7 +5,7 @@
     -moz-filter: grayscale(60%);
     -ms-filter: grayscale(60%);
     -o-filter: grayscale(60%);
-    filter: grayscale(60%);
+    filter: grayscale(30%);
     transition-duration: 0.4s;
     transition-property: filter, -webkit-filter, -moz-filter, -ms-filter, -o-filter;
   }
