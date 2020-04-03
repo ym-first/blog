@@ -242,7 +242,7 @@ body {
   top: 0;
   left: 0;
   bottom: 0;
-  width: 280px;
+  width: 320px;
   height: 100%;
   overflow: hidden;
   background-color: #333;
@@ -278,7 +278,7 @@ body {
   vertical-align: bottom;
 }
 .sidebar .content {
-  width: 250px;
+  width: 290px;
   padding-left: 30px;
 }
 .sidebar .author {
