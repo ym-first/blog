@@ -6,12 +6,12 @@
     display: block;
     height: 45px;
     color: #fff;
-    text-align: right;
-    background-color: color-default;
+    text-align: center;
+    background-color: #0c0000;
     padding: 5px 10px;
   }
   .mobile-header .title {
-    font-size: 32px;
+    font-size: 24px;
     line-height: 32px;
     vertical-align: middle;
     color: #fff;
