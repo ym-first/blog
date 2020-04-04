@@ -222,7 +222,7 @@ function elasticText() {
 			ct = obj.content,
 			du = obj.duration || 50,
 			effact = obj.effact
-		let fs = obj.fontSize || 14
+		let fs = obj.fontSize || 12
 		const tf = document.getElementById(id)
 		if (typeof fs !== 'string') {
 			fs = fs.toString()
@@ -661,7 +661,7 @@ function getHitokoto() {
 				id: 'yiyanmotto',
 				duration: 100,
 				effact: 'easeOut',
-				content: '生活不止眼前的苟且'
+				content: '不要为不能改变的事情烦恼~'
 			})
 		}
 	})
