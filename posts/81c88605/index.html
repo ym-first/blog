@@ -442,17 +442,20 @@ application.setName(<span class="string">"api-generic-consumer"</span>);
         var guest_info = 'nick,mail,link'.split(',').filter(function(item){
           return GUEST_INFO.indexOf(item) > -1
         });
+
         new Valine({
             el: '#comments',
             notify: 'false' == 'true',
             verify: 'false' == 'true',
             appId: "0KCO3NrCXRiYRqv8EJkV1OOp-gzGzoHsz",
             appKey: "ShTIqqkpe21E2szUNPgSdE7q",
-            avatar: "mm",
+            avatar: "wavatar",
             placeholder: "Just go go",
             guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
             pageSize: "10"
         })
+        vinputt = document.getElementsByClassName("vinput");
+        for (i=0 ; i<vinputt.length ; i++){vinputt[i].style.border="1.5px solid #1abc9c36"}
     </script>
     <!-- Valine Comments end -->
 
