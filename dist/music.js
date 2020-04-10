@@ -3,6 +3,18 @@ const ap = new APlayer({
     // mini: true,
     autoplay: false,
     audio: [
+        {
+            name: "分手总要在雨天",
+            artist: '张学友',
+            url: 'http://music.163.com/song/media/outer/url?id=187741.mp3',
+            cover: 'http://p2.music.126.net/G3WbwV7xfv-V-pVE36iTTA==/18255191556505451.jpg?param=40y40',
+            },
+        {
+        name: "等",
+        artist: '陈百强',
+        url: 'http://music.163.com/song/media/outer/url?id=27874927.mp3',
+        cover: 'http://p2.music.126.net/cwHgs1tjNlOLtDj8YJcD1A==/109951163067903912.jpg?param=40y40',
+        },
       {
         name: "My Way",
         artist: '张敬轩',
