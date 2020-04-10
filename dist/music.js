@@ -13,7 +13,7 @@ const ap = new APlayer({
         name: "等",
         artist: '陈百强',
         url: 'http://music.163.com/song/media/outer/url?id=27874927.mp3',
-        cover: 'http://p2.music.126.net/cwHgs1tjNlOLtDj8YJcD1A==/109951163067903912.jpg?param=40y40',
+        cover: 'http://p1.music.126.net/luoiKIagB63n7Y3bxfsZYQ==/109951163633483361.jpg?param=40y40',
         },
       {
         name: "My Way",
