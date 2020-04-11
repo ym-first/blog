@@ -39,16 +39,16 @@
 
 
     
-    <meta name="description" content="如何测试dubbo接口：Python:1. hessian+http的方式调用(python-hessian库):">
+    <meta name="description" content="接上文,了解Dubbo接口后,如何测试dubbo接口：Python版解决方案:1. hessian+http的方式调用(python-hessian库):">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dubbo接口测试">
 <meta property="og:url" content="https://ym-first.github.io/blog/posts/81c88605/index.html">
 <meta property="og:site_name" content="M.Y_敏兒">
-<meta property="og:description" content="如何测试dubbo接口：Python:1. hessian+http的方式调用(python-hessian库):">
+<meta property="og:description" content="接上文,了解Dubbo接口后,如何测试dubbo接口：Python版解决方案:1. hessian+http的方式调用(python-hessian库):">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTgy1gdboopoouuj30po0h5dif.jpg">
 <meta property="article:published_time" content="2020-04-03T05:30:40.000Z">
-<meta property="article:modified_time" content="2020-04-11T01:22:56.889Z">
+<meta property="article:modified_time" content="2020-04-11T13:39:28.195Z">
 <meta property="article:author" content="M.Y_敏兒">
 <meta property="article:tag" content="测试">
 <meta name="twitter:card" content="summary">
@@ -200,7 +200,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#如何测试dubbo接口："><span class="post-toc-number">1.</span> <span class="post-toc-text">如何测试dubbo接口：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Python"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Python:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-hessian-http的方式调用-python-hessian库"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">1. hessian+http的方式调用(python-hessian库):</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-使用dubbo-client"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">2. 使用dubbo-client</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#java"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">java:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-XML配置文件方式"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">1. XML配置文件方式:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-API方式的泛化调用"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">2. API方式的泛化调用:</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#接上文-了解Dubbo接口后-如何测试dubbo接口："><span class="post-toc-number">1.</span> <span class="post-toc-text">接上文,了解Dubbo接口后,如何测试dubbo接口：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Python版解决方案"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Python版解决方案:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-hessian-http的方式调用-python-hessian库"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">1. hessian+http的方式调用(python-hessian库):</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-使用dubbo-client"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">2. 使用dubbo-client</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#java"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">java:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-XML配置文件方式"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">1. XML配置文件方式:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-API方式的泛化调用"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">2. API方式的泛化调用:</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
    
@@ -229,7 +229,7 @@
             阅读本文可能花费您&nbsp;<span class="post-count">5</span>&nbsp;分钟
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="如何测试dubbo接口："><a href="#如何测试dubbo接口：" class="headerlink" title="如何测试dubbo接口："></a>如何测试dubbo接口：</h1><h2 id="Python"><a href="#Python" class="headerlink" title="Python:"></a><strong>Python:</strong></h2><h3 id="1-hessian-http的方式调用-python-hessian库"><a href="#1-hessian-http的方式调用-python-hessian库" class="headerlink" title="1. hessian+http的方式调用(python-hessian库):"></a>1. <strong>hessian+http的方式调用(python-hessian库):</strong></h3><a id="more"></a>
+            <h1 id="接上文-了解Dubbo接口后-如何测试dubbo接口："><a href="#接上文-了解Dubbo接口后-如何测试dubbo接口：" class="headerlink" title="接上文,了解Dubbo接口后,如何测试dubbo接口："></a>接上文,了解Dubbo接口后,如何测试dubbo接口：</h1><h2 id="Python版解决方案"><a href="#Python版解决方案" class="headerlink" title="Python版解决方案:"></a><strong>Python版解决方案:</strong></h2><h3 id="1-hessian-http的方式调用-python-hessian库"><a href="#1-hessian-http的方式调用-python-hessian库" class="headerlink" title="1. hessian+http的方式调用(python-hessian库):"></a>1. <strong>hessian+http的方式调用(python-hessian库):</strong></h3><a id="more"></a>
 <ul>
 <li><p>(1) dubbo项目中，增加hessian方式序列化，及相关依赖。下图为xml配置方式示例。</p>
 <ul>
@@ -319,7 +319,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新：<time datetime="2020-04-11T01:22:56.889Z" itemprop="dateUpdated">2020-04-11 09:22:56</time>
+    最后更新：<time datetime="2020-04-11T13:39:28.195Z" itemprop="dateUpdated">2020-04-11 21:39:28</time>
 </span>
 
 
@@ -366,7 +366,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://ym-first.github.io/blog/posts/81c88605/&title=《Dubbo接口测试》 — M.Y_敏兒&source=如何测试dubbo接口：Python:1. hessian+http的方式调用(python-hessian库):" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://ym-first.github.io/blog/posts/81c88605/&title=《Dubbo接口测试》 — M.Y_敏兒&source=接上文,了解Dubbo接口后,如何测试dubbo接口：Python版解决方案:1. hessian+http的方式调用(python-hessian库):" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -401,7 +401,15 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/blog/posts/f0c13426/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：Dubbo接口框架相关概念
+        </h4>
+      </a>
+    </div>
   
 
   
@@ -533,7 +541,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://ym-first.github.io/blog/posts/81c88605/&title=《Dubbo接口测试》 — M.Y_敏兒&source=如何测试dubbo接口：Python:1. hessian+http的方式调用(python-hessian库):" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://ym-first.github.io/blog/posts/81c88605/&title=《Dubbo接口测试》 — M.Y_敏兒&source=接上文,了解Dubbo接口后,如何测试dubbo接口：Python版解决方案:1. hessian+http的方式调用(python-hessian库):" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
