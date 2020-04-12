@@ -1,6 +1,8 @@
 ---
 title: Dubbo接口测试
-tags: 测试
+tags: 
+- 测试
+- 接口测试
 categories: 接口测试
 abbrlink: 81c88605
 date: 2020-04-03 13:30:40

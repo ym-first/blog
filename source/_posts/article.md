@@ -1,6 +1,8 @@
 ---
 title: Dubbo接口框架相关概念
-tags: 测试
+tags:
+- 测试
+- 接口测试
 abbrlink: f0c13426
 date: 2020-04-12 11:11:30
 ---
