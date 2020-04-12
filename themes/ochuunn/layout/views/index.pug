@@ -1,0 +1,42 @@
+doctype html
+html.index(lang="zh-CN")
+  head
+    include head.pug
+    //- <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    //- <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    //- <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  body
+    //- # 我自己加的汉堡形导航栏
+    <button class="sidebar-toggle" type="button" data-toggle="collapse" data-target="#demo">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    </button>
+    <div id="demo" class="collapse-in">
+      Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
+      cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
+      vice lomo.ß
+    </div>
+
+    #particles-oli-wrapper.hide
+    .index-wrapper
+      header.head.index.hide
+        h1.head-title.u-fl
+          = config.title
+        include nav.pug
+      <div class="dropdown">
+      <button class="dropbtn">目录</button>
+      <div class="dropdown-content">
+        <a href="//www.runoob.com">菜鸟教程 1</a>
+        <a href="//www.runoob.com">菜鸟教程 2</a>
+        <a href="//www.runoob.com">菜鸟教程 3</a>
+        <a href="//www.runoob.com">菜鸟教程 1</a>
+        <a href="//www.runoob.com">菜鸟教程 2</a>
+        <a href="//www.runoob.com">菜鸟教程 3</a>
+      </div>
+      </div>
+
+    != js('js/particles.min.js')
+    != js('js/particles.oli.js')
+
+    include ../plugins/google.pug

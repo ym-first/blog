@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- partial('_partials/head') %>
+  <link rel="stylesheet" media="screen" href="/blog/scripts/demo/css/style.css">
+</head>
+<body
+  <% if (theme.monochrome) { %>
+    class="monochrome"
+  <% } %>
+  >
+  <%- partial('_partials/mobile-header', {}, {cache: true}) %>
+  <!-- <div id="particles-js"></div> -->
+  <div id="particles-js" class="main-container">
+    <%- partial('_partials/sidebar', {}, {cache: true}) %>
+    <div class="main-content">
+      <!-- <canvas id="backgroud_can" height="900"></canvas> -->
+      <script src="/blog/scripts/particles.min.js"></script>
+      
+      <script src="/blog/scripts/demo/js/app.js"></script>
+      
+      <% if (theme.maxContentWidth) { %>
+        <div style="max-width: '<%= theme.maxContentWidth %>'">
+      <% } %>
+          <%- body %>
+          <%- partial('_partials/footer', {}, {cache: true}) %>
+      <% if (theme.maxContentWidth) { %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+  <%- partial('_partials/scripts', {}, {cache: true}) %>
+</body>
+</html>
