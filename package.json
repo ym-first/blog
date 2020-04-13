@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "aplayer": "^1.10.1",
+    "bufferutil": "^4.0.1",
+    "canvas": "^2.6.1",
     "hexo": "^4.0.0",
     "hexo-abbrlink": "^2.0.5",
     "hexo-deployer-git": "^2.1.0",
@@ -31,6 +33,7 @@
     "hexo-renderer-stylus": "^1.1.0",
     "hexo-server": "^1.0.0",
     "hexo-tag-aplayer": "^3.0.4",
-    "hexo-wordcount": "^6.0.1"
+    "hexo-wordcount": "^6.0.1",
+    "utf-8-validate": "^5.0.2"
   }
 }
