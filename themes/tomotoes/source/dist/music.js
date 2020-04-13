@@ -4,6 +4,18 @@ const ap = new APlayer({
     autoplay: false,
     audio: [
         {
+          name: "不要怕-Live",
+          artist: '吉克隽逸',
+          url: 'http://music.163.com/song/media/outer/url?id=28936113.mp3',
+          cover: 'http://p2.music.126.net/0ZBYdn9Hm7_R-Z50pOwF6A==/8891750533913724.jpg?param=40y40',
+          },
+        {
+          name: "My Way",
+          artist: '张敬轩',
+          url: 'http://music.163.com/song/media/outer/url?id=189243.mp3',
+          cover: 'https://p1.music.126.net/7a77DZlspSaBZexOr8mdLw==/18863221486279082.jpg?param=40y40',
+        },
+        {
             name: "分手总要在雨天",
             artist: '张学友',
             url: 'http://music.163.com/song/media/outer/url?id=187741.mp3',
@@ -15,17 +27,11 @@ const ap = new APlayer({
         url: 'http://music.163.com/song/media/outer/url?id=27874927.mp3',
         cover: 'http://p1.music.126.net/luoiKIagB63n7Y3bxfsZYQ==/109951163633483361.jpg?param=40y40',
         },
-      {
-        name: "My Way",
-        artist: '张敬轩',
-        url: 'http://music.163.com/song/media/outer/url?id=189243.mp3',
-        cover: 'https://p1.music.126.net/7a77DZlspSaBZexOr8mdLw==/18863221486279082.jpg?param=40y40',
-      },
-      {
-        name: '情人',
-        artist: 'Beyond',
-        url: 'http://music.163.com/song/media/outer/url?id=347241.mp3', 
-        cover: 'http://p2.music.126.net/pHr2hq_QGGDrM3JOedJyVQ==/93458488373022.jpg?param=40y40',
-      }
+      // {
+      //   name: '情人',
+      //   artist: 'Beyond',
+      //   url: 'http://music.163.com/song/media/outer/url?id=347241.mp3', 
+      //   cover: 'http://p2.music.126.net/pHr2hq_QGGDrM3JOedJyVQ==/93458488373022.jpg?param=40y40',
+      // }
     ]
 });
