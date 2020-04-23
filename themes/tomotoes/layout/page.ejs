@@ -2,6 +2,7 @@
     title: page.title,
     hdClass: 'page-header'
 }) %>
+
 <%
 page.reward = 'reward' in page ? (theme.reward && page.reward) : theme.reward;
 page.slug = 'hexo-page-' + page.path.replace(/\/index\.html$/,'').split('/').join('-');
