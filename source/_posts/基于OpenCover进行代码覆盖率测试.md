@@ -10,12 +10,12 @@ tags:
 之前的工作中有用到OpenCover对项目中的Asp.Net站点、服务进行覆盖率测试, 现在重新整理下笔记.
 
 ## OpenCover简介：
-* 一个用于.NET 2.0及以上应用程序的代码覆盖的开源命令行工具。
+* 一个用于.NET 2.0及以上应用程序的代码覆盖的开源命令行工具;
 <!-- more -->
-* 使用PDB文件提供序列信息，来确定dll文件中哪些代码行与源代码的每一行相关联，然后检测、插桩每个序列点以记录命中的行。
-    * 因此必须要有的是PDB文件以及可执行文件和程序集，应该在调试模式下构建测试中的应用程序。如果未找到PDB文件，则不会收集任何覆盖数据。
-* 使用COM（组件对象模型）开发，检测程序profiler部分使用c++，
-* OpenCover使用mono.Cecil来分析分支或IL以确定在何处检测代码。
+* 使用PDB文件提供序列信息，来确定dll文件中哪些代码行与源代码的每一行相关联，然后检测、插桩每个序列点以记录命中的行;
+    * 因此必须要有的是PDB文件以及可执行文件和程序集，应该在调试模式下构建测试中的应用程序。如果未找到PDB文件，则不会收集任何覆盖数据;
+* 使用COM（组件对象模型）开发，检测程序profiler部分则使用c++;
+* 使用mono.Cecil来分析分支或IL以确定在何处检测代码;
 
 ### OpenCover提供的指标有：
 1. 声明范围, 即已涵盖的行数。
@@ -29,8 +29,8 @@ tags:
  * 默认选择所有的类和方法
  * 使用PartCover语法，(+|-)[Assembly-Filter]Type-Filter。
  * 例如，+[Open\*]* 包括以Open开头的程序
- * -[\*]Core.\* 集中的所有类型，排除Core命名空间中的所有类型，而不管程序集如何。
- * 如果未提供过滤器，+[\*]\ß*则会自动应用默认的包含过滤器。
+ * -[\*]Core.\* 排除Core命名空间中的所有类型(跟程序集无关)。
+ * 如果未提供过滤器，+[\*]\*则会自动应用默认包含所有的过滤器。
 * -output： 输出XML文件的路径，如果为空，则将在当前目录中创建results.xml
 * -register [：user] - 注册和取消注册代码覆盖率分析器
 * -targetargs： - 要传递给目标进程的参数（可指定被测程序的路径）
@@ -60,7 +60,7 @@ tags:
 * 12)ReportGenerator将xml转成HTML
 * ![](https://tva1.sinaimg.cn/large/0081Kckwgy1glacgqgvjyj316b0mcaig.jpg)
 
-## 测试前, 对OpenCover和ReportGenerator的主要配置流程：
+## OpenCover和ReportGenerator的主要配置流程：
 ### 以测试站点程序为例:
 * 1)配置好OpenCover、ReportGenerator、被测程序的路径、IIS Express config的路径
 * 2)执行配置好相关参数的CMD命令, 示例如下：
@@ -87,6 +87,7 @@ H:\白盒测试\Debug\ReportGenerator\ReportGenerator.exe -reports:H:\白盒测�
 1）执行如下命令启动服务：
 G:\Opencover所在路径\OpenCover.Console.exe -service:byname -target:安装好的服务名 -register:ym -output:H:\白盒测试保存路径\xxx\xxx.xml 
 2）测试完毕后，正常关闭服务，则可收集覆盖数据。
+
 ### 报告部分截图
 * 包含语句覆盖和分支覆盖情况。点击相应的页面，会进入对应程序，可看到具体覆盖到哪一行代码。
 ![](https://tva1.sinaimg.cn/large/0081Kckwgy1glac4ottr3j30s30hbaay.jpg)
@@ -136,8 +137,7 @@ Then you can use ReportGenerator to merge the coverage results.
 * 它将项目源代码中的标识符和语句映射为已编译应用程序中的相应标识符和指令。这些映射文件将调试器链接到您的源代码，从而可以进行调试, 跟踪到特定的函数和代码行。
 * 它包含调试代码时所需的许多重要相关信息（在Visual Studio中），例如，在您希望调试器在Visual Studio中中断的位置插入断点。
 * 当加载一个模块(dll文件), debugger找到对应的pdb(Program Debug Database)文件. 文件中记录了模块的变量、方法、类、源代码行数等信息, 包含类型和符号化调试信息编译和链接项目的过程中收集的二进制文件。
-<a href="https://blogs.msdn.microsoft.com/vcblog/2016/02/08/whats-inside-a-pdb-file/">参考1 </a>
-<a href="https://tpodolak.com/blog/2017/10/12/net-core-calculating-code-coverage-opencover-windows/">参考2  </a><a href="http://www.cnblogs.com/itech/archive/2011/08/15/2136522.html">参考3  </a><a href="https://blog.csdn.net/feihe0755/article/details/54233714">参考4</a>
+<a href="https://blogs.msdn.microsoft.com/vcblog/2016/02/08/whats-inside-a-pdb-file/">参考1 </a><a href="https://tpodolak.com/blog/2017/10/12/net-core-calculating-code-coverage-opencover-windows/">参考2  </a><a href="http://www.cnblogs.com/itech/archive/2011/08/15/2136522.html">参考3  </a><a href="https://blog.csdn.net/feihe0755/article/details/54233714">参考4</a>
 
 ## FAQ:
 ### 1）若提示
