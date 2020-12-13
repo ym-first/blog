@@ -9,14 +9,20 @@ const ap = new APlayer({
         url: 'http://music.163.com/song/media/outer/url?id=94576.mp3',
         cover: 'http://p2.music.126.net/1rwehhpnhVJKrn-H33XAuA==/68169720922853.jpg?param=40y40',
       },
-        {
+      {
+        name: "Joe Le Taxi",
+        artist: '陈慧娴',
+        url: 'http://music.163.com/song/media/outer/url?id=212203.mp3',
+        cover: 'http://p1.music.126.net/3nOSHPz0MsQ42klQclDQlQ==/18850027346604601.jpg?param=40y40',
+      },
+      {
           name: "不要怕-Live",
           artist: '吉克隽逸',
           url: 'http://music.163.com/song/media/outer/url?id=28936113.mp3',
           cover: 'http://p2.music.126.net/0ZBYdn9Hm7_R-Z50pOwF6A==/8891750533913724.jpg?param=40y40',
           },
         {
-            name: "分手总要在雨天",
+            name: "分手总要在雨天-Live",
             artist: '张学友',
             url: 'http://music.163.com/song/media/outer/url?id=187741.mp3',
             cover: 'http://p2.music.126.net/G3WbwV7xfv-V-pVE36iTTA==/18255191556505451.jpg?param=40y40',
@@ -27,7 +33,8 @@ const ap = new APlayer({
         url: 'http://music.163.com/song/media/outer/url?id=27874927.mp3',
         cover: 'http://p1.music.126.net/luoiKIagB63n7Y3bxfsZYQ==/109951163633483361.jpg?param=40y40',
         },
-      // {
+        
+      // {https://music.163.com/song?id=212203&userid=247206710
       //   name: '情人',
       //   artist: 'Beyond',
       //   url: 'http://music.163.com/song/media/outer/url?id=347241.mp3', 
