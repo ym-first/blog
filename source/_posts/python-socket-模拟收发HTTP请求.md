@@ -138,6 +138,7 @@ def main():
         # 等待输入，如果comm为close，客户端关闭连接
         comm = input("comm :")
         if comm.find("close") != -1:
+            # 关闭socket连接的读写通道, 此时会给服务端发送fin包,
             tcp_socket.shutdown(socket.SHUT_RDWR)
             # tcp_socket.close()
             return
