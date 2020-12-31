@@ -10,8 +10,9 @@ date: 2020-12-29 18:30:15
 ---
 ## 网络中数据发送的过程
 
-1. 应用层中, 服务端创建server_socket, 并通过bind的系统调用绑定端口, 再调用listen在该端口上监听客户端的连接,
-2. 客户端也创建自己的client_socket, 通过connect系统调用, 发送syn包给服务端的server_socket
+1. 应用层中, 服务端创建server_socket, 并通过bind的系统调用绑定端口, 
+   再调用listen使server_socket变成被动socket, 然后调用accept在对应端口上阻塞并监听客户端的连接,
+2. 客户端也创建自己的client_socket, 通过connect系统调用, 发送syn包给服务端的server_socket, 数据先会到tcp发送缓冲中,
    如果已经建立好连接, 则客户端的client_socket调用系统调用的write方法, 把数据写到tcp发送缓冲中, 
 <!-- more -->
 3. 然后数据开始进入tcp/ip协议栈, 首先是tcp层组装数据包, 并得到引用这些数据的数据包描述符sk_buff, 
@@ -29,7 +30,7 @@ date: 2020-12-29 18:30:15
 4. 然后这些数据就以sk_buff的形式进入IP层, tcp层, 
 5. 在tcp层如果这个数据包是请求连接的syn包, 那么会先放到tcp的半连接队列, 等收到ack包的时候, 才放到tcp的全连接队列, 
 6. 然后进入tcp接收缓冲, 再到达应用层
-
+* ![](https://tva1.sinaimg.cn/large/0081Kckwgy1gm5jf4oadbj30pq0u614l.jpg)
 ## python版服务端的简单实现
 ```python
 # coding=utf-8
@@ -75,7 +76,9 @@ def send_datas(client_socket):
     client_socket.setsockopt(socket.IPPROTO_TCP, 0x10, 8)
     # 接收数据，返回http格式的响应
     while True:
-        request = client_socket.recv(1024)
+        # 接收数据的长度
+        len_recv = 6148
+        request = client_socket.recv(len_recv)
         # recv接收到fin包之后，就马上响应ack了，而服务端的fin包需要close之后才会发
         print("re   " + request.decode("utf-8"))
         # 如果客户端那边调用close, 服务端接收到的数据长度为0, 
@@ -105,8 +108,9 @@ if __name__ == "__main__":
 
 ## 客户端的实现
 ```python
-import fcntl
+
 import socket
+import threading
 
 COOKUE = '''Cookie: Idea-38dabdcb=1a3e1891-7313-4a6c-8141-c158de42e97'''
 LANGUAGE = '''Accept-Language: zh-CN,zh;q=0.8'''
@@ -114,39 +118,75 @@ USER_AGENT = '''User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.
 ACCEPT = '''Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'''
 CACHE_CONTROL_MAX_AGE = '''Cache-Control: max-age=0'''
 CONNECTION_KEEP_ALIVE = '''Connection: keep-alive'''
-HOST = '''Host: 192.168.0.101:3344'''
-PATH = '''/blog/?date=yyy'''
+HOST = '''Host: 192.168.0.101:8000'''
+PATH = '''/blog/'''
+# PATH = '''/blog/?date=yyy'''
 BICRLF = "\r\n\r\n"
 CRLF = "\r\n"
+CONTENT_LEN = "Content-Length: "
+send_flag = True
+
+def send_data(tcp_socket):
+    while send_flag:
+        len_msg = int(input("how many char do you wanna send? : "))
+        # 等待输入，如果comm为close，客户端关闭连接
+        # content为要发送的内容，req_med为请求的方法，分别以空格分隔
+        comm, content, req_med = input("comm :").split(" ")
+        if req_med == "p":
+            req_med = "POST"
+        else:
+            req_med = "GET"
+        long_msg = content * len_msg  # .encode("utf-8")
+        len_lmsg = str(len(long_msg))
+        # 要发送的数据
+        msg = ("%s %s HTTP/1.1" + CRLF + "%s%s%s%s%s%s%s%s") \
+              % (req_med, PATH, HOST + CRLF + CONTENT_LEN + len_lmsg + CRLF, CONNECTION_KEEP_ALIVE + CRLF,
+                 CACHE_CONTROL_MAX_AGE + CRLF,
+                 ACCEPT + CRLF, USER_AGENT + CRLF, LANGUAGE + CRLF, COOKUE + BICRLF, long_msg)
+        msg = msg.encode("utf-8")
+
+        if comm.find("close") != -1:
+            tcp_socket.shutdown(socket.SHUT_RDWR)
+            # tcp_socket.close()
+        elif comm.find("pass") != -1:
+            pass
+        elif send_flag == False:
+            return
+        else:
+            tcp_socket.send(msg)
+
+
+def recv_data(tcp_socket=None, len_recv=None):
+    while True:
+        recv = tcp_socket.recv(len_recv)
+        if recv:
+            global send_flag
+            send_flag = True
+        else:
+            send_flag = False
+            tcp_socket.shutdown(socket.SHUT_WR)
+            return
+        print(recv)
 
 
 def main():
-    # 创建socket, 该socket对应一个打开文件和一个文件描述符
-    # 入参1为指定协议族, 因为有的系统不一定有实现tcp/ip协议, 
-    # 入参2为socket的类型, tcp就对应SOCK_STREAM, 因为建立连接后, 数据就像流一样在两端传输
-    tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    print(tcp_socket.fileno())
-    
-    # 连接服务端
-    tcp_socket.connect(("192.168.0.101", 3344))
-    # 要发送的数据
-    msg = ("GET %s HTTP/1.1"+CRLF+"%s%s%s%s%s%s%s")\
-          %(PATH, HOST+CRLF, CONNECTION_KEEP_ALIVE+CRLF, CACHE_CONTROL_MAX_AGE+CRLF,
-            ACCEPT+CRLF, USER_AGENT+CRLF, LANGUAGE+CRLF, COOKUE+BICRLF)
-    msg = msg.encode("utf-8")
     while True:
-        # 等待输入，如果comm为close，客户端关闭连接
-        comm = input("comm :")
-        if comm.find("close") != -1:
-            # 关闭socket连接的读写通道, 此时会给服务端发送fin包,
-            tcp_socket.shutdown(socket.SHUT_RDWR)
-            # tcp_socket.close()
-            return
-        # 发送数据
-        tcp_socket.send(msg)
-        # 服务端的响应到达之前, 会在接收数据这一步阻塞
-        recv = tcp_socket.recv(1024)
-        print(recv)
+        # 创建socket, 该socket对应一个打开文件和一个文件描述符
+        # 入参1为指定协议族, 因为有的系统不一定有实现tcp/ip协议,
+        # 入参2为socket的类型, tcp就对应SOCK_STREAM, 因为建立连接后, 数据就像流一样在两端传输
+        tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        print(tcp_socket.fileno())
+
+        # 连接服务端
+        tcp_socket.connect(("192.168.0.101", 8000))
+        global send_flag
+        send_flag = True
+        # 接收数据的长度
+        len_recv = 6148
+        # 同步阻塞的recv操作， 改成用一个线程异步接收数据，实时检测服务端发来的fin包，收到就马上把send_flag改为false
+        thread = threading.Thread(target=recv_data, args=(tcp_socket, len_recv))
+        thread.start()
+        send_data(tcp_socket)
 
 
 if __name__ == "__main__":
@@ -156,13 +196,13 @@ if __name__ == "__main__":
 ## whireshark 抓包截图
 * ![](https://tva1.sinaimg.cn/large/0081Kckwgy1gm4ysa57cpj31rg0igdpc.jpg)
 1. 如图, 客户端调用connect后, 发送请求与服务端建立连接的syn包, 包含一个客户端维护的序列号
-2. 服务端收到syn包后, 也回一个混合了syn和ack的数据包, 其中包含服务端维护的序列号, 而ack号则是客户端的序列号+1,
-3. 客户端收到服务端的syn+ack后, 再回ack包, 此时序列号+1, ack号=服务端序列号+1,
+2. 服务端收到syn包后, 也回一个混合了syn和ack的数据包, 其中包含服务端维护的序列号, 而ack包是作为对客户端syn包的确认回应, 所以ack号则是客户端的序列号+1,
+3. 客户端收到服务端的syn+ack后, 再对该包确认回应而发送ack包, 此时序列号+1, ack号=服务端序列号+1,
 4. 三次握手后, 客户端和服务端之间建立一条流通道,
 5. 服务端的tcp接收缓冲区满了, 所以给客户端发送一个tcp window update的包,
 6. 然后客户端发送http协议格式的数据, 
 7. 服务端接收到数据回一个ack的包,
-8. 由于距离tcp流通道的上一个数据包的时间已经慢8秒了, 于是服务端给客户端发送keep-alive的tcp包, 
+8. 由于距离tcp流通道的上一个数据包的时间已经满8秒了, 于是服务端给客户端发送keep-alive的tcp包, 
 9. 客户端接收后马上回一个ack,
 10. 服务端继续发送http格式的响应,
 11. 客户端回ack
