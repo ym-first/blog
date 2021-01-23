@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>通过behave学习BDD | M.Y_敏兒 | True nobility is being superior to your former self.</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="前言最近觉得学习一个东西最好的方式就是使用它, 把抽象的东西变得具体而实际(ps:这好像刚好也是行为驱动开发存在的原因😄), 所以, 直接从pyhon的BDD工具behave着手, 感受BDD的逻辑和好处. 实例化需求的定义: 维基百科: Specification by example (SBE) is a collaborative approach to defining requirem">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过behave学习BDD">
+<meta property="og:url" content="https://ym-first.github.io/blog/posts/e6f54ca7/index.html">
+<meta property="og:site_name" content="M.Y_敏兒">
+<meta property="og:description" content="前言最近觉得学习一个东西最好的方式就是使用它, 把抽象的东西变得具体而实际(ps:这好像刚好也是行为驱动开发存在的原因😄), 所以, 直接从pyhon的BDD工具behave着手, 感受BDD的逻辑和好处. 实例化需求的定义: 维基百科: Specification by example (SBE) is a collaborative approach to defining requirem">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1gm72on9jlcj306b04jdgi.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1gm734noye0j30hc09vadc.jpg">
+<meta property="article:published_time" content="2020-12-30T13:04:57.000Z">
+<meta property="article:modified_time" content="2021-01-20T11:15:56.000Z">
+<meta property="article:author" content="M.Y_敏兒">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1gm72on9jlcj306b04jdgi.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="M.Y_敏兒" href="/blog/atom.xml">
+    
+    <link rel="shortcut icon" href="/blog/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/blog/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+<meta name="generator" content="Hexo 4.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="https://ym-first.github.io/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">M.Y_敏兒</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        <div class="nav2">
+          
+              <a class="nav2item" data-title="Email" href="mailto:youngyuliya@foxmail.com" target="_parent"title="Email" >
+                <i class="icon icon-lg icon-envelope-o envelope-o"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/ym-first" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+              <a class="nav2item" data-title="微博" href="/blog/" target="_blank"title="微博" >
+                <i class="icon icon-lg icon-weibo weibo"></i>
+              </a>
+          
+
+            </div>
+        
+              <li class="waves-block waves-effect">
+                  <a href="/blog/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <!-- <span>主 页 __________________________</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>主 页 __________________________</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/blog/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <!-- <span>归 档 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>归 档 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/blog/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <!-- <span>分 类 __________________________</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>分 类 __________________________</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/blog/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <!-- <span>标 签 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>标 签 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/blog/about"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <!-- <span>关 于 __________________________</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>关 于 __________________________</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+      
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">通过behave学习BDD</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="/blog/atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实例化需求的定义"><span class="post-toc-number">2.</span> <span class="post-toc-text">实例化需求的定义:</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#行为驱动开发的定义"><span class="post-toc-number">3.</span> <span class="post-toc-text">行为驱动开发的定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#behave基本使用"><span class="post-toc-number">4.</span> <span class="post-toc-text">behave基本使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#步骤"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">步骤</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#feature文件的内容格式"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">.feature文件的内容格式.</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#environment-py中的内容"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">environment.py中的内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#my-step-py中的内容-主要是对feature文件中的given和then的实现"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">my_step.py中的内容. 主要是对feature文件中的given和then的实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#my-step-py文件中有用到wait这个装饰器-主要逻辑就是10s内-每隔0-5s重新执行一遍被装饰的函数"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">my_step.py文件中有用到wait这个装饰器, 主要逻辑就是10s内, 每隔0.5s重新执行一遍被装饰的函数.</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#执行场景用例"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">执行场景用例</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启发"><span class="post-toc-number">5.</span> <span class="post-toc-text">启发</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#项目打包的大致步骤"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">项目打包的大致步骤</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-BDD框架behave学习"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">通过behave学习BDD</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2020-12-30 21:04:57" datetime="2020-12-30T13:04:57.000Z"  itemprop="datePublished">2020-12-30</time>
+
+            <br id="mybreak"/>
+            
+<script>
+	mybreak.style="display:none";
+</script>
+
+
+            <i>·</i>
+            
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">6</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近觉得学习一个东西最好的方式就是使用它, 把抽象的东西变得具体而实际(ps:这好像刚好也是行为驱动开发存在的原因😄), 所以, 直接从pyhon的BDD工具behave着手, 感受BDD的逻辑和好处.</p>
+<h2 id="实例化需求的定义"><a href="#实例化需求的定义" class="headerlink" title="实例化需求的定义:"></a>实例化需求的定义:</h2><blockquote>
+<p>维基百科: <em>Specification by example (SBE) is a collaborative approach to defining requirements and business-oriented functional tests for software products based on capturing and illustrating requirements using realistic examples instead of abstract statements. It is applied in the context of agile software development methods, in particular behavior-driven development.</em></p>
+</blockquote>
+<a id="more"></a>
+<ul>
+<li>实例化需求就是使用具体的例子来澄清需求和基于业务功能测试的一种协作方式. 实践方式通常为敏捷开发的行为驱动开发.</li>
+</ul>
+<h2 id="行为驱动开发的定义"><a href="#行为驱动开发的定义" class="headerlink" title="行为驱动开发的定义"></a>行为驱动开发的定义</h2><blockquote>
+<p>On the “Agile specifications, BDD and Testing eXchange” in November 2009 in London, Dan North gave the following definition of BDD:</p>
+</blockquote>
+<blockquote>
+<p>BDD is a second-generation, outside–in, pull-based, multiple-stakeholder, multiple-scale, high-automation, agile methodology. It describes a cycle of interactions with well-defined outputs, resulting in the delivery of working, tested software that matters.</p>
+</blockquote>
+<ul>
+<li><p>行为驱动开发就是使用一种通用的语言来描述验收条件的一些操作及被测程序对应的响应行为, 并由此自动验证代码的一种开发方法.</p>
+</li>
+<li><p>其中的通用语言一般使用Gherkin语言, 它基于领域驱动设计, 重点在于描述需求背景和目的, 让代码实现始终为需求服务.<br>而自动化验证则是为了提供及时的反馈和回归测试.</p>
+</li>
+</ul>
+<h2 id="behave基本使用"><a href="#behave基本使用" class="headerlink" title="behave基本使用"></a>behave基本使用</h2><ul>
+<li>python中常用的驱动框架有lettuce和behave, 但是lettuce不兼容python3.<br>而Django也有对应的插件behave-django, 以下操作都是基于behave-django来实现的.<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3></li>
+<li>安装behave-django<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install behave-django</span><br></pre></td></tr></tbody></table></figure></li>
+<li>settings.py文件中添加该插件<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS += [<span class="string">'behave_django'</span>]</span><br></pre></td></tr></tbody></table></figure></li>
+<li>1) 项目的根目录创建features目录<br>2) .feature文件中就是用Gerkin语言写的各个行为场景<br>3) environment.py会在执行用例前, 执行里面的代码, 一般全局的前置条件和后置条件的逻辑在这个文件中定义.<br>4) 目录下再创建steps目录, steps下就是各种需求例子的实现逻辑代码. <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gm72on9jlcj306b04jdgi.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="feature文件的内容格式"><a href="#feature文件的内容格式" class="headerlink" title=".feature文件的内容格式."></a>.feature文件的内容格式.</h3></li>
+<li>其中双引号引起来的内容会被提取作为变量的值</li>
+<li>格式为 As-a /I want to/So that 的内容不会被执行, 重点在于使用者和需求的背景</li>
+<li>Given/When/Then 分别描述用例的前置条件、操作和检查点<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Feature: My blog</span><br><span class="line">  As a vister</span><br><span class="line">  I want to be able to see the header in the page</span><br><span class="line">  So that I know it is the right page</span><br><span class="line">  Scenario: I access my blog</span><br><span class="line">    Given I access the url "/blog/"</span><br><span class="line">    Then I see the header M.Y</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="environment-py中的内容"><a href="#environment-py中的内容" class="headerlink" title="environment.py中的内容"></a>environment.py中的内容</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line"><span class="comment"># context为一个全局对象, behave运行的时候会给这个对象绑定很多属性, </span></span><br><span class="line"><span class="comment"># 包括before_all(), before_feature(), …, after_all()等回调函数</span></span><br><span class="line"><span class="comment"># 因此我们也可以给context绑定自定义属性, 如下, 就绑定了browser属性, 其引用指向创建的webdriver实例</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">before_all</span><span class="params">(context)</span>:</span></span><br><span class="line">    <span class="comment"># 谷歌浏览器配置对象</span></span><br><span class="line">    opt = webdriver.ChromeOptions()</span><br><span class="line">    <span class="comment"># 解决“chrome正受到自动测试软件的控制”信息栏显示</span></span><br><span class="line">    opt.add_experimental_option(<span class="string">"useAutomationExtension"</span>, <span class="literal">False</span>)</span><br><span class="line">    opt.add_experimental_option(<span class="string">"excludeSwitches"</span>, [<span class="string">'enable-automation'</span>])</span><br><span class="line">    context.browser = webdriver.Chrome(options=opt, executable_path=<span class="string">"./chromedriver"</span>)</span><br><span class="line">    context.browser.base_url = <span class="string">"https://yummyisminer.xyz"</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="my-step-py中的内容-主要是对feature文件中的given和then的实现"><a href="#my-step-py中的内容-主要是对feature文件中的given和then的实现" class="headerlink" title="my_step.py中的内容. 主要是对feature文件中的given和then的实现"></a>my_step.py中的内容. 主要是对feature文件中的given和then的实现</h3></li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> behave <span class="keyword">import</span> given, then</span><br><span class="line"><span class="keyword">from</span> commons.some_decorator <span class="keyword">import</span> wait</span><br><span class="line"></span><br><span class="line"><span class="comment"># "{url}" 就是对应feature中的"/blog/", 用花括号变量名来标识为变量, 而这里的url作为变量引用/blog/这个值</span></span><br><span class="line"><span class="meta">@given(u'I access the url "{url}"')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">step_impl</span><span class="params">(context, url)</span>:</span></span><br><span class="line">    context.browser.get(context.browser.base_url+url)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@then(u'I see the header {tex}')</span></span><br><span class="line"><span class="meta">@wait</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">step_impl</span><span class="params">(context, tex)</span>:</span></span><br><span class="line">    context.test.assertIn(</span><br><span class="line">        tex,</span><br><span class="line">        context.browser.find_element_by_css_selector(<span class="string">"h1"</span>).text</span><br><span class="line">    )</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="my-step-py文件中有用到wait这个装饰器-主要逻辑就是10s内-每隔0-5s重新执行一遍被装饰的函数"><a href="#my-step-py文件中有用到wait这个装饰器-主要逻辑就是10s内-每隔0-5s重新执行一遍被装饰的函数" class="headerlink" title="my_step.py文件中有用到wait这个装饰器, 主要逻辑就是10s内, 每隔0.5s重新执行一遍被装饰的函数."></a>my_step.py文件中有用到wait这个装饰器, 主要逻辑就是10s内, 每隔0.5s重新执行一遍被装饰的函数.</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> selenium.common.exceptions <span class="keyword">import</span> WebDriverException</span><br><span class="line"></span><br><span class="line">MAX_WAIT = <span class="number">10</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wait</span><span class="params">(fun)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapped_fun</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        start_time = time.time()</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="keyword">return</span> fun(*args, **kwargs)</span><br><span class="line">            <span class="keyword">except</span>(AssertionError, WebDriverException) <span class="keyword">as</span> e:</span><br><span class="line">                <span class="keyword">if</span> time.time() - start_time &gt; MAX_WAIT:</span><br><span class="line">                    <span class="keyword">raise</span> e</span><br><span class="line">                time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    <span class="keyword">return</span> wrapped_fun</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="执行场景用例"><a href="#执行场景用例" class="headerlink" title="执行场景用例"></a>执行场景用例</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py behave</span><br></pre></td></tr></tbody></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gm734noye0j30hc09vadc.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="启发"><a href="#启发" class="headerlink" title="启发"></a>启发</h2><ul>
+<li><p>暂时的理解: BDD主要就是用来澄清需求, 使业务、开发、测试三方对需求的理解都一致, 所以应该一般require文件部分的内容由业务人员编写, 用来限定验收条件, 然后大家针对这些验收条件进行评审, 发现模糊的描述, 确认各种“如果xxx, 就xxx”的情况, 接着测试人员可以基于require文件编写对应的操作和验证实现方法, 每开发一个功能, 都需要跑通这些验收用例, 提前并持续不断的提供反馈, 降低后期返工的概率.</p>
+</li>
+<li><p>后续如果我要给自动化测试扩展BDD功能的话, 首先因为BDD主要就是用来写一些基于业务逻辑的验收用例, 那用例就应该跟自动化测试框架分离, 也就是BDD的逻辑是单独写在一个项目.</p>
+</li>
+<li><p>所以, 就需要把自动化测试框架打包成可安装模块.<br>然后实现了BDD项目中, 在用例实例方法里导入自动化测试框架这个模块, 然后调用相关的逻辑方法完成操作和验证.</p>
+</li>
+</ul>
+<h3 id="项目打包的大致步骤"><a href="#项目打包的大致步骤" class="headerlink" title="项目打包的大致步骤"></a>项目打包的大致步骤</h3><ol>
+<li>创建一个目录, <strong>init</strong>.py文件, 自动化框架项目拷贝到该目录下, 并创建setup.py, 如下配置<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> setuptools</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">setuptools.setup(</span><br><span class="line">    name=<span class="string">"autotestwithstub"</span>,</span><br><span class="line">    version=<span class="string">"1.0.1"</span>,</span><br><span class="line">    <span class="comment"># 添加非py的数据文件</span></span><br><span class="line">    <span class="comment"># 列表中的每一个元组的第一个元素为数据文件将存储到的目录(相对于当前解释器安装的根目录)， 第二个元素为要添加的文件路径</span></span><br><span class="line">    data_files=[(<span class="string">'lib/Configs'</span>, [<span class="string">'autotestwithstub/Configs/MyApp.ini'</span>,<span class="string">'autotestwithstub/Configs/logging_conf.ini'</span>])],</span><br><span class="line">    <span class="comment"># 将目录下找到的包(也就是有__init__.py文件的目录)都安装</span></span><br><span class="line">    packages=setuptools.find_packages(),</span><br><span class="line">    include_package_data=<span class="literal">True</span>,</span><br><span class="line">    author=<span class="string">"ym"</span>,</span><br><span class="line">    author_email=<span class="string">"xx@qq.com"</span>,</span><br><span class="line">    url=<span class="string">"https://yummyisminer.xyz"</span>,</span><br><span class="line">    description=<span class="string">"a autotest framework with stub web server"</span>,</span><br><span class="line">)</span><br></pre></td></tr></tbody></table></figure></li>
+<li>开始打包, 执行命令之后会在项目下创建dist目录, dist目录下就会有对应的tar.gz和whl格式的安装包<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 setup.py sdist bdist_wheel</span><br></pre></td></tr></tbody></table></figure></li>
+<li>在当前使用的python解释器安装目录下, 安装刚刚生成的模块<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install dist/autotestwithstub-1.0.1-py3-none-any.whl</span><br></pre></td></tr></tbody></table></figure></li>
+<li>新项目中导入之前项目下的包, 调用对应的逻辑</li>
+</ol>
+<p><a href="https://packaging.python.org/tutorials/packaging-projects/" target="_blank" rel="noopener">参考资料</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新：<time datetime="2021-01-20T11:15:56.000Z" itemprop="dateUpdated">2021-01-20 19:15:56</time>
+</span>
+
+
+        
+        原文链接：<a href="/blog/posts/e6f54ca7/" target="_blank" rel="external">https://ym-first.github.io/blog/posts/e6f54ca7/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='https://ym-first.github.io/blog'">
+            <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" alt="M.Y_敏兒">
+            <a>M.Y_敏兒</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+    <div class="page-reward">
+        <nav class="myreward">
+            <a id="rewardBtn" href="javascript:;"><span>打&nbsp;赏</span><span>装成好像很多人打赏的样子</span></a>
+        </nav>
+    </div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://ym-first.github.io/blog/posts/e6f54ca7/&title=《通过behave学习BDD》 — M.Y_敏兒&pic=https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://ym-first.github.io/blog/posts/e6f54ca7/&title=《通过behave学习BDD》 — M.Y_敏兒&source=前言最近觉得学习一个东西最好的方式就是使用它, 把抽象的东西变得具体而实际(ps:这好像刚好也是行为驱动开发存在的原因😄), 所以, 直接从pyhon的..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ym-first.github.io/blog/posts/e6f54ca7/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《通过behave学习BDD》 — M.Y_敏兒&url=https://ym-first.github.io/blog/posts/e6f54ca7/&via=https://ym-first.github.io/blog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://ym-first.github.io/blog/posts/e6f54ca7/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/blog/posts/4a17b156/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：Hello World
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/blog/posts/6178cbe6/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：socket 模拟收发HTTP包">下一篇：socket 模拟收发HTTP包</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "0KCO3NrCXRiYRqv8EJkV1OOp-gzGzoHsz",
+            appKey: "ShTIqqkpe21E2szUNPgSdE7q",
+            avatar: "wavatar",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+        // 改变评论边框颜色
+        vinputt = document.getElementsByClassName("vinput");
+        for (i=0 ; i<vinputt.length ; i++){vinputt[i].style.border="1.5px solid #1abc9c36"}
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2020
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="https://ym-first.github.io/blog">敏兒</a>
+            <!-- <br/> -->
+            <!-- Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a> -->
+        </span>
+
+        <!-- <br/> -->
+        <!-- <br/>
+        <span>
+            
+
+        </span> -->
+        <!-- <br/> -->
+
+        <span class="license"><a  target="_blank" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">All content under CC BY-NC-ND 4.0</a></span>
+    </div>
+    <span id="RunTime" style="color:wheat;"></span>
+</footer>
+
+    </main>
+    
+        
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        <span>感谢您的鼓励支持！</span>
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" data-img="/blog/img/yuanbao.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="https://yummyisminer.xyz/assets/wechat.png" data-alipay="/blog/img/yuanbao.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span>
+                <span class="reward-toggle-item alipayPay">支付宝</span>
+            </div>
+        </label>
+
+        <!-- <label class="reward-toggle"><input id="rewardToggle" type="checkbox" class="reward-toggle-check" aria-label="reward"><div class="reward-toggle-ctrol"> <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span> <span class="reward-toggle-item alipayPay">支付宝</span></div></label> -->
+        
+        <i class="icon icon-caret-up"></i>
+    </div>
+</div>
+
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://ym-first.github.io/blog/posts/e6f54ca7/&title=《通过behave学习BDD》 — M.Y_敏兒&pic=https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://ym-first.github.io/blog/posts/e6f54ca7/&title=《通过behave学习BDD》 — M.Y_敏兒&source=前言最近觉得学习一个东西最好的方式就是使用它, 把抽象的东西变得具体而实际(ps:这好像刚好也是行为驱动开发存在的原因😄), 所以, 直接从pyhon的..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ym-first.github.io/blog/posts/e6f54ca7/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《通过behave学习BDD》 — M.Y_敏兒&url=https://ym-first.github.io/blog/posts/e6f54ca7/&via=https://ym-first.github.io/blog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://ym-first.github.io/blog/posts/e6f54ca7/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACN0lEQVR42u3a246DMAxF0f7/T9PXjlTCPjYdCWfnqaqYwKKSx5e8XngdH4tc83kl+dv0yuKSIUPGYxnHcvFHJIDODmfXyJAhYx/GWQRbf+b7rB/ihnvJkCFDxnLrAyySRMqQIUPGXQx+M/LQ6yJWhgwZMtIilpD6penPa3EZMmQ8kMG77v//+SfzDRkyZDyKcYSrltKtd6iVxH/2lCFDxmgGD3B8qFmDpQFXhgwZ+zB4Yyt93FqWSkYFX76RIUPGaAbZIm3MrUtf0s7jQ4KL3qEMGTJGMPoHuToHKTg7SA1lyJCxDaNTWPLkknyPdpMhQ8YGDH7EgbfyeYnbTxBlyJAxm9EJsp2GGkkiSf190XSTIUPGOEYacEk45mlfWvSe4mXIkDGOUTu8xccDPFy2fgcZMmSMZqQ1YCfIpmlfPw2VIUPGJEatpVVL7zp4dMZNhgwZ4xj8EBiJbLWil7fe4tmpDBkyRjBqyRy5GS9ueVmLZhoyZMgYzagF0/T2cd7KX7QMGTI2Y/SHAZ3jX7yUvZhyyJAhYxwjBawfIj1elrLjDFeGDBnjGOn8M03myKuJW4QyZMgYyjjC1R8q8FAbhGAZMmSMZtTmg/zGnfFDejhDhgwZsxkkyPJb8vfUeSnBm5YhQ8YgBg98ZJ9aOE6f9nS+IUOGjO0ZvKBNRwi8DL44bCFDhoztGWkCVztyQQrgG/5vyJAh41GMtKFGwm5aHvO+oAwZMnZjdI5T8G9qmDRky5AhYxzjDf+iA/EhKHiZAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/blog/', SHARE: true, REWARD: true};
+</script>
+
+<!-- jquery -->
+<script src="/blog/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/blog/js/main.min.js?v=3.0" ></script>
+
+
+<!-- 动画&配置 -->
+<script src="/blog/js/script.min.js?v=3.0" ></script>
+
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2020/03/12");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "M.Y_敏兒");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 敏而好学 %c  © 敏兒 https://yummyisminer.xyz/\n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+
+</body>
+</html>

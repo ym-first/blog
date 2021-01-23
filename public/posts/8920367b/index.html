@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>基于OpenCover的代码覆盖率测试 | M.Y_敏兒 | True nobility is being superior to your former self.</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="测试,覆盖率测试">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="前言之前的工作中有用到OpenCover对项目中的Asp.Net站点、服务进行覆盖率测试, 现在重新整理下笔记. OpenCover简介： 一个用于.NET 2.0及以上应用程序的代码覆盖的开源命令行工具;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于OpenCover的代码覆盖率测试">
+<meta property="og:url" content="https://ym-first.github.io/blog/posts/8920367b/index.html">
+<meta property="og:site_name" content="M.Y_敏兒">
+<meta property="og:description" content="前言之前的工作中有用到OpenCover对项目中的Asp.Net站点、服务进行覆盖率测试, 现在重新整理下笔记. OpenCover简介： 一个用于.NET 2.0及以上应用程序的代码覆盖的开源命令行工具;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1glabzct7wqj30ga03fmx3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1glac00ut37j30hd06ldg3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1glac1j082fj30jp0hxwfy.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1glacgqgvjyj316b0mcaig.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1glaci6hhr3j310r0fxwhk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1glac4ottr3j30s30hbaay.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1glac58dbfij30nf08qglt.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1glae8bzjk4j30hr02e0sn.jpg">
+<meta property="article:published_time" content="2020-12-02T23:40:59.000Z">
+<meta property="article:modified_time" content="2021-01-20T11:15:56.000Z">
+<meta property="article:author" content="M.Y_敏兒">
+<meta property="article:tag" content="测试">
+<meta property="article:tag" content="覆盖率测试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/0081Kckwgy1glabzct7wqj30ga03fmx3.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="M.Y_敏兒" href="/blog/atom.xml">
+    
+    <link rel="shortcut icon" href="/blog/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/blog/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+<meta name="generator" content="Hexo 4.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="https://ym-first.github.io/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">M.Y_敏兒</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        <div class="nav2">
+          
+              <a class="nav2item" data-title="Email" href="mailto:youngyuliya@foxmail.com" target="_parent"title="Email" >
+                <i class="icon icon-lg icon-envelope-o envelope-o"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/ym-first" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+              <a class="nav2item" data-title="微博" href="/blog/" target="_blank"title="微博" >
+                <i class="icon icon-lg icon-weibo weibo"></i>
+              </a>
+          
+
+            </div>
+        
+              <li class="waves-block waves-effect">
+                  <a href="/blog/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <!-- <span>主 页 __________________________</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>主 页 __________________________</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/blog/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <!-- <span>归 档 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>归 档 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/blog/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <!-- <span>分 类 __________________________</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>分 类 __________________________</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/blog/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <!-- <span>标 签 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>标 签 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/blog/about"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <!-- <span>关 于 __________________________</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>关 于 __________________________</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+      
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">基于OpenCover的代码覆盖率测试</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="/blog/atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OpenCover简介："><span class="post-toc-number">2.</span> <span class="post-toc-text">OpenCover简介：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#OpenCover提供的指标有："><span class="post-toc-number">2.1.</span> <span class="post-toc-text">OpenCover提供的指标有：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OpenCover主要命令参数："><span class="post-toc-number">3.</span> <span class="post-toc-text">OpenCover主要命令参数：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#未使用OpenCover时，被测程序的正常运行流程："><span class="post-toc-number">4.</span> <span class="post-toc-text">未使用OpenCover时，被测程序的正常运行流程：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用OpenCover、ReportGenerator后，被测程序的运行流程："><span class="post-toc-number">5.</span> <span class="post-toc-text">使用OpenCover、ReportGenerator后，被测程序的运行流程：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OpenCover和ReportGenerator的主要配置流程："><span class="post-toc-number">6.</span> <span class="post-toc-text">OpenCover和ReportGenerator的主要配置流程：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#以测试站点程序为例"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">以测试站点程序为例:</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ReportGenerator概述："><span class="post-toc-number">7.</span> <span class="post-toc-text">ReportGenerator概述：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常用的命令行参数："><span class="post-toc-number">7.1.</span> <span class="post-toc-text">常用的命令行参数：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#报告部分截图"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">报告部分截图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码覆盖详情截图"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">代码覆盖详情截图</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于IIS-Express："><span class="post-toc-number">8.</span> <span class="post-toc-text">关于IIS Express：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么用IIS-Express："><span class="post-toc-number">8.1.</span> <span class="post-toc-text">为什么用IIS Express：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#启动完整的IIS的操作："><span class="post-toc-number">8.2.</span> <span class="post-toc-text">启动完整的IIS的操作：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原文描述："><span class="post-toc-number">8.3.</span> <span class="post-toc-text">原文描述：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于PDB文件："><span class="post-toc-number">9.</span> <span class="post-toc-text">关于PDB文件：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#FAQ"><span class="post-toc-number">10.</span> <span class="post-toc-text">FAQ:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1）若提示"><span class="post-toc-number">10.1.</span> <span class="post-toc-text">1）若提示</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-基于OpenCover进行代码覆盖率测试"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">基于OpenCover的代码覆盖率测试</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2020-12-03 07:40:59" datetime="2020-12-02T23:40:59.000Z"  itemprop="datePublished">2020-12-03</time>
+
+            <br id="mybreak"/>
+            
+<script>
+	mybreak.style="display:none";
+</script>
+
+
+            <i>·</i>
+            
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">8</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前的工作中有用到OpenCover对项目中的Asp.Net站点、服务进行覆盖率测试, 现在重新整理下笔记.</p>
+<h2 id="OpenCover简介："><a href="#OpenCover简介：" class="headerlink" title="OpenCover简介："></a>OpenCover简介：</h2><ul>
+<li>一个用于.NET 2.0及以上应用程序的代码覆盖的开源命令行工具;<a id="more"></a></li>
+<li>使用PDB文件提供序列信息，来确定dll文件中哪些代码行与源代码的每一行相关联，然后检测、插桩每个序列点以记录命中的行;<ul>
+<li>因此必须要有的是PDB文件以及可执行文件和程序集，应该在调试模式下构建测试中的应用程序。如果未找到PDB文件，则不会收集任何覆盖数据;</li>
+</ul>
+</li>
+<li>使用COM（组件对象模型）开发，检测程序profiler部分则使用c++;</li>
+<li>使用mono.Cecil来分析分支或IL以确定在何处检测代码;</li>
+</ul>
+<h3 id="OpenCover提供的指标有："><a href="#OpenCover提供的指标有：" class="headerlink" title="OpenCover提供的指标有："></a>OpenCover提供的指标有：</h3><ol>
+<li>声明范围, 即已涵盖的行数。</li>
+<li>方法覆盖范围，即涵盖了哪些方法。</li>
+<li>分支覆盖范围, 即采取了哪些分支, 这与圈复杂度有关</li>
+</ol>
+<h2 id="OpenCover主要命令参数："><a href="#OpenCover主要命令参数：" class="headerlink" title="OpenCover主要命令参数："></a>OpenCover主要命令参数：</h2><ul>
+<li>-target： 应用程序可执行文件或服务名称的路径<br>我的理解：就是配置将被测程序运行起来的程序或服务。大多用的NUnit。本文例子用的是IIS Express</li>
+<li>-filter： 应用于选择性地包括或排除coverage结果中的程序集和类的过滤器列表 <ul>
+<li>默认选择所有的类和方法</li>
+<li>使用PartCover语法，(+|-)[Assembly-Filter]Type-Filter。</li>
+<li>例如，+[Open*]* 包括以Open开头的程序</li>
+<li>-[*]Core.* 排除Core命名空间中的所有类型(跟程序集无关)。</li>
+<li>如果未提供过滤器，+[*]*则会自动应用默认包含所有的过滤器。</li>
+</ul>
+</li>
+<li>-output： 输出XML文件的路径，如果为空，则将在当前目录中创建results.xml</li>
+<li>-register [：user] - 注册和取消注册代码覆盖率分析器</li>
+<li>-targetargs： - 要传递给目标进程的参数（可指定被测程序的路径）</li>
+<li>-targetdir： - 目标目录的路径或PDB文件的备用路径<br>如果-targetargs 已经指定了被测程序的路径，那么这里可作为查找PDB文件的依据。本文例子则作为查找PDB文件的路径<br><a href="https://github.com/OpenCover/opencover/wiki/Usage" target="_blank" rel="noopener">用法  </a><a href="https://github.com/opencover/opencover/blob/master/main/OpenCover.Documentation/Usage.pdf" target="_blank" rel="noopener">文档</a><br><a href="http://www.cnblogs.com/binyao/category/477233.html" target="_blank" rel="noopener">参考1  </a><a href="http://www.cnblogs.com/tylerzhou/p/9076386.html" target="_blank" rel="noopener">参考2  </a><a href="http://blog.alantsai.net/posts/2017/01/devopsseries-opencover-intro" target="_blank" rel="noopener">参考3  </a><a href="https://www.codeproject.com/Articles/677691/Getting-code-coverage-from-your-NET-testing-using" target="_blank" rel="noopener">参考4</a></li>
+</ul>
+<h2 id="未使用OpenCover时，被测程序的正常运行流程："><a href="#未使用OpenCover时，被测程序的正常运行流程：" class="headerlink" title="未使用OpenCover时，被测程序的正常运行流程："></a>未使用OpenCover时，被测程序的正常运行流程：</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://tva1.sinaimg.cn/large/0081Kckwgy1glabzct7wqj30ga03fmx3.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="使用OpenCover、ReportGenerator后，被测程序的运行流程："><a href="#使用OpenCover、ReportGenerator后，被测程序的运行流程：" class="headerlink" title="使用OpenCover、ReportGenerator后，被测程序的运行流程："></a>使用OpenCover、ReportGenerator后，被测程序的运行流程：</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://tva1.sinaimg.cn/large/0081Kckwgy1glac00ut37j30hd06ldg3.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ul>
+<li>1)命令行调用OpenCover.Console.exe</li>
+<li>2)OpenCover使用SentrySdk收集崩溃报告<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://tva1.sinaimg.cn/large/0081Kckwgy1glac1j082fj30jp0hxwfy.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>3)解析命令行中传入的参数（被测程序路径、要打印使用说明、是否启动服务、过滤信息等）</li>
+<li>4)处理过滤器信息，如果命令行中未传-filter参数，则默认匹配分析所有的类和方法——&gt;创建性能计数器</li>
+<li>5)得到输出xml报告的全路径</li>
+<li>6)初始化封装了注入框架依赖的容器</li>
+<li>7)创建文件句柄，后续将覆盖率信息写入文件中。如果已经存在覆盖率xml文件，则合并</li>
+<li>8)启动覆盖率分析进程。注册分析器，调用OpenCover.Profiler.dll</li>
+<li>9)启动托管被测代码的程序(IIS Express)</li>
+<li>10)访问站点测试被测程序</li>
+<li>11)关闭IIS Express, 得到运行结果同时，也得到xml覆盖率结果</li>
+<li>12)ReportGenerator将xml转成HTML</li>
+<li><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://tva1.sinaimg.cn/large/0081Kckwgy1glacgqgvjyj316b0mcaig.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+</li>
+</ul>
+<h2 id="OpenCover和ReportGenerator的主要配置流程："><a href="#OpenCover和ReportGenerator的主要配置流程：" class="headerlink" title="OpenCover和ReportGenerator的主要配置流程："></a>OpenCover和ReportGenerator的主要配置流程：</h2><h3 id="以测试站点程序为例"><a href="#以测试站点程序为例" class="headerlink" title="以测试站点程序为例:"></a>以测试站点程序为例:</h3><ul>
+<li>1)配置好OpenCover、ReportGenerator、被测程序的路径、IIS Express config的路径</li>
+<li>2)执行配置好相关参数的CMD命令, 示例如下：<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H:\白盒测试\Debug\Opencover\OpenCover.Console.exe -target:<span class="string">"C:\Program Files (x86)\IIS Express\iisexpress.exe"</span> -targetdir:<span class="string">"D:\被测站点\xxx.xxx.com\bin"</span> -targetargs:<span class="string">"/site:xxx_bh.xxx.com /config:\"C:\Users\ym\Documents\IISExpress\config\applicationhost.config\""</span> -register:ym -output:<span class="string">"H:\白盒测试\xml_ym\xxx_bh.xxx.com\xxx_bh.xxx.com.xml"</span></span><br></pre></td></tr></tbody></table></figure></li>
+<li>3)此时IIS Express已经启动，访问在通过IIS Express配置的站点，开始测试。</li>
+<li>4)测试完成后，退出IIS Express，生成xml文件。</li>
+<li>5)使用ReportGenerator生成HTML文档，CMD命令示例如下：<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H:\白盒测试\Debug\ReportGenerator\ReportGenerator.exe -reports:H:\白盒测试\xml\白盒测试.xml -targetdir:H:\白盒测试\xml\html</span><br></pre></td></tr></tbody></table></figure></li>
+<li><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://tva1.sinaimg.cn/large/0081Kckwgy1glaci6hhr3j310r0fxwhk.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+</li>
+</ul>
+<h2 id="ReportGenerator概述："><a href="#ReportGenerator概述：" class="headerlink" title="ReportGenerator概述："></a>ReportGenerator概述：</h2><ul>
+<li>ReportGenerator用于将OpenCover，PartCover，Visual Studio或NCover生成的XML报告转换为各种格式的友好可读报告。</li>
+<li>主要就是配置xml文件的路径和输出html的路径, 执行命令后, ReportGenerator就会解析传入的参数, 然后输出报告<h3 id="常用的命令行参数："><a href="#常用的命令行参数：" class="headerlink" title="常用的命令行参数："></a>常用的命令行参数：</h3></li>
+<li>-reports： - 应该解析的覆盖率报告，分号分隔，允许使用通配符</li>
+<li>-targetdir： - 应保存生成的报告的目录</li>
+<li>-sourcedirs：[;] [;] - 包含相应源代码的目录，可选，分号分隔</li>
+<li>-classfilters：&lt;（+ | - ）filter&gt; [; &lt;（+ | - ）filter&gt;] [; &lt;（+ | - ）filter&gt;] - 报表中应包含或排除的类列表，可选，可用通配符。</li>
+<li>如果是测试Windows服务的覆盖率：<br>1）执行如下命令启动服务：<br>G:\Opencover所在路径\OpenCover.Console.exe -service:byname -target:安装好的服务名 -register:ym -output:H:\白盒测试保存路径\xxx\xxx.xml<br>2）测试完毕后，正常关闭服务，则可收集覆盖数据。</li>
+</ul>
+<h3 id="报告部分截图"><a href="#报告部分截图" class="headerlink" title="报告部分截图"></a>报告部分截图</h3><ul>
+<li>包含语句覆盖和分支覆盖情况。点击相应的页面，会进入对应程序，可看到具体覆盖到哪一行代码。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://tva1.sinaimg.cn/large/0081Kckwgy1glac4ottr3j30s30hbaay.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+</li>
+</ul>
+<h3 id="代码覆盖详情截图"><a href="#代码覆盖详情截图" class="headerlink" title="代码覆盖详情截图"></a>代码覆盖详情截图</h3><ul>
+<li>绿色表示完全覆盖，橙色表示该行代码还有分支未覆盖到，红色则未覆盖。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://tva1.sinaimg.cn/large/0081Kckwgy1glac58dbfij30nf08qglt.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+</li>
+</ul>
+<p><a href="https://github.com/OpenCover/opencover/wiki/Service-Support" target="_blank" rel="noopener">文档中的描述  </a><a href="https://www.cnblogs.com/tylerzhou/p/9076537.html" target="_blank" rel="noopener">参考资料1  </a><a href="https://www.cnblogs.com/SivilTaram/p/vs_opencover_unit_coverage.html" target="_blank" rel="noopener">参考资料2</a></p>
+<h2 id="关于IIS-Express："><a href="#关于IIS-Express：" class="headerlink" title="关于IIS Express："></a>关于IIS Express：</h2><ul>
+<li>一个兼具Visual Studio的ASP.NET开发服务器和Windows的IIS Web服务器功能的轻量级web服务器。<br><a href="https://stackify.com/what-is-iis-express/" target="_blank" rel="noopener">具体描述   </a><a href="https://blog.csdn.net/zhangjk1993/article/details/36671105" target="_blank" rel="noopener">配置</a></li>
+</ul>
+<h3 id="为什么用IIS-Express："><a href="#为什么用IIS-Express：" class="headerlink" title="为什么用IIS Express："></a>为什么用IIS Express：</h3><p>更轻便, 易于实现自动化. 而结合实际需求，虽然也可以直接往-target传参为IIS的启动程序来进行监控测试情况，但是IIS还部署了其他非测试站点，会相互影响。所以实际应用还是采用IIS Express，每个测试人员部署自己的IIS Express，而不会相互影响。</p>
+<h3 id="启动完整的IIS的操作："><a href="#启动完整的IIS的操作：" class="headerlink" title="启动完整的IIS的操作："></a>启动完整的IIS的操作：</h3><p>1）在调试模式下运行被测程序并启动OpenCover（将代码构建到调试模式获取PDB文件）<br>2）所有在站点下运行的应用程序都必须使用相同的应用程序池；否则，会报错<br>3）在调试模式下启动被测程序前，需要停止intserver（启动被测程序的服务）</p>
+<h3 id="原文描述："><a href="#原文描述：" class="headerlink" title="原文描述："></a>原文描述：</h3><figure class="highlight python"><figcaption><span>Running against IIS</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Normally I’d suggest running against IISEXPPRESS <span class="keyword">as</span> I think it <span class="keyword">is</span> easier to automate. However <span class="keyword">for</span> those who really want to run against a full blown IIS then the following instructions (supplied by a user) will hopefully suffice.</span><br><span class="line">“The trick <span class="keyword">is</span> to start OpenCover to run the w3wp.exe process <span class="keyword">in</span> debug mode e.g.</span><br><span class="line">OpenCover.Console.exe -target:C:\Windows\System32\inetsrv\w3wp.exe -targetargs:-debug </span><br><span class="line">-targetdir:C:\Inetpub\wwwwoot\MyWebApp\bin\ -filter:+[*]* -register:user</span><br><span class="line">There are some prerequisites though:</span><br><span class="line"><span class="number">1.</span>All applications running under the site must make use of the same app pool; yo<span class="string">u'll get errors in the EventLog otherwise.</span></span><br><span class="line"><span class="string">2.inetserver needs to be stopped, before starting w3wp.exe in debug mode. You can use the following command:</span></span><br><span class="line"><span class="string">net stop w3svc /y</span></span><br><span class="line"><span class="string">After testing/code coverage completion you can close the w3wp.exe process and start the inetserver again:</span></span><br><span class="line"><span class="string">net start w3svc</span></span><br><span class="line"><span class="string">This procedure was tested on a Win2008 machine with IIS7.5”</span></span><br><span class="line"><span class="string">You can also run multiple OpenCover instances against separate IIS sites by using the –s option when running IIS to choose the siteid e.g.</span></span><br><span class="line"><span class="string">OpenCover.Console.exe -target:C:\Windows\System32\inetsrv\w3wp.exe </span></span><br><span class="line"><span class="string">    -targetargs:"-debug -s 1" </span></span><br><span class="line"><span class="string">    -targetdir:%WebSite_Path% </span></span><br><span class="line"><span class="string">    -filter:+[*]* </span></span><br><span class="line"><span class="string">    -register:user </span></span><br><span class="line"><span class="string">    -output:%CoverageResult_Path%</span></span><br><span class="line"><span class="string">Then you can use ReportGenerator to merge the coverage results.</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="关于PDB文件："><a href="#关于PDB文件：" class="headerlink" title="关于PDB文件："></a>关于PDB文件：</h2><ul>
+<li>PDB是Program Data Base 的缩写, 程序数据库（.pdb）文件（也称为符号文件）。</li>
+<li>它将项目源代码中的标识符和语句映射为已编译应用程序中的相应标识符和指令。这些映射文件将调试器链接到您的源代码，从而可以进行调试, 跟踪到特定的函数和代码行。</li>
+<li>它包含调试代码时所需的许多重要相关信息（在Visual Studio中），例如，在您希望调试器在Visual Studio中中断的位置插入断点。</li>
+<li>当加载一个模块(dll文件), debugger找到对应的pdb(Program Debug Database)文件. 文件中记录了模块的变量、方法、类、源代码行数等信息, 包含类型和符号化调试信息编译和链接项目的过程中收集的二进制文件。<br><a href="https://blogs.msdn.microsoft.com/vcblog/2016/02/08/whats-inside-a-pdb-file/" target="_blank" rel="noopener">参考1 </a><a href="https://tpodolak.com/blog/2017/10/12/net-core-calculating-code-coverage-opencover-windows/" target="_blank" rel="noopener">参考2  </a><a href="http://www.cnblogs.com/itech/archive/2011/08/15/2136522.html" target="_blank" rel="noopener">参考3  </a><a href="https://blog.csdn.net/feihe0755/article/details/54233714" target="_blank" rel="noopener">参考4</a></li>
+</ul>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ:"></a>FAQ:</h2><h3 id="1）若提示"><a href="#1）若提示" class="headerlink" title="1）若提示"></a>1）若提示</h3><ul>
+<li><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://tva1.sinaimg.cn/large/0081Kckwgy1glae8bzjk4j30hr02e0sn.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>原因有三：　<br>（1）未走到相关代码<br>（2）缺少对应的pdb文件<br>（3）未正确注册Profiler，添加参数-register:账号名</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新：<time datetime="2021-01-20T11:15:56.000Z" itemprop="dateUpdated">2021-01-20 19:15:56</time>
+</span>
+
+
+        
+        原文链接：<a href="/blog/posts/8920367b/" target="_blank" rel="external">https://ym-first.github.io/blog/posts/8920367b/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='https://ym-first.github.io/blog'">
+            <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" alt="M.Y_敏兒">
+            <a>M.Y_敏兒</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+    <div class="page-reward">
+        <nav class="myreward">
+            <a id="rewardBtn" href="javascript:;"><span>打&nbsp;赏</span><span>装成好像很多人打赏的样子</span></a>
+        </nav>
+    </div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E8%A6%86%E7%9B%96%E7%8E%87%E6%B5%8B%E8%AF%95/" rel="tag">覆盖率测试</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://ym-first.github.io/blog/posts/8920367b/&title=《基于OpenCover的代码覆盖率测试》 — M.Y_敏兒&pic=https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://ym-first.github.io/blog/posts/8920367b/&title=《基于OpenCover的代码覆盖率测试》 — M.Y_敏兒&source=前言之前的工作中有用到OpenCover对项目中的Asp.Net站点、服务进行覆盖率测试, 现在重新整理下笔记.
+OpenCover简介：
+一个用于.NE..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ym-first.github.io/blog/posts/8920367b/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《基于OpenCover的代码覆盖率测试》 — M.Y_敏兒&url=https://ym-first.github.io/blog/posts/8920367b/&via=https://ym-first.github.io/blog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://ym-first.github.io/blog/posts/8920367b/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/blog/posts/6178cbe6/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：socket 模拟收发HTTP包
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/blog/posts/5e8f1732/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：《猎豹行动》笔记">下一篇：《猎豹行动》笔记</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "0KCO3NrCXRiYRqv8EJkV1OOp-gzGzoHsz",
+            appKey: "ShTIqqkpe21E2szUNPgSdE7q",
+            avatar: "wavatar",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+        // 改变评论边框颜色
+        vinputt = document.getElementsByClassName("vinput");
+        for (i=0 ; i<vinputt.length ; i++){vinputt[i].style.border="1.5px solid #1abc9c36"}
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2020
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="https://ym-first.github.io/blog">敏兒</a>
+            <!-- <br/> -->
+            <!-- Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a> -->
+        </span>
+
+        <!-- <br/> -->
+        <!-- <br/>
+        <span>
+            
+
+        </span> -->
+        <!-- <br/> -->
+
+        <span class="license"><a  target="_blank" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">All content under CC BY-NC-ND 4.0</a></span>
+    </div>
+    <span id="RunTime" style="color:wheat;"></span>
+</footer>
+
+    </main>
+    
+        
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        <span>感谢您的鼓励支持！</span>
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" data-img="/blog/img/yuanbao.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="https://yummyisminer.xyz/assets/wechat.png" data-alipay="/blog/img/yuanbao.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span>
+                <span class="reward-toggle-item alipayPay">支付宝</span>
+            </div>
+        </label>
+
+        <!-- <label class="reward-toggle"><input id="rewardToggle" type="checkbox" class="reward-toggle-check" aria-label="reward"><div class="reward-toggle-ctrol"> <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span> <span class="reward-toggle-item alipayPay">支付宝</span></div></label> -->
+        
+        <i class="icon icon-caret-up"></i>
+    </div>
+</div>
+
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://ym-first.github.io/blog/posts/8920367b/&title=《基于OpenCover的代码覆盖率测试》 — M.Y_敏兒&pic=https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://ym-first.github.io/blog/posts/8920367b/&title=《基于OpenCover的代码覆盖率测试》 — M.Y_敏兒&source=前言之前的工作中有用到OpenCover对项目中的Asp.Net站点、服务进行覆盖率测试, 现在重新整理下笔记.
+OpenCover简介：
+一个用于.NE..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ym-first.github.io/blog/posts/8920367b/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《基于OpenCover的代码覆盖率测试》 — M.Y_敏兒&url=https://ym-first.github.io/blog/posts/8920367b/&via=https://ym-first.github.io/blog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://ym-first.github.io/blog/posts/8920367b/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3aO3bDMAwEQN//0k7rxnq7oONE5KhywVAcFQg+fDzi5/nyJGteVyZ/264cPhgYGLdlPC+fZE0OyPfPz4aBgXEO410Eu16T73N9iHfvSs6GgYGB8e53G46TFPDdzhgYGBizgDsrTa9D7R/838DAwLgVIylHk+CbpIPtuz5ci2NgYNyQkXfdv//7V+YbGBgYt2LM2v0zXr5DfSoMDIytGW3TPxk6Jo2zPPUsrmVgYGBsysgbW+1xZ1nqrCWHgYFxAqMdPebjgdmYMw/ERYaLgYFxc8bKRa5kJNAOLPPiGQMD4wTGrH02a6jlg8z882FgYJzAWNmoPWjSaGsHqI/174GBgfHvGbOkrYjfo7K2PRUGBsY5jCQEtwPI9bHBUhGLgYGxBSMJcDNqGy7zk0S3RTAwMLZm5C+bXfkqrlDkHxcDA+MYRpvArRSuSUFbsDEwMI5h1NPOy3Rt1lZrBwZFFomBgXFbRtsCW7k20eZydZqIgYGxNSMfNK5fmFhv8BUYDAyMjRizIrO9J9teh21XYmBgnMNYL0HbcNymj0VFjoGBsR1jZaO2fZZ8mnoggYGBsSnjWT558ZkPQZPmXZQUYmBgbMpYmQ/OGvrtdbGV6yAYGBg7MZIg27bDPjsQrb80BgbGpoxZ4Pv+FYpiMICBgYGxsHKWSkZNNwwMDIyPhsg8rUyupmFgYJzASIrY2fCgLY+H4RgDA2NrxqyXlTT68yN+KvXEwMDYjvED5cDbGVBMIfcAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/blog/', SHARE: true, REWARD: true};
+</script>
+
+<!-- jquery -->
+<script src="/blog/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/blog/js/main.min.js?v=3.0" ></script>
+
+
+<!-- 动画&配置 -->
+<script src="/blog/js/script.min.js?v=3.0" ></script>
+
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2020/03/12");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "M.Y_敏兒");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 敏而好学 %c  © 敏兒 https://yummyisminer.xyz/\n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+
+</body>
+</html>
