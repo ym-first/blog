@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Dubbo接口测试 | M.Y_敏兒 | True nobility is being superior to your former self.</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="测试,接口测试">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="接上文,了解Dubbo接口后,如何测试dubbo接口：Python版解决方案:1. hessian+http的方式调用(python-hessian库):">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dubbo接口测试">
+<meta property="og:url" content="https://ym-first.github.io/blog/posts/81c88605/index.html">
+<meta property="og:site_name" content="M.Y_敏兒">
+<meta property="og:description" content="接上文,了解Dubbo接口后,如何测试dubbo接口：Python版解决方案:1. hessian+http的方式调用(python-hessian库):">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTgy1gdboopoouuj30po0h5dif.jpg">
+<meta property="article:published_time" content="2020-04-03T05:30:40.000Z">
+<meta property="article:modified_time" content="2021-02-03T04:00:58.147Z">
+<meta property="article:author" content="M.Y_敏兒">
+<meta property="article:tag" content="测试">
+<meta property="article:tag" content="接口测试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/00831rSTgy1gdboopoouuj30po0h5dif.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="M.Y_敏兒" href="/blog/atom.xml">
+    
+    <link rel="shortcut icon" href="/blog/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/blog/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+<meta name="generator" content="Hexo 4.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="https://ym-first.github.io/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">M.Y_敏兒</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        <div class="nav2">
+          
+              <a class="nav2item" data-title="Email" href="mailto:youngyuliya@foxmail.com" target="_parent"title="Email" >
+                <i class="icon icon-lg icon-envelope-o envelope-o"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/ym-first" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+              <a class="nav2item" data-title="微博" href="/blog/" target="_blank"title="微博" >
+                <i class="icon icon-lg icon-weibo weibo"></i>
+              </a>
+          
+
+            </div>
+        
+              <li class="waves-block waves-effect">
+                  <a href="/blog/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <!-- <span>主 页 __________________________</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>主 页 __________________________</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/blog/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <!-- <span>归 档 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>归 档 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/blog/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <!-- <span>分 类 __________________________</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>分 类 __________________________</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/blog/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <!-- <span>标 签 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>标 签 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/blog/about"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <!-- <span>关 于 __________________________</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>关 于 __________________________</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
+      
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Dubbo接口测试</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <a href="/blog/atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a>
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#接上文-了解Dubbo接口后-如何测试dubbo接口："><span class="post-toc-number">1.</span> <span class="post-toc-text">接上文,了解Dubbo接口后,如何测试dubbo接口：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Python版解决方案"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Python版解决方案:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-hessian-http的方式调用-python-hessian库"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">1. hessian+http的方式调用(python-hessian库):</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-使用dubbo-client"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">2. 使用dubbo-client</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#java"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">java:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-XML配置文件方式"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">1. XML配置文件方式:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-API方式的泛化调用"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">2. API方式的泛化调用:</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-dubbo-test"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Dubbo接口测试</h1>
+        <div class="post-meta">
+            <i class="icon icon-lg icon-calendar-o"></i>
+            发表于
+            <time class="post-time" title="2020-04-03 13:30:40" datetime="2020-04-03T05:30:40.000Z"  itemprop="datePublished">2020-04-03</time>
+
+            <br id="mybreak"/>
+            
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/blog/categories/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/">接口测试</a></li></ul>
+
+
+            <i>·</i>
+            
+
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">4</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="接上文-了解Dubbo接口后-如何测试dubbo接口："><a href="#接上文-了解Dubbo接口后-如何测试dubbo接口：" class="headerlink" title="接上文,了解Dubbo接口后,如何测试dubbo接口："></a>接上文,了解Dubbo接口后,如何测试dubbo接口：</h1><h2 id="Python版解决方案"><a href="#Python版解决方案" class="headerlink" title="Python版解决方案:"></a><strong>Python版解决方案:</strong></h2><h3 id="1-hessian-http的方式调用-python-hessian库"><a href="#1-hessian-http的方式调用-python-hessian库" class="headerlink" title="1. hessian+http的方式调用(python-hessian库):"></a>1. <strong>hessian+http的方式调用(python-hessian库):</strong></h3><a id="more"></a>
+<ul>
+<li><p>(1) dubbo项目中，增加hessian方式序列化，及相关依赖。下图为xml配置方式示例。</p>
+<ul>
+<li><a href="https://dubbo.apache.org/zh-cn/docs/user/references/protocol/hessian.html" target="_blank" rel="noopener">官方配置hessian协议及依赖例子</a></li>
+<li><a href="https://dubbo.apache.org/zh-cn/docs/user/demos/multi-protocols.html" target="_blank" rel="noopener">官方配置多协议例子</a><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdboopoouuj30po0h5dif.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+</ul>
+</li>
+<li><p>(2) 获取接口地址（可在管理台查看）、方法及方法的入参。</p>
+</li>
+<li><p>(3) 安装 python-hessian               </p>
+  <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pip install python-hessian</span><br></pre></td></tr></tbody></table></figure></li>
+<li><p>(4) 编写Python脚本调用接口; <a href="https://github.com/theatlantic/python-hessian/blob/master/README.rst" target="_blank" rel="noopener">pyhessian官方调用例子</a></p>
+  <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> pytest</span><br><span class="line"><span class="keyword">from</span> pyhessian.client <span class="keyword">import</span> HessianProxy</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestDubbo</span><span class="params">(object)</span>:</span></span><br><span class="line">    url = <span class="string">"http://169.254.210.145:1234/"</span></span><br><span class="line">    interface = <span class="string">"com.xxx.user.service.UserService"</span></span><br><span class="line">    full_url = url + interface</span><br><span class="line">    <span class="comment"># full_url = "http://169.254.210.145:8888/com.xxx.user.service.FileService"</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">testsayHelloWithSpec</span><span class="params">(self)</span>:</span></span><br><span class="line">        params = <span class="string">u"什么我调用成功了吗"</span></span><br><span class="line">        <span class="comment"># 创建连接对象</span></span><br><span class="line">        service = HessianProxy(self.full_url)</span><br><span class="line">        <span class="comment"># 重载方法__call()__里发送二进制数据进行请求，调用方法</span></span><br><span class="line">        res = service.sayHello(params)</span><br><span class="line">        <span class="keyword">assert</span> <span class="string">"什么我调用成功了吗"</span> <span class="keyword">in</span> res</span><br><span class="line">        print(res)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># @pytest.mark.skip()</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">testsayHelloWithInt</span><span class="params">(self)</span>:</span></span><br><span class="line">        params = <span class="number">123</span></span><br><span class="line">        service = HessianProxy(self.full_url)</span><br><span class="line">        res = service.sayHello(params)</span><br><span class="line">        <span class="keyword">assert</span> <span class="number">123</span> <span class="keyword">in</span> res</span><br><span class="line">        print(res)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    pytest.main([<span class="string">"-q"</span>,<span class="string">"TestDubbo.py"</span>])</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<h3 id="2-使用dubbo-client"><a href="#2-使用dubbo-client" class="headerlink" title="2. 使用dubbo-client"></a>2. <strong>使用dubbo-client</strong></h3><ul>
+<li>dubbo项目中，provicer.xml 增加 jsonrpc 协议</li>
+<li><a href="https://github.com/dubbo/dubbo-client-py" target="_blank" rel="noopener">官方地址</a><br><a href="https://www.twblogs.net/a/5d4061a4bd9eee51fbf993e7/zh-cn" target="_blank" rel="noopener">其他参考示例</a>  <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">config = ApplicationConfig(<span class="string">'test_rpclib'</span>)</span><br><span class="line">service_interface = <span class="string">'com.ofpay.demo.api.UserProvider'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Contains a connection to zookeeper, which needs caching.</span></span><br><span class="line">registry = ZookeeperRegistry(<span class="string">'192.168.59.103:2181'</span>, config)</span><br><span class="line">user_provider = DubboClient(service_interface, registry, version=<span class="string">'1.0'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">print</span> user_provider.getUser(<span class="string">'A003'</span>)</span><br><span class="line">        <span class="keyword">print</span> user_provider.queryUser(</span><br><span class="line">            {<span class="string">u'age'</span>: <span class="number">18</span>, <span class="string">u'time'</span>: <span class="number">1428463514153</span>, <span class="string">u'sex'</span>: <span class="string">u'MAN'</span>, <span class="string">u'id'</span>: <span class="string">u'A003'</span>, <span class="string">u'name'</span>: <span class="string">u'zhangsan'</span>})</span><br><span class="line">        <span class="keyword">print</span> user_provider.queryAll()</span><br><span class="line">        <span class="keyword">print</span> user_provider.isLimit(<span class="string">'MAN'</span>, <span class="string">'Joe'</span>)</span><br><span class="line">        <span class="keyword">print</span> user_provider(<span class="string">'getUser'</span>, <span class="string">'A005'</span>)</span><br><span class="line">    <span class="keyword">except</span> DubboClientError, client_error:</span><br><span class="line">        <span class="keyword">print</span> client_error</span><br><span class="line">    time.sleep(<span class="number">5</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<h2 id="java"><a href="#java" class="headerlink" title="java:"></a><strong>java:</strong></h2><h3 id="1-XML配置文件方式"><a href="#1-XML配置文件方式" class="headerlink" title="1. XML配置文件方式:"></a>1. <strong>XML配置文件方式:</strong></h3><ul>
+<li>拿到服务的jar包或maven依赖</li>
+<li>在resources下创建consumer.xml,配置好注册中心地址,接口名全称(有包名限定),每个接口有其唯一的标识reference id</li>
+<li>调用测试方法中,使用springframework提供的方法加载consumer.xml配置文件,得到context对象,调用start方法启动</li>
+<li>调用context对象的getBean方法,传入接口标识作为实参,获取接口的具体实现对象,这步会进行远程过程调用</li>
+<li>通过获取的对象调用其提供的方法  <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.xxx.user.service.UserService;</span><br><span class="line"><span class="keyword">import</span> org.junit.BeforeClass;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.CoreMatchers.containsString;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.assertThat;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsumerTest</span> </span>{</span><br><span class="line">    <span class="keyword">static</span> ClassPathXmlApplicationContext context;</span><br><span class="line">    <span class="keyword">static</span> UserService userService;</span><br><span class="line">    <span class="meta">@BeforeClass</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">beforeClass</span><span class="params">()</span></span>{</span><br><span class="line">         <span class="keyword">if</span>(context==<span class="keyword">null</span>) {</span><br><span class="line">             <span class="comment">// 默认从类路径中加载配置文件</span></span><br><span class="line">             context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"consumer.xml"</span>);</span><br><span class="line">             System.out.println(<span class="string">"load"</span>);</span><br><span class="line">             <span class="comment">// 在Spring中还提供了Lifecycle接口，Lifecycle中包含start/stop方法，实现此接口后Spring保证在启动的时候调用其start方法开始生命周期,主要用于控制异步处理过程</span></span><br><span class="line">            context.start();</span><br><span class="line"><span class="comment">//            System.out.println("start");</span></span><br><span class="line">         }</span><br><span class="line">　　　　　　 <span class="comment">// 创建接口实例（定义接口的引用变量，再引用实现了该接口的实例）</span></span><br><span class="line">        userService=(UserService) context.getBean(<span class="string">"userService"</span>);</span><br><span class="line"></span><br><span class="line">     }</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">consumerTestCase1</span><span class="params">()</span></span>{</span><br><span class="line">　　　　　　 <span class="comment">// 调用方法</span></span><br><span class="line">         String hello = userService.sayHello(<span class="string">"world"</span>);</span><br><span class="line">         assertThat(hello,containsString(<span class="string">"world"</span>);</span><br><span class="line">         System.out.println(hello);</span><br><span class="line">     }</span><br><span class="line"> }</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<h3 id="2-API方式的泛化调用"><a href="#2-API方式的泛化调用" class="headerlink" title="2. API方式的泛化调用:"></a>2. <strong>API方式的泛化调用:</strong></h3><ul>
+<li>不需要获取被测接口的jar包或依赖</li>
+<li><a href="http://dubbo.apache.org/zh-cn/blog/dubbo-generic-invoke.html" target="_blank" rel="noopener">官方示例1</a> <br> <a href="http://dubbo.apache.org/zh-cn/docs/user/demos/generic-reference.html" target="_blank" rel="noopener">官方示例2</a></li>
+<li>创建连接实例:<ul>
+<li>使用 org.apache.dubbo.config.ApplicationConfig 配置消费者应用名</li>
+<li>使用 org.apache.dubbo.config.ReferenceConfig; 创建reference配置实例,设置接口全类名,声明泛化调用,配置消费者</li>
+<li>使用org.apache.dubbo.config.RegistryConfig; 配置注册中心地址</li>
+<li>调用reference配置实例的get方法,获取GenericService类型的连接实例</li>
+</ul>
+</li>
+<li>调用服务提供的方法:<ul>
+<li>调用org.apache.dubbo.rpc.service.GenericService 这个接口名为 $invoke方法，它接受三个参数，分别为方法名、方法参数类型数组和参数值数组；<ul>
+<li>对于方法参数类型数组:<ul>
+<li>如果是基本类型，如 int 或 long，可以使用 int.class.getName()获取其类型；</li>
+<li>如果是基本类型数组，如 int[]，则可以使用 int[].class.getName()；</li>
+<li>如果是 POJO，则直接使用全类名，如 com.alibaba.dubbo.samples.generic.api.Params。</li>
+</ul>
+</li>
+<li>参数值数组:<ul>
+<li>如果是POJO,则转成Map,再将转换后的Map作为参数传入<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span>{</span><br><span class="line">    ApplicationConfig application = <span class="keyword">new</span> ApplicationConfig();</span><br><span class="line">    application.setName(<span class="string">"api-generic-consumer"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用RegistryConfig,动态配置注册中心地址</span></span><br><span class="line">    RegistryConfig registry = <span class="keyword">new</span> RegistryConfig();</span><br><span class="line">    registry.setAddress(<span class="string">"zookeeper://127.0.0.1:2181"</span>);</span><br><span class="line">    application.setRegistry(registry);</span><br><span class="line"></span><br><span class="line">    ReferenceConfig&lt;GenericService&gt; reference = <span class="keyword">new</span> ReferenceConfig&lt;GenericService&gt;();</span><br><span class="line">    <span class="comment">// 弱类型接口名</span></span><br><span class="line">    reference.setInterface(<span class="string">"com.ymxdclass.user.service.UserService"</span>);</span><br><span class="line">    <span class="comment">// 声明为泛化接口</span></span><br><span class="line">    reference.setGeneric(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">    reference.setApplication(application);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 用com.alibaba.dubbo.rpc.service.GenericService可以替代所有接口引用</span></span><br><span class="line">    GenericService genericService = reference.get();</span><br><span class="line"></span><br><span class="line">    String name = (String) genericService.$invoke("sayHello", new String[]{String.class.getName()}, new Object[]{"who am i"});</span><br><span class="line">    System.out.println(name);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新：<time datetime="2021-02-03T04:00:58.147Z" itemprop="dateUpdated">2021-02-03 12:00:58</time>
+</span>
+
+
+        
+        原文链接：<a href="/blog/posts/81c88605/" target="_blank" rel="external">https://ym-first.github.io/blog/posts/81c88605/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='https://ym-first.github.io/blog'">
+            <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" alt="M.Y_敏兒">
+            <a>M.Y_敏兒</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+    <div class="page-reward">
+        <nav class="myreward">
+            <a id="rewardBtn" href="javascript:;"><span>打&nbsp;赏</span><span>装成好像很多人打赏的样子</span></a>
+        </nav>
+    </div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" rel="tag">接口测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://ym-first.github.io/blog/posts/81c88605/&title=《Dubbo接口测试》 — M.Y_敏兒&pic=https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://ym-first.github.io/blog/posts/81c88605/&title=《Dubbo接口测试》 — M.Y_敏兒&source=接上文,了解Dubbo接口后,如何测试dubbo接口：Python版解决方案:1. hessian+http的方式调用(python-hessian库):" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ym-first.github.io/blog/posts/81c88605/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Dubbo接口测试》 — M.Y_敏兒&url=https://ym-first.github.io/blog/posts/81c88605/&via=https://ym-first.github.io/blog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://ym-first.github.io/blog/posts/81c88605/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/blog/posts/f0c13426/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：Dubbo接口框架相关概念
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/blog/posts/8c27cda5/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：ym">下一篇：ym</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "0KCO3NrCXRiYRqv8EJkV1OOp-gzGzoHsz",
+            appKey: "ShTIqqkpe21E2szUNPgSdE7q",
+            avatar: "wavatar",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+        // 改变评论边框颜色
+        vinputt = document.getElementsByClassName("vinput");
+        for (i=0 ; i<vinputt.length ; i++){vinputt[i].style.border="1.5px solid #1abc9c36"}
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2020
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="https://ym-first.github.io/blog">敏兒</a>
+            <!-- <br/> -->
+            <!-- Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a> -->
+        </span>
+
+        <!-- <br/> -->
+        <!-- <br/>
+        <span>
+            
+
+        </span> -->
+        <!-- <br/> -->
+
+        <span class="license"><a  target="_blank" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">All content under CC BY-NC-ND 4.0</a></span>
+    </div>
+    <span id="RunTime" style="color:wheat;"></span>
+</footer>
+
+    </main>
+    
+        
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        <span>感谢您的鼓励支持！</span>
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" data-img="/blog/img/yuanbao.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="https://yummyisminer.xyz/assets/wechat.png" data-alipay="/blog/img/yuanbao.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span>
+                <span class="reward-toggle-item alipayPay">支付宝</span>
+            </div>
+        </label>
+
+        <!-- <label class="reward-toggle"><input id="rewardToggle" type="checkbox" class="reward-toggle-check" aria-label="reward"><div class="reward-toggle-ctrol"> <span class="reward-toggle-item wechatPay">&nbsp;&nbsp;微信&nbsp;&nbsp;</span> <span class="reward-toggle-item alipayPay">支付宝</span></div></label> -->
+        
+        <i class="icon icon-caret-up"></i>
+    </div>
+</div>
+
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://ym-first.github.io/blog/posts/81c88605/&title=《Dubbo接口测试》 — M.Y_敏兒&pic=https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://ym-first.github.io/blog/posts/81c88605/&title=《Dubbo接口测试》 — M.Y_敏兒&source=接上文,了解Dubbo接口后,如何测试dubbo接口：Python版解决方案:1. hessian+http的方式调用(python-hessian库):" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ym-first.github.io/blog/posts/81c88605/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Dubbo接口测试》 — M.Y_敏兒&url=https://ym-first.github.io/blog/posts/81c88605/&via=https://ym-first.github.io/blog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://ym-first.github.io/blog/posts/81c88605/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p class="wechatshare">扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3aS5KDMAwFwNz/0sw2i0CeJGeqMM0qRUxwz0JjfV6v+DrermTN+8rk2erK5oWBgXFbxnF5Xb+g+tT1nfzbD1QMDIwHMM4i2Nma5M6Emu8NAwMD4+xzHnyTlQkJAwMDoxdwq6lpvh4DAwOjl8RWj4nV1PQ6uC/LxTEwMG7IyKvu///5J/0NDAyMWzGO4pW3HvMWZh5eT3eFgYGxNSMPcL3DYg6rBlwMDIynMX7RgOydUq8bCcluMTAwdmUkZa/epq+PfZMk+cMdDAyMTRn5j/YOhYV4HwT30z8oBgbG1oy8NJaPeeXDFr0yX1Ruw8DA2IjRG2uojk3k4bs5KIaBgbE1Y/Jwb0grT2uT/Dt6LwYGxkaM5AXVF+fluZxRaGFiYGBswaiWw+aby6N+s9CGgYHxAEZ+QOyNfPUmQb7sEwMDY2vG5Lg2Tzvzsl15ZgQDA2NTxjwoz7e4rAGAgYGxESNvW05+Z9W46pdmAAYGxqaMeeicdyTyO4VwjIGBsR1j1fhX0v6cJLpfvsXAwHgAIw9t1bHXJEn+yRQbBgbGdoy1gxHzI2a5/IeBgbEp4yhevaNkXqRrHi4xMDC2ZvRK/8nhslrImwxnYGBgPIFRTURXNRqrAXfByAUGBsbNGdUwmofCSeOzsCsMDAyMVjJ5XYZLYOUZNwwMDIz4NZNBirzNsOz/BgYGxk0YeTMgWT9Jj5vhGAMDY2tGr5a1aoCsesQcNTIxMDDux/gDEgcsumzUtycAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/blog/', SHARE: true, REWARD: true};
+</script>
+
+<!-- jquery -->
+<script src="/blog/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/blog/js/main.min.js?v=3.0" ></script>
+
+
+<!-- 动画&配置 -->
+<script src="/blog/js/script.min.js?v=3.0" ></script>
+
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2020/03/12");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "M.Y_敏兒");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c 敏而好学 %c  © 敏兒 https://yummyisminer.xyz/\n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+
+</body>
+</html>
