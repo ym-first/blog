@@ -145,7 +145,8 @@ jsonContent:
 githubEmojis:
   enable: true
   className: github-emoji
-  unicode: false
+  inject: true
+  unicode: true
   styles:
   localEmojis:
   

@@ -1,8 +1,26 @@
 const ap = new APlayer({
     container: document.getElementById('aplayer'),
     // mini: true,
-    autoplay: false,
+    autoplay: false, 
     audio: [
+      {
+        name: "雨中的恋人们",
+        artist: '黄凯芹',
+        url: 'http://music.163.com/song/media/outer/url?id=94576.mp3',
+        cover: 'http://p2.music.126.net/1rwehhpnhVJKrn-H33XAuA==/68169720922853.jpg?param=40y40',
+      },
+      {
+        name: '摘星',
+        artist: '陈百强',
+        url: 'http://music.163.com/song/media/outer/url?id=247206710.mp3', 
+        cover: 'http://p1.music.126.net/luoiKIagB63n7Y3bxfsZYQ==/109951163633483361.jpg?param=40y40',
+      },
+      // {
+      //   name: '豆蔻战',
+      //   artist: '林姗姗',
+      //   url: 'http://music.163.com/song/media/outer/url?id=31365209.mp3', 
+      //   cover: 'http://p1.music.126.net/JeYPRRPZXYkWUjw5gUR3Eg==/109951164925550516.jpg?param=40y40',
+      // },
         {
         name: '遥望-Demo',
         artist: 'Beyond',
@@ -26,12 +44,6 @@ const ap = new APlayer({
         url: 'http://music.163.com/song/media/outer/url?id=28936113.mp3',
         cover: 'http://p2.music.126.net/0ZBYdn9Hm7_R-Z50pOwF6A==/8891750533913724.jpg?param=40y40',
         },
-      {
-        name: "雨中的恋人们",
-        artist: '黄凯芹',
-        url: 'http://music.163.com/song/media/outer/url?id=94576.mp3',
-        cover: 'http://p2.music.126.net/1rwehhpnhVJKrn-H33XAuA==/68169720922853.jpg?param=40y40',
-      },
       // {
       //   name: "Joe Le Taxi",
       //   artist: '陈慧娴',
@@ -45,12 +57,12 @@ const ap = new APlayer({
       //   url: 'http://music.163.com/song/media/outer/url?id=29809714.mp3',
       //   cover: 'http://p1.music.126.net/277Ag7Ksu94nhJgXaj2A7Q==/109951163066639996.jpg?param=40y40',
       // },
-      {
-        name: "总有一天等到你",
-        artist: '张学友',
-        url: 'http://music.163.com/song/media/outer/url?id=190438.mp3',
-        cover: 'http://p2.music.126.net/G3WbwV7xfv-V-pVE36iTTA==/18255191556505451.jpg?param=40y40',
-      },
+      // {
+      //   name: "总有一天等到你",
+      //   artist: '张学友',
+      //   url: 'http://music.163.com/song/media/outer/url?id=190438.mp3',
+      //   cover: 'http://p2.music.126.net/G3WbwV7xfv-V-pVE36iTTA==/18255191556505451.jpg?param=40y40',
+      // },
       // {
       //   name: "ツナ覚醒-《家庭教师》插曲",
       //   artist: '佐橋俊彦',
