@@ -10,6 +10,7 @@ const ap = new APlayer({
         cover: 'http://p2.music.126.net/1rwehhpnhVJKrn-H33XAuA==/68169720922853.jpg?param=40y40',
       },
       {
+<<<<<<< HEAD
         name: '摘星',
         artist: '陈百强',
         url: 'http://music.163.com/song/media/outer/url?id=247206710.mp3', 
@@ -21,6 +22,13 @@ const ap = new APlayer({
       //   url: 'http://music.163.com/song/media/outer/url?id=31365209.mp3', 
       //   cover: 'http://p1.music.126.net/JeYPRRPZXYkWUjw5gUR3Eg==/109951164925550516.jpg?param=40y40',
       // },
+=======
+        name: '豆蔻战',
+        artist: '林姗姗',
+        url: 'http://music.163.com/song/media/outer/url?id=31365209.mp3', 
+        cover: 'http://p1.music.126.net/JeYPRRPZXYkWUjw5gUR3Eg==/109951164925550516.jpg?param=40y40',
+      },
+>>>>>>> 86a068d8d8bdde4d3ed120e2933edb13d0bb29e5
         {
         name: '遥望-Demo',
         artist: 'Beyond',
