@@ -1,8 +1,0 @@
-2020-05-11 18:36:52:614 [Appium] Welcome to Appium v1.17.1
-2020-05-11 18:36:52:615 [Appium] Non-default server args:
-2020-05-11 18:36:52:615 [Appium]   address: 127.0.0.1
-2020-05-11 18:36:52:615 [Appium]   logFile: log/20200511+18-36-24AppiumLog.txt
-2020-05-11 18:36:52:615 [Appium]   logTimestamp: true
-2020-05-11 18:36:52:615 [Appium]   localTimezone: true
-2020-05-11 18:36:52:631 [Appium] Appium REST http interface listener started on 127.0.0.1:4723
-2020-05-11 18:36:58:130 [Appium] Received SIGINT - shutting down
