@@ -10,7 +10,7 @@ date: 2020-04-12 18:08:43
 * 可以采用读取csv文件进行参数化。
     * 具体操作步骤：
         * 1.选中线程组，右键的配置元件就可以看到【CSV 数据文件设置】
-        * 2.不重复的订单号有了，然后设置用户自定义变量，并将变量名填写在【CSV 数据文件设置】的【变量名称选项】，此时设置的特定变量的值就可以从配置文件中读取。
+        * 2.不重复的订单号有了，在【CSV 数据文件设置】的【变量名称选项】设置变量名，就可以通过${变量名}从配置文件中读取对应的数据。
 <!-- more -->
         * ![](https://tva1.sinaimg.cn/large/007S8ZIlly1gdr5ehxuwgj30l10cnwfn.jpg)
         * 3.请求中替换相应的变量，使请求与变量及配置文件相互关联。
@@ -25,7 +25,7 @@ date: 2020-04-12 18:08:43
     * 如果没有安装插件管理中心, 则先在jmeter 的lib/ext 目录下放插件管理中心 <a href="https://jmeter-plugins.org/get/">plugins-manager.jar</a> 这个jar包, 然后重启JMeter, 就能使用该函数了
     * 具体用法可以通过【选项】-【函数助手对话框】进行查看。
     * ![](https://tva1.sinaimg.cn/large/007S8ZIlly1gdr5f5f1zyj30ke0bwaat.jpg)
-* 用上面提到的添加用户自定义变量的方法，添加加密所需要参数变量，再通过__V函数（用法：${__V(变量名)} ）获取加密所需要的值。
+* 用添加用户自定义变量的方法，添加加密所需要参数变量，再通过__V函数（用法：${__V(变量名)} ）获取加密所需要的值。
 * 如果加密字符串还包含变量名，直接在__MD5函数中填写对应的变量名即可![](https://tva1.sinaimg.cn/large/007S8ZIlly1gdr5fe6wqgj305j00swea.jpg)
 * 如果还需要对加密后字符串转换成大写，则可以用uppercase转换成大写。
 ![](https://tva1.sinaimg.cn/large/007S8ZIlly1gdr5fo654wj309v00o0sj.jpg)
@@ -71,9 +71,9 @@ public class MD5 extends AbstractFunction {
     @Override
     public synchronized String execute(SampleResult previousResult, Sampler currentSampler)
             throws InvalidVariableException {
-        // 获取存放了当前线程的所有变量的容器对象
+        // 获取存放了当前线程的所有变量的一个容器对象
         JMeterVariables vars = getVariables();
-        // 将CompoundVariable类型的参数, 通过execute方法转成字符串
+        // 从数组中获取要加密的原始字符串, 强转为CompoundVariable类型后, 通过execute方法转成字符串
         String str = ((CompoundVariable) values[0]).execute();
         MessageDigest digest;
         try {
@@ -81,11 +81,18 @@ public class MD5 extends AbstractFunction {
         } catch (NoSuchAlgorithmException ex) {
             return "Error creating digest: " + ex;
         }
+        digest.update(str.getBytes());
+        byte[] digestArray = digest.digest();
 
-        String res = JOrphanUtils.baToHexString(digest.digest(str.getBytes()));
+        for (byte b: digestArray){
+            stringBuffer.append(String.format("%02x",b));
+        }
+
+        String res = stringBuffer.toString();
 
         if (vars != null && values.length > 1) {
             // 把第二个参数(也就是要替换的变量名)作为键, 加密后的结果作为值, 存入到vars容器中
+            // 后续就可以通过${varName的值}来获取加密后的字符串
             String varName = ((CompoundVariable) values[1]).execute().trim();
             vars.put(varName, res);
         }
