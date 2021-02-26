@@ -143,6 +143,14 @@
                   </a>
               </li>
             
+              <li class="waves-block waves-effect">
+                  <a href="/blog/recent"  >
+                    <i class="icon icon-lg icon-weibo"></i>
+                    <!-- <span>最近 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><i class="icon icon-lg icon-caret-left"></i> -->
+                    <span>最近 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><i class="icon icon-lg icon-check-square-o"></i>
+                  </a>
+              </li>
+            
       
         
       </ul>
@@ -190,12 +198,15 @@
                     <script>
                         if(location.href.indexOf('about')!=-1){
                             pagetitle.textContent = '敏而好学';
-                        }else if(location.href.indexOf('tags')!=-1||location.href.indexOf('categories')!=-1){
+                        }else if(location.href.indexOf('tags')!=-1||location.href.indexOf('categories')!=-1 || location.href.indexOf('recent')){
                             var a=location.href.substring(location.href.length-5,location.href.length-1);
                             if(a==='tags'){
                                 pagetitle.textContent = '不要为不能改变的事情烦恼~';
                             }else if(a==='ries'){
                                 pagetitle.textContent = 'True nobility is being superior to your former self.';
+                            }
+                            else{
+                                pagetitle.textContent = '最近的一些些想法。。。';
                             }
                         }
                     </script>
