@@ -129,22 +129,10 @@
     float: right;
     border-radius: 15px;
 }
-@media screen and (max-width:760px) {
-    #xmusic {
-        display: none;
-    }
-    #main {
-        width: 100%;
-        overflow-x: hidden;
-    }
-     ::-webkit-scrollbar {
-        display: none;
-    }
-}
 
 
 
-.is-container {
+ .is-container {
 	font-size: 0.8em;
     width: 80%;
     margin-left:22%;
@@ -519,4 +507,21 @@
 #microw #snippetFoot :last-child{
 	color:#e02460;
 	line-height: 2em;
+}
+
+@media screen and (max-width:768px) {
+    #xmusic {
+        display: none;
+    }
+    #main {
+        width: 100%;
+        overflow-x: hidden;
+    }
+     ::-webkit-scrollbar {
+        display: none;
+    }
+	#microw.is-container {
+		width: 100%;
+		margin-left:0%;
+	}
 }
