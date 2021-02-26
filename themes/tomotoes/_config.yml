@@ -21,6 +21,9 @@ menu:
   smile-o:
     text: 关 于 __________________________
     url: /about
+  weibo:
+    text: 最近 >>>>>>>>>>>>>
+    url: /recent
 
 # 图标菜单
 # 如果您没有微信公众号 您完全可以更改为 其他的链接 比如微博
@@ -68,6 +71,8 @@ categoriestitle: 'True nobility is being superior to your former self.'
 
 # 关于页标题
 aboutitle: 敏而好学
+
+recenttitle: 最近的一些些想法。。。
 
 # 设置 Android L Chrome 浏览器状态栏颜色
 color: '#77AAFF'

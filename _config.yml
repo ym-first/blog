@@ -136,7 +136,7 @@ jsonContent:
     slug: false
     updated: false
     comments: false
-    link: false
+    link: true
     permalink: false
     excerpt: false
     categories: false
@@ -149,4 +149,6 @@ githubEmojis:
   unicode: true
   styles:
   localEmojis:
+
+
   
