@@ -245,7 +245,7 @@
   "mode": "cors",
   "credentials": "omit"
 });
-	console.log(res.data); 
+	// console.log(res.data); 
     if (res.data["changes"].length>0){
         document.getElementById("temp").remove();
     }
@@ -254,7 +254,7 @@
     res.data["changes"].reverse().forEach(element => {
         let content = element["file"]["content"];
         if ((tempcontent.substr(0,10) != content.substr(0,10)) && content.charAt(0)===" "){
-            console.log(element["file"]["content"]);
+            // console.log(element["file"]["content"]);
             var issue = document.createElement("div");
             issue.setAttribute("class", "is-issue-content")
 
