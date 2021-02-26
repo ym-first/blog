@@ -9,75 +9,8 @@ page.comments = "";
 %>
 <div class="container body-wrap">
     <div id="microw" class="is-container">
-        <div id="temp" class="is-issue-content"><i class="icon is-icon">🍓 Yummy🥝</i><div> 最近一个月应该至少有20天是，一天花1小时练ukulele，起的茧也开始脱皮了。。。<br>其实就是跟着节拍器的节奏爬格子，爬完之后练不同和弦的扫弦。扫弦我是真的纠结了好久，怎么练都跟视频里的声音不对。所以就把自己弹的和视频里的也录下来，然后一遍遍的听、比对，但只是知道明显不对，又听不出来哪里不对。<br>然后又去YouTube、b站找了一堆扫弦、strumming之类的视频看，还包括Jake Shimabukuro讲的。。。<br>继续录音、录视频，暂停、播放，调音、换弦，观察、比对姿势和琴弦的变化，才终于发现，别人扫弦是真的如清风一般轻轻又快速的扫过，弦的振幅很小的，而我总是太着急，总是想着快，快着快着就成了“击”弦了，所以总是有杂音。。。<br>然后昨天练习，突然发现，好像有点那种该有的味道了，节奏感也有那么点了！😄<br>所以总结下来就是:<br>1.扫弦要真的扫到弦，现在我还只是入门，每根弦都扫到，后面进阶应该还得学些乐理什么的才知道什么时候又不用扫哪根弦；<br>2.力度要轻而且要稳，这个真的得像做饭掌握火候一样，得多练才知道怎样才是合适的力度。静下心来观察自己不对的地方，不要急，年轻人，是你的总会是你的，该会的总该会的；<br>3.琴弦和琴的构造都会影响音色，反正我看了那么多视频，他们弹出来的声音都是有差别的；</div><div class="is-issue-header">2021-02-25 14:53:22 </div></div>
+        <script src="https://embed.cacher.io/d7023d820831ae13acaf17925c2d1ba32f0cfa41.js?a=95f780388397b238bf35f7ce6050de68&t=solarized_light&r=0"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-    async function getcontent(){
-        // axios.get("https://api.github.com")
-	let res = await axios.get("https://cors-anywhere.herokuapp.com/https://api.cacher.io/libraries/cb7723cbce059cfa0f7d/snippets/7d52434c5531f01447c0/files/b754cca0c3b8cc2ebeca/changes", {
-  "headers": {
-    "accept": "application/json",
-    "accept-language": "zh-CN,zh;q=0.9",
-    "access-token": "838AALQKQGgd3QJDZDD7jg",
-    "client": "7qm4_6_9LQ11ZK0zP0JkCQ",
-    "content-type": "application/json",
-    "expiry": "1645674645",
-    "provider": "github",
-    "token-type": "Bearer",
-    "uid": "45418706",
-    "x-client-session": "aa82caa2-d978-3a4c-62b9-5d0503cb258e"
-  },
-  "referrerPolicy": "same-origin",
-  "body": null,
-  "method": "GET",
-  "mode": "cors",
-  "credentials": "omit"
-});
-	console.log(res.data); 
-    if (res.data["changes"].length>0){
-        document.getElementById("#temp").remove();
-    }
-    const microw = document.getElementById("microw");
-    let tempcontent="";
-    res.data["changes"].reverse().forEach(element => {
-        let content = element["file"]["content"];
-        if ((tempcontent.substr(0,10) != content.substr(0,10)) && content.charAt(0)===" "){
-            console.log(element["file"]["content"]);
-            var issue = document.createElement("div");
-            issue.setAttribute("class", "is-issue-content")
-
-            let foot = document.createElement("i");
-            foot.setAttribute("class", "icon is-icon");
-            foot.innerText="🍓 Yummy🥝";
-            issue.append(foot);
-
-            
-            var cont = document.createElement("div");
-            cont.innerText=element["file"]["content"];
-            issue.append(cont);
-
-            var head = document.createElement("div");
-            head.innerText=element["at"].replace("T", " ").replace("Z", " ");
-            head.setAttribute("class", "is-issue-header")
-            issue.append(head);
-
-            microw.append(issue);
-
-            tempcontent = content;
-        }
-        
-        // var br = document.createElement("br");
-        // cont.append(br);
-        
-    });
-}
-        getcontent();
-        
-    </script>
-    <!-- https://gist.github.com/ym-first/4d84c8878e81862e35cca81d22c2ffd3/revisions?diff=unified -->
-    <!-- https://api.cacher.io/libraries/cb7723cbce059cfa0f7d?snippets_per_page=250&snippets_page=0 -->
-    <!-- https://api.cacher.io/libraries/cb7723cbce059cfa0f7d/snippets/b4009a857f24f0271aa4/files/feca2c9966014a237db1/changes -->
-    <!-- <script src="https://embed.cacher.io/825238800563a245aefc16975c2d18a02a5af845.js?a=ebcd987e6cd531782e4527545e8f3e39&t=solarized_light&r=0"></script> -->
     <!-- <%- partial('_partial/micropost', {post: page }) %> -->
     </div>
     </div>
