@@ -64,6 +64,7 @@
 		
 	}
 	if (!resStr){
+		resStr="";
 		graphql4issues();
 	}
 	window.onload = function(){
