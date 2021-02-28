@@ -1,4 +1,67 @@
 (function(w, d) {
+	function timeDifference(current, previous) {
+		var msPerMinute = 60 * 1000;
+		var msPerHour = msPerMinute * 60;
+		var msPerDay = msPerHour * 24;
+		var msPerMonth = msPerDay * 30;
+		var msPerYear = msPerDay * 365;
+
+		var elapsed = current - previous;
+		let relativeTime;
+		if (elapsed < msPerMinute) {
+			relativeTime = Math.round(elapsed/1000);
+			return relativeTime>1?relativeTime+ ' seconds ago':relativeTime+' second ago';   
+		}
+
+		else if (elapsed < msPerHour) {
+			relativeTime = Math.round(elapsed/msPerMinute);
+			return relativeTime>1?relativeTime+ ' minutes ago':relativeTime+' minute ago';
+		}
+
+		else if (elapsed < msPerDay ) {
+			relativeTime = Math.round(elapsed/msPerHour);
+			return relativeTime>1?relativeTime+ ' hours ago':relativeTime+' hour ago';
+		}
+
+		else if (elapsed < msPerMonth) {
+			relativeTime = Math.round(elapsed/msPerDay)
+			return relativeTime>1?relativeTime+ ' days ago':relativeTime+' day ago';
+		}
+
+		else if (elapsed < msPerYear) {
+			relativeTime = Math.round(elapsed/msPerMonth);
+			return relativeTime>1?relativeTime+ ' months ago':relativeTime+' month ago';
+		}
+
+		else {
+			relativeTime = Math.round(elapsed/msPerYear);
+			return relativeTime>1?relativeTime+ ' years ago':relativeTime+' year ago';
+		}
+		}
+	// 获取issues的文本和时间
+	let res = "";
+	let resStr = "";
+	const rt =["ad2e32","4c82c521ead6ff8","197e482a62695433637"].join("")
+	async function graphql4issues(){
+		const axiosin = axios.create({
+			"headers": {
+			"accept": "application/json",
+			"authorization": "bearer ".concat(rt),
+			"content-type": "application/json;charset=UTF-8",
+			} });
+		res = await axiosin.post("https://api.github.com/graphql", "{\"operationName\":\"getIssues\",\"query\":\"\\n  query getIssues($owner: String!, $repo: String!, $cursor: String, $pageSize: Int!) {\\n    repository(owner: $owner, name: $repo) {\\n      issues(first: $pageSize, after: $cursor, orderBy: {field: CREATED_AT, direction: DESC}, filterBy: {createdBy: $owner, states: OPEN}) {\\n        pageInfo {\\n          hasNextPage\\n          endCursor\\n        }\\n        nodes {\\n          id\\n          number\\n          createdAt\\n          bodyHTML\\n          comments(first: 1) {\\n            totalCount\\n          }\\n          labels(first: 1) {\\n            nodes {\\n              name\\n              color\\n            }\\n          }\\n        }\\n      }\\n    }\\n  }\\n  \",\"variables\":{\"owner\":\"ym-first\",\"repo\":\"ymBlog\",\"pageSize\":6}}",);
+		const nodeInfo = res.data["data"]["repository"]["issues"]["nodes"];
+		const strHead = "<div class=\"is-issue-content\"><em>🍓 Yummy🥝 </em><pre class=\"cacher-snippet-code\"><div class=\"ca-hljs\">";
+		const strPrefoot = "</div></pre><div class=\"cacher-snippet-footer\" id=\"snippetFoot\"><em>";
+		const strAppendFoot = "</em></div></div>";
+		nodeInfo.forEach((element)=>{
+			let relativeTime = timeDifference(new Date().getTime(),new Date(element["createdAt"]).getTime());
+			resStr += strHead+element["bodyHTML"]+strPrefoot+relativeTime+strAppendFoot;
+		})
+		$("#microw").innerHTML= resStr;
+		
+	}
+	graphql4issues();
 	const body = d.body,
 		$ = d.querySelector.bind(d),
 		$$ = d.querySelectorAll.bind(d),
@@ -83,7 +146,8 @@
 				if (!isPost) {
 					main.classList.remove('menuoff')
 					jQuery(title).animate({
-						marginRight: '-20%'
+						marginRight: '15%'
+						// marginRight: '-20%'
 					})
 				}
 				if (w.innerWidth < 1241) {
@@ -493,7 +557,8 @@
 			if (!isPost) {
 				main.classList.add('menuoff')
 				jQuery(title).animate({
-					marginRight: '-3%'
+					marginRight: '15%'
+					// marginRight: '-3%'
 				})
 			}
 		},
@@ -659,8 +724,9 @@
 		if (!key) {
 			return
 		}
-
-		const regExp = new RegExp(key.replace(/[ ]/g, '|'), 'gmi')
+		//对括号取消转义,当成普通字符串
+		nkey = key.replace(/[(]/g, '\\(').replace(/[)]/g,'\\)')
+		const regExp = new RegExp(nkey.replace(/[ ]/g, '|'), 'gmi')
 
 		loadData(function(data) {
 			const result = data.filter(function(post) {
@@ -697,4 +763,164 @@
 
 	keyInput.addEventListener('input', search)
 	keyInput.addEventListener(even, search)
+	// 添加音乐播放器
+	var bodywrap = document.getElementsByClassName('nav')[0]
+	var aplaycss = document.createElement('link')
+	aplaycss.rel = 'stylesheet'
+	aplaycss.href = '/blog/dist/APlayer.min.css'
+	// bodywrap.parentNode.insertBefore(aplaycss,bodywrap)
+	bodywrap.appendChild(aplaycss)
+
+	var aplaydiv = document.createElement('div')
+	aplaydiv.id = 'aplayer'
+	// bodywrap.parentNode.insertBefore(aplaydiv,bodywrap)
+	bodywrap.appendChild(aplaydiv)
+
+	var aplaysc = document.createElement('script')
+	aplaysc.type = 'text/javascript'
+	aplaysc.src = '/blog/dist/APlayer.min.js'
+	// bodywrap.parentNode.insertBefore(aplaysc,bodywrap)
+	bodywrap.appendChild(aplaysc)
+
+	function getChanges(res){
+		// console.log(res.data); 
+		if (res.data["changes"].length>0){
+			document.getElementById("temp").remove();
+		}
+		const microw = document.getElementById("microw");
+		let tempcontent="";
+		res.data["changes"].reverse().forEach(element => {
+			let content = element["file"]["content"];
+			if ((tempcontent.substr(0,10) != content.substr(0,10)) && content.charAt(0)===" "){
+				// console.log(element["file"]["content"]);
+				var issue = document.createElement("div");
+				issue.setAttribute("class", "is-issue-content")
+
+				let foot = document.createElement("i");
+				foot.setAttribute("class", "icon is-icon");
+				foot.innerText="🍓 Yummy🥝";
+				issue.append(foot);
+
+				
+				var cont = document.createElement("div");
+				cont.innerText=element["file"]["content"];
+				issue.append(cont);
+
+				var head = document.createElement("div");
+				head.innerText=element["at"].replace("T", " ").replace("Z", " ");
+				head.setAttribute("class", "is-issue-header")
+				issue.append(head);
+
+				microw.append(issue);
+
+				tempcontent = content;
+				}
+			});
+		}
+	
+	//<!-- <div id="temp" class="is-issue-content"><i class="icon is-icon">🍓 Yummy🥝</i><div> 最近一个月应该至少有20天是，一天花1小时练ukulele，起的茧也开始脱皮了。。。<br>其实就是跟着节拍器的节奏爬格子，爬完之后练不同和弦的扫弦。扫弦我是真的纠结了好久，怎么练都跟视频里的声音不对。所以就把自己弹的和视频里的也录下来，然后一遍遍的听、比对，但只是知道明显不对，又听不出来哪里不对。<br>然后又去YouTube、b站找了一堆扫弦、strumming之类的视频看，还包括Jake Shimabukuro讲的。。。<br>继续录音、录视频，暂停、播放，调音、换弦，观察、比对姿势和琴弦的变化，才终于发现，别人扫弦是真的如清风一般轻轻又快速的扫过，弦的振幅很小的，而我总是太着急，总是想着快，快着快着就成了“击”弦了，所以总是有杂音。。。<br>然后昨天练习，突然发现，好像有点那种该有的味道了，节奏感也有那么点了！😄<br>所以总结下来就是:<br>1.扫弦要真的扫到弦，现在我还只是入门，每根弦都扫到，后面进阶应该还得学些乐理什么的才知道什么时候又不用扫哪根弦；<br>2.力度要轻而且要稳，这个真的得像做饭掌握火候一样，得多练才知道怎样才是合适的力度。静下心来观察自己不对的地方，不要急，年轻人，是你的总会是你的，该会的总该会的；<br>3.琴弦和琴的构造都会影响音色，反正我看了那么多视频，他们弹出来的声音都是有差别的；</div><div class="is-issue-header">2021-02-25 14:53:22 </div></div>
+	// <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	async function getcontent(){
+		// axios.get("https://api.github.com")
+		let res = await axios.get("https://cors-anywhere.herokuapp.com/https://api.cacher.io/libraries/cb7723cbce059cfa0f7d/snippets/7d52434c5531f01447c0/files/b754cca0c3b8cc2ebeca/changes", {
+		"headers": {
+		"accept": "application/json",
+		"accept-language": "zh-CN,zh;q=0.9",
+		"access-token": "838AALQKQGgd3QJDZDD7jg",
+		"client": "7qm4_6_9LQ11ZK0zP0JkCQ",
+		"content-type": "application/json",
+		"expiry": "1645674645",
+		"provider": "github",
+		"token-type": "Bearer",
+		"uid": "45418706",
+		"x-client-session": "aa82caa2-d978-3a4c-62b9-5d0503cb258e"
+		},
+		"referrerPolicy": "same-origin",
+		"body": null,
+		"method": "GET",
+		"mode": "cors",
+		"credentials": "omit"
+		});
+		return res
+	}
+
+	async function getSnippet(){
+		let res = await axios.get("https://cors.bridged.cc/https://api.cacher.io/libraries/cb7723cbce059cfa0f7d/snippets/7d52434c5531f01447c0", {
+			"headers": {
+				"accept": "application/json",
+				"accept-language": "zh-CN,zh;q=0.9",
+				"access-token": "838AALQKQGgd3QJDZDD7jg",
+				"client": "7qm4_6_9LQ11ZK0zP0JkCQ",
+				"content-type": "application/json",
+				"expiry": "1645674645",
+				"provider": "github",
+				"token-type": "Bearer",
+				"uid": "45418706",
+				"x-client-session": "d415f9e6-af8e-b46b-25df-7fa688ec7ef9"
+			},
+			"referrerPolicy": "same-origin",
+			"body": "{\"snippet\":{\"id\":993500,\"guid\":\"7d52434c5531f01447c0\",\"title\":\"ymblog\",\"description\":\"\",\"isPrivate\":true,\"createdAt\":\"2021-02-25T14:53:22Z\",\"updatedAt\":\"2021-02-26T00:51:52Z\",\"gistId\":\"8fd3880afecb8583aaf8d7a013666524\",\"gistboxId\":null,\"syncToGist\":true,\"gistUpdatedAt\":\"2021-02-25T14:53:42Z\",\"pagePermission\":null,\"files\":[{\"id\":1462119,\"guid\":\"b754cca0c3b8cc2ebeca\",\"filename\":\"ymblog\",\"filetype\":\"text\",\"content\":\" 最近一个月应该至少有20天是，一天花1小时练ukulele，起的茧也开始脱皮了。。。\\n其实就是跟着节拍器的节奏爬格子，爬完之后练不同和弦的扫弦。扫弦我是真的纠结了好久，怎么练都跟视频里的声音不对。所以就把自己弹的和视频里的也录下来，然后一遍遍的听、比对，但只是知道明显不对，又听不出来哪里不对。\\n然后又去YouTube、b站找了一堆扫弦、strumming之类的视频看，还包括Jake Shimabukuro讲的。。。\\n继续录音、录视频，暂停、播放，调音、换弦，观察、比对姿势和琴弦的变化，才终于发现，别人扫弦是真的如清风一般轻轻又快速的扫过，弦的振幅很小的，而我总是太着急，总是想着快，快着快着就成了“击”弦了，所以总是有杂音。。。\\n然后昨天练习，突然发现，好像有点那种该有的味道了，节奏感也有那么点了！😄\\n所以总结下来就是:\\n1.扫弦要真的扫到弦，现在我还只是入门，每根弦都扫到，后面进阶应该还得学些乐理什么的才知道什么时候又不用扫哪根弦；\\n2.力度要轻而且要稳，这个真的得像做饭掌握火候一样，得多练才知道怎样才是合适的力度。静下心来观察自己不对的地方，不要急，年轻人，是你的总会是你的，该会的总该会的；\\n3.琴弦和琴的构造都会影响音色，反正我看了那么多视频，他们弹出来的声音都是有差别的；\",\"contentLength\":548,\"isShared\":false,\"snippetFileOrder\":0,\"createdAt\":\"2021-02-25T14:53:22Z\",\"updatedAt\":\"2021-02-25T14:53:22Z\"},{\"id\":1462534,\"guid\":\"de165b07d86e897ee13f\",\"filename\":\"test\",\"filetype\":\"python\",\"content\":\"just test\\n2021/02/25\",\"contentLength\":9,\"isShared\":false,\"snippetFileOrder\":1,\"createdAt\":\"2021-02-26T00:51:52Z\",\"updatedAt\":\"2021-02-26T00:51:52Z\"}],\"starredBy\":[],\"createdBy\":{\"id\":43802,\"name\":null,\"email\":\"541897923@qq.com\",\"image\":\"https://avatars.githubusercontent.com/u/45418706?v=4\",\"nickname\":\"ym-first\",\"provider\":\"github\"},\"lastUpdatedBy\":{\"id\":43802,\"name\":null,\"email\":\"541897923@qq.com\",\"image\":\"https://avatars.githubusercontent.com/u/45418706?v=4\",\"nickname\":\"ym-first\",\"provider\":\"github\"}},\"assignToUserId\":null,\"autosave\":false}",
+			"method": "PUT",
+			"mode": "cors",
+			"credentials": "omit"
+			});
+		return res;
+	}
+	
+	window.onload = function(){
+		var msc = document.createElement('script')
+		msc.type = 'text/javascript'
+		msc.src = '/blog/dist/music.js'
+		bodywrap.appendChild(msc)
+
+		
+		// let t = document.querySelector("relative-time");
+		// var ovser = new MutationObserver((mutations)=>{
+		// 	mutations.forEach((mu)=>{
+		// 	if (mu.type=="attributes"){
+		// 		let temptime = new Date(t.getAttribute("datetime")).getTime();
+		// 		console.log(temptime)
+		// 	t.innerHTML = timeDifference(new Date().getTime(),temptime)
+		// 	}})}
+		// )
+		// ovser.observe(t,{attributes:true})
+
+		// // 从cacher获取即时代码片段
+		// let res = getSnippet();
+		// let resArray = []
+		// let i = 0
+		// let snippetsArray = document.querySelectorAll("#microw .cacher-snippet");
+		// snippetsArray.forEach((element)=>{
+		// 	element.setAttribute("class","is-issue-content");
+			
+		// 	let foot = element.lastChild;
+		// 	let author = document.createElement("em");
+		// 	author.innerText="🍓 Yummy🥝 ";
+		// 	element.insertBefore(author,element.firstChild);
+
+		// 	foot.innerHTML= "";
+		// 	let empostTime = document.createElement("em")
+			
+		// 	let postTime = document.createElement("relative-time");
+		// 	empostTime.appendChild(postTime);
+		// 	postTime.innerText = "hold on ...";
+		// 	foot.appendChild(empostTime);
+		// 	foot.setAttribute("id", "snippetFoot");
+		// })
+		// // 遍历接口获取的数据，修改片段时间
+		// res.then(response=>{
+		// 	resArray = response.data["snippet"]["files"].reverse();
+		// 	snippetsArray.forEach((element)=>{
+		// 		let postTime = element.lastChild.lastChild;
+		// 		let createAt = new Date(resArray[i]["createdAt"]).getTime();
+		// 		postTime.innerText= timeDifference(new Date().getTime(),createAt)
+		// 		i ++;
+		// 	});
+		// })
+
+		
+       
+		
+	}
+	// if (G.innerWidth > 760) {// }
 }.call(this))
