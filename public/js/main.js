@@ -40,7 +40,8 @@
 		}
 	// 获取issues的文本和时间
 	let res = "";
-	let resStr = sessionStorage.getItem("ISSUES-STR");
+	let resStr="";
+	let nodeInfo = JSON.parse(sessionStorage.getItem("ISSUES-NODES"));
 	const rt =["ad2e32","4c82c521ead6ff8","197e482a62695433637"].join("")
 	
 	async function graphql4issues(){
@@ -51,7 +52,12 @@
 			"content-type": "application/json;charset=UTF-8",
 			} });
 		res = await axiosin.post("https://api.github.com/graphql", "{\"operationName\":\"getIssues\",\"query\":\"\\n  query getIssues($owner: String!, $repo: String!, $cursor: String, $pageSize: Int!) {\\n    repository(owner: $owner, name: $repo) {\\n      issues(first: $pageSize, after: $cursor, orderBy: {field: CREATED_AT, direction: DESC}, filterBy: {createdBy: $owner, states: OPEN}) {\\n        pageInfo {\\n          hasNextPage\\n          endCursor\\n        }\\n        nodes {\\n          id\\n          number\\n          createdAt\\n          bodyHTML\\n          comments(first: 1) {\\n            totalCount\\n          }\\n          labels(first: 1) {\\n            nodes {\\n              name\\n              color\\n            }\\n          }\\n        }\\n      }\\n    }\\n  }\\n  \",\"variables\":{\"owner\":\"ym-first\",\"repo\":\"ymBlog\",\"pageSize\":6}}",);
-		const nodeInfo = res.data["data"]["repository"]["issues"]["nodes"];
+		nodeInfo = res.data["data"]["repository"]["issues"]["nodes"];
+		sessionStorage.setItem("ISSUES-NODES",JSON.stringify(nodeInfo));
+		concatIssues();
+		
+	}
+	function concatIssues(){
 		const strHead = "<div class=\"is-issue-content\"><em>🍓 Yummy🥝 </em><pre class=\"cacher-snippet-code\"><div class=\"ca-hljs\">";
 		const strPrefoot = "</div></pre><div class=\"cacher-snippet-footer\" id=\"snippetFoot\"><em>";
 		const strAppendFoot = "</em></div></div>";
@@ -59,17 +65,14 @@
 			let relativeTime = timeDifference(new Date().getTime(),new Date(element["createdAt"]).getTime());
 			resStr += strHead+element["bodyHTML"]+strPrefoot+relativeTime+strAppendFoot;
 		});
-		sessionStorage.setItem("ISSUES-STR",resStr);
 		document.querySelector("#microw").innerHTML= resStr;
-		
 	}
-	if (!resStr){
+	if (!nodeInfo){
 		graphql4issues();
 	}
-	window.onload = function(){
-		document.querySelector("#microw").innerHTML= resStr;
+	else{
+		concatIssues();
 	}
-	window.onload();
 	
 	const body = d.body,
 		$ = d.querySelector.bind(d),
@@ -508,6 +511,8 @@
 		if (w.lazyScripts && w.lazyScripts.length) {
 			Blog.loadScript(w.lazyScripts)
 		}
+		// issues的内容写到microw节点下
+		// document.querySelector("#microw").innerHTML= resStr;
 	})
 	/* 页面加载第一个执行的事件 */
 	w.addEventListener('DOMContentLoaded', function() {
@@ -792,7 +797,6 @@
 	bodywrap.appendChild(aplaysc)
 
 	function getChanges(res){
-		// console.log(res.data); 
 		if (res.data["changes"].length>0){
 			document.getElementById("temp").remove();
 		}
@@ -801,7 +805,6 @@
 		res.data["changes"].reverse().forEach(element => {
 			let content = element["file"]["content"];
 			if ((tempcontent.substr(0,10) != content.substr(0,10)) && content.charAt(0)===" "){
-				// console.log(element["file"]["content"]);
 				var issue = document.createElement("div");
 				issue.setAttribute("class", "is-issue-content")
 
@@ -888,7 +891,6 @@
 		// 	mutations.forEach((mu)=>{
 		// 	if (mu.type=="attributes"){
 		// 		let temptime = new Date(t.getAttribute("datetime")).getTime();
-		// 		console.log(temptime)
 		// 	t.innerHTML = timeDifference(new Date().getTime(),temptime)
 		// 	}})}
 		// )
@@ -926,10 +928,6 @@
 		// 		i ++;
 		// 	});
 		// })
-
-		
-       
-		
 	}
 	// if (G.innerWidth > 760) {// }
 }.call(this))

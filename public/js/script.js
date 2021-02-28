@@ -322,7 +322,11 @@ function elasticText() {
 				t.t.css('position') !== 'fixed' &&
 				t.t.css('position') !== 'absolute'
 			) {
-				t.t.css('position', 'relative')
+				t.t.css('position', 'absolute')
+				// relative 固定底部
+				t.t.css('bottom', 0)
+				t.t.css('height', '40px')
+				t.t.css('width', '100%')
 			}
 			t.w = t.t.width()
 			t.h = t.t.height()
@@ -619,7 +623,7 @@ function setTime(a) {
 				? `0${mydate.getSeconds()}`
 				: mydate.getSeconds()
 	if (!isNaN(day)) {
-		RunTime.innerHTML = `网站已运行：${day}天 ${myHours}小时 ${myMinutes}分 ${mySeconds}秒 `
+		RunTime.innerHTML = ` ${day}天 ${myHours}小时 ${myMinutes}' ${mySeconds}'' `
 	}
 	return false
 }
@@ -628,43 +632,35 @@ function setTime(a) {
 let countFail = 0
 
 function getHitokoto() {
-	$.ajax({
-		type: 'GET',
-		url: 'https://sslapi.hitokoto.cn/',
-		dataType: 'json',
-		timeout: 2500,
-		success: function(data) {
-			if (data.hitokoto.length > 12) {
-				countFail++
-				if (countFail > 5) {
-					elasticText({
-						id: 'yiyanmotto',
-						duration: 100,
-						effact: 'easeOut',
-						content: '为了正义！'
-					})
-				} else {
-					getHitokoto()
-				}
-			} else {
-				/* 签名 */
-				elasticText({
-					id: 'yiyanmotto',
-					duration: 100,
-					effact: 'easeOut',
-					content: data.hitokoto
-				})
-			}
-		},
-		error: function() {
-			elasticText({
-				id: 'yiyanmotto',
-				duration: 100,
-				effact: 'easeOut',
-				content: '不要为不能改变的事情烦恼~'
-			})
-		}
+	elasticText({
+		id: 'yiyanmotto',
+		duration: 100,
+		effact: 'easeOut',
+		content: '不要为不能改变的事情烦恼~'
 	})
+	// $.ajax({
+	// 	type: 'GET',
+	// 	url: 'https://sslapi.hitokoto.cn/',
+	// 	dataType: 'json',
+	// 	timeout: 100,
+	// 	success: function(data) {
+	// 		/* 签名 */
+	// 		elasticText({
+	// 			id: 'yiyanmotto',
+	// 			duration: 100,
+	// 			effact: 'easeOut',
+	// 			content: data.hitokoto
+	// 		})
+	// 	},
+	// 	error: function() {
+	// 		elasticText({
+	// 			id: 'yiyanmotto',
+	// 			duration: 100,
+	// 			effact: 'easeOut',
+	// 			content: '不要为不能改变的事情烦恼~'
+	// 		})
+	// 	}
+	// })
 }
 
 /* 粘贴提示 */
