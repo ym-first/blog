@@ -221,35 +221,89 @@
 
 <div class="container body-wrap">
     <div id="microw" class="is-container">
+        <div class="is-issue-content"><em>🍓 Yummy🥝 </em><pre class="cacher-snippet-code"><div class="ca-hljs"><div class="highlight highlight-source-sql"><pre>It<span class="pl-s"><span class="pl-pds">'</span>s now or never !</span></pre></div></div></pre><div class="cacher-snippet-footer" id="snippetFoot"><em>19 hours ago</em></div></div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+    function timeDifference(current, previous) {
+		var msPerMinute = 60 * 1000;
+		var msPerHour = msPerMinute * 60;
+		var msPerDay = msPerHour * 24;
+		var msPerMonth = msPerDay * 30;
+		var msPerYear = msPerDay * 365;
+
+		var elapsed = current - previous;
+		let relativeTime;
+		if (elapsed < msPerMinute) {
+			relativeTime = Math.round(elapsed/1000);
+			return relativeTime>1?relativeTime+ ' seconds ago':relativeTime+' second ago';   
+		}
+
+		else if (elapsed < msPerHour) {
+			relativeTime = Math.round(elapsed/msPerMinute);
+			return relativeTime>1?relativeTime+ ' minutes ago':relativeTime+' minute ago';
+		}
+
+		else if (elapsed < msPerDay ) {
+			relativeTime = Math.round(elapsed/msPerHour);
+			return relativeTime>1?relativeTime+ ' hours ago':relativeTime+' hour ago';
+		}
+
+		else if (elapsed < msPerMonth) {
+			relativeTime = Math.round(elapsed/msPerDay)
+			return relativeTime>1?relativeTime+ ' days ago':relativeTime+' day ago';
+		}
+
+		else if (elapsed < msPerYear) {
+			relativeTime = Math.round(elapsed/msPerMonth);
+			return relativeTime>1?relativeTime+ ' months ago':relativeTime+' month ago';
+		}
+
+		else {
+			relativeTime = Math.round(elapsed/msPerYear);
+			return relativeTime>1?relativeTime+ ' years ago':relativeTime+' year ago';
+		}
+		}
+
+        async function graphql4issues(){
+		const axiosin = axios.create({
+			"headers": {
+			"accept": "application/json",
+			"authorization": "bearer ".concat(rt),
+			"content-type": "application/json;charset=UTF-8",
+			} });
+		res = await axiosin.post("https://api.github.com/graphql", "{\"operationName\":\"getIssues\",\"query\":\"\\n  query getIssues($owner: String!, $repo: String!, $cursor: String, $pageSize: Int!) {\\n    repository(owner: $owner, name: $repo) {\\n      issues(first: $pageSize, after: $cursor, orderBy: {field: CREATED_AT, direction: DESC}, filterBy: {createdBy: $owner, states: OPEN}) {\\n        pageInfo {\\n          hasNextPage\\n          endCursor\\n        }\\n        nodes {\\n          id\\n          number\\n          createdAt\\n          bodyHTML\\n          comments(first: 1) {\\n            totalCount\\n          }\\n          labels(first: 1) {\\n            nodes {\\n              name\\n              color\\n            }\\n          }\\n        }\\n      }\\n    }\\n  }\\n  \",\"variables\":{\"owner\":\"ym-first\",\"repo\":\"ymBlog\",\"pageSize\":6}}",);
+		nodeInfo = res.data["data"]["repository"]["issues"]["nodes"];
+		sessionStorage.setItem("ISSUES-NODES",JSON.stringify(nodeInfo));
+		return res;
+	}
+</script>
+    <script>
         
-        <!-- <script src="https://embed.cacher.io/d7023d820831ae13acaf17925c2d1ba32f0cfa41.js?a=95f780388397b238bf35f7ce6050de68&t=solarized_light&r=0"></script> -->
-        <!-- <script src="https://gist.github.com/ym-first/8fd3880afecb8583aaf8d7a013666524.js"></script> -->
-    <!-- 
-<article id="recent-"
-  class="post-article article-type-recent fade" itemprop="blogPost">
+	// 获取issues的文本和时间
+	let res = "";
+	let resStr="";
+	let nodeInfo = JSON.parse(sessionStorage.getItem("ISSUES-NODES"));
+	const rt =["ad2e32","4c82c521ead6ff8","197e482a62695433637"].join("")
 
-    <div class="post-card">
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 >最近的一些想法</h2>
-            <div class="post-meta">
-            <i class="icon icon-lg icon-calendar-o"></i>
-            发表于
-            <time class="post-time" title="2021-02-24 14:22:48" datetime="2021-02-24T06:22:48.000Z"  itemprop="datePublished">2021-02-24</time>
-
-            </div>
-            
-        </div>
-        
-
-        <div class="post-footer">
-
-        </div>
-    </div>
-
-    
-
-</article>
- -->
+	function concatIssues(){
+		const strHead = "<div class=\"is-issue-content\"><em>🍓 Yummy🥝 </em><pre class=\"cacher-snippet-code\"><div class=\"ca-hljs\">";
+		const strPrefoot = "</div></pre><div class=\"cacher-snippet-footer\" id=\"snippetFoot\"><em>";
+		const strAppendFoot = "</em></div></div>";
+		nodeInfo.forEach((element)=>{
+			let relativeTime = timeDifference(new Date().getTime(),new Date(element["createdAt"]).getTime());
+			resStr += strHead+element["bodyHTML"]+strPrefoot+relativeTime+strAppendFoot;
+		});
+		document.querySelector("#microw").innerHTML= resStr;
+	}
+	if (!nodeInfo){
+		graphql4issues().then((response)=>{
+            concatIssues();
+        });
+	}
+	else{
+		concatIssues();
+	}
+    </script>
 </div>
 </div>
         <footer class="footer">
@@ -285,8 +339,7 @@
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!-- waves按钮特效 -->
+    <!-- waves按钮特效 -->
 <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 
 <!-- 主题配置脚本 -->

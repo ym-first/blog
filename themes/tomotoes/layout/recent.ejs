@@ -9,9 +9,35 @@ page.comments = "";
 %>
 <div class="container body-wrap">
     <div id="microw" class="is-container">
+        <div class="is-issue-content"><em>🍓 Yummy🥝 </em><pre class="cacher-snippet-code"><div class="ca-hljs"><div class="highlight highlight-source-sql"><pre>It<span class="pl-s"><span class="pl-pds">'</span>s now or never !</span></pre></div></div></pre><div class="cacher-snippet-footer" id="snippetFoot"><em>19 hours ago</em></div></div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <%- partial('_partial/common') %>
+    <script>
         
-        <!-- <script src="https://embed.cacher.io/d7023d820831ae13acaf17925c2d1ba32f0cfa41.js?a=95f780388397b238bf35f7ce6050de68&t=solarized_light&r=0"></script> -->
-        <!-- <script src="https://gist.github.com/ym-first/8fd3880afecb8583aaf8d7a013666524.js"></script> -->
-    <!-- <%- partial('_partial/micropost', {post: page }) %> -->
+	// 获取issues的文本和时间
+	let res = "";
+	let resStr="";
+	let nodeInfo = JSON.parse(sessionStorage.getItem("ISSUES-NODES"));
+	const rt =["ad2e32","4c82c521ead6ff8","197e482a62695433637"].join("")
+
+	function concatIssues(){
+		const strHead = "<div class=\"is-issue-content\"><em>🍓 Yummy🥝 </em><pre class=\"cacher-snippet-code\"><div class=\"ca-hljs\">";
+		const strPrefoot = "</div></pre><div class=\"cacher-snippet-footer\" id=\"snippetFoot\"><em>";
+		const strAppendFoot = "</em></div></div>";
+		nodeInfo.forEach((element)=>{
+			let relativeTime = timeDifference(new Date().getTime(),new Date(element["createdAt"]).getTime());
+			resStr += strHead+element["bodyHTML"]+strPrefoot+relativeTime+strAppendFoot;
+		});
+		document.querySelector("#microw").innerHTML= resStr;
+	}
+	if (!nodeInfo){
+		graphql4issues().then((response)=>{
+            concatIssues();
+        });
+	}
+	else{
+		concatIssues();
+	}
+    </script>
 </div>
 </div>
