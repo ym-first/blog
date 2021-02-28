@@ -40,8 +40,9 @@
 		}
 	// 获取issues的文本和时间
 	let res = "";
-	let resStr = "";
+	let resStr = sessionStorage.getItem("ISSUES-STR");
 	const rt =["ad2e32","4c82c521ead6ff8","197e482a62695433637"].join("")
+	
 	async function graphql4issues(){
 		const axiosin = axios.create({
 			"headers": {
@@ -57,11 +58,19 @@
 		nodeInfo.forEach((element)=>{
 			let relativeTime = timeDifference(new Date().getTime(),new Date(element["createdAt"]).getTime());
 			resStr += strHead+element["bodyHTML"]+strPrefoot+relativeTime+strAppendFoot;
-		})
-		$("#microw").innerHTML= resStr;
+		});
+		sessionStorage.setItem("ISSUES-STR",resStr);
+		document.querySelector("#microw").innerHTML= resStr;
 		
 	}
-	graphql4issues();
+	if (!resStr){
+		graphql4issues();
+	}
+	window.onload = function(){
+		document.querySelector("#microw").innerHTML= resStr;
+	}
+	window.onload();
+	
 	const body = d.body,
 		$ = d.querySelector.bind(d),
 		$$ = d.querySelectorAll.bind(d),
