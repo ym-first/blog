@@ -5,9 +5,9 @@
   <subtitle>True nobility is being superior to your former self.</subtitle>
   <link href="/blog/atom.xml" rel="self"/>
   
-  <link href="https://ym-first.github.io/blog/"/>
+  <link href="https://yummyisminer.xyz/blog/"/>
   <updated>2021-02-04T02:38:05.398Z</updated>
-  <id>https://ym-first.github.io/blog/</id>
+  <id>https://yummyisminer.xyz/blog/</id>
   
   <author>
     <name>M.Y_敏兒</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>通过behave学习BDD</title>
-    <link href="https://ym-first.github.io/blog/posts/e6f54ca7/"/>
-    <id>https://ym-first.github.io/blog/posts/e6f54ca7/</id>
+    <link href="https://yummyisminer.xyz/blog/posts/e6f54ca7/"/>
+    <id>https://yummyisminer.xyz/blog/posts/e6f54ca7/</id>
     <published>2020-12-30T13:04:57.000Z</published>
     <updated>2021-02-04T02:38:05.398Z</updated>
     
@@ -40,8 +40,8 @@
   
   <entry>
     <title>socket 模拟收发HTTP包</title>
-    <link href="https://ym-first.github.io/blog/posts/6178cbe6/"/>
-    <id>https://ym-first.github.io/blog/posts/6178cbe6/</id>
+    <link href="https://yummyisminer.xyz/blog/posts/6178cbe6/"/>
+    <id>https://yummyisminer.xyz/blog/posts/6178cbe6/</id>
     <published>2020-12-29T10:30:15.000Z</published>
     <updated>2021-02-04T02:38:05.401Z</updated>
     
@@ -56,21 +56,21 @@
     </summary>
     
     
-      <category term="网络" scheme="https://ym-first.github.io/blog/categories/%E7%BD%91%E7%BB%9C/"/>
+      <category term="网络" scheme="https://yummyisminer.xyz/blog/categories/%E7%BD%91%E7%BB%9C/"/>
     
     
-      <category term="协议" scheme="https://ym-first.github.io/blog/tags/%E5%8D%8F%E8%AE%AE/"/>
+      <category term="协议" scheme="https://yummyisminer.xyz/blog/tags/%E5%8D%8F%E8%AE%AE/"/>
     
-      <category term="python" scheme="https://ym-first.github.io/blog/tags/python/"/>
+      <category term="python" scheme="https://yummyisminer.xyz/blog/tags/python/"/>
     
-      <category term="socket" scheme="https://ym-first.github.io/blog/tags/socket/"/>
+      <category term="socket" scheme="https://yummyisminer.xyz/blog/tags/socket/"/>
     
   </entry>
   
   <entry>
     <title>基于OpenCover的代码覆盖率测试</title>
-    <link href="https://ym-first.github.io/blog/posts/8920367b/"/>
-    <id>https://ym-first.github.io/blog/posts/8920367b/</id>
+    <link href="https://yummyisminer.xyz/blog/posts/8920367b/"/>
+    <id>https://yummyisminer.xyz/blog/posts/8920367b/</id>
     <published>2020-12-02T23:40:59.000Z</published>
     <updated>2021-02-04T02:38:05.403Z</updated>
     
@@ -86,16 +86,16 @@
     
     
     
-      <category term="测试" scheme="https://ym-first.github.io/blog/tags/%E6%B5%8B%E8%AF%95/"/>
+      <category term="测试" scheme="https://yummyisminer.xyz/blog/tags/%E6%B5%8B%E8%AF%95/"/>
     
-      <category term="覆盖率测试" scheme="https://ym-first.github.io/blog/tags/%E8%A6%86%E7%9B%96%E7%8E%87%E6%B5%8B%E8%AF%95/"/>
+      <category term="覆盖率测试" scheme="https://yummyisminer.xyz/blog/tags/%E8%A6%86%E7%9B%96%E7%8E%87%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>《猎豹行动》笔记</title>
-    <link href="https://ym-first.github.io/blog/posts/5e8f1732/"/>
-    <id>https://ym-first.github.io/blog/posts/5e8f1732/</id>
+    <link href="https://yummyisminer.xyz/blog/posts/5e8f1732/"/>
+    <id>https://yummyisminer.xyz/blog/posts/5e8f1732/</id>
     <published>2020-04-20T02:10:11.000Z</published>
     <updated>2021-02-07T02:59:54.506Z</updated>
     
@@ -109,21 +109,21 @@
     </summary>
     
     
-      <category term="读书笔记" scheme="https://ym-first.github.io/blog/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="https://yummyisminer.xyz/blog/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="读书笔记" scheme="https://ym-first.github.io/blog/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="https://yummyisminer.xyz/blog/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="敏捷" scheme="https://ym-first.github.io/blog/tags/%E6%95%8F%E6%8D%B7/"/>
+      <category term="敏捷" scheme="https://yummyisminer.xyz/blog/tags/%E6%95%8F%E6%8D%B7/"/>
     
-      <category term="DevOps" scheme="https://ym-first.github.io/blog/tags/DevOps/"/>
+      <category term="DevOps" scheme="https://yummyisminer.xyz/blog/tags/DevOps/"/>
     
   </entry>
   
   <entry>
     <title>凤凰项目-三步工作法笔记</title>
-    <link href="https://ym-first.github.io/blog/posts/d698d359/"/>
-    <id>https://ym-first.github.io/blog/posts/d698d359/</id>
+    <link href="https://yummyisminer.xyz/blog/posts/d698d359/"/>
+    <id>https://yummyisminer.xyz/blog/posts/d698d359/</id>
     <published>2020-04-14T04:31:11.000Z</published>
     <updated>2021-02-04T02:38:05.402Z</updated>
     
@@ -140,21 +140,21 @@
     </summary>
     
     
-      <category term="读书笔记" scheme="https://ym-first.github.io/blog/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="https://yummyisminer.xyz/blog/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="读书笔记" scheme="https://ym-first.github.io/blog/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="https://yummyisminer.xyz/blog/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="敏捷" scheme="https://ym-first.github.io/blog/tags/%E6%95%8F%E6%8D%B7/"/>
+      <category term="敏捷" scheme="https://yummyisminer.xyz/blog/tags/%E6%95%8F%E6%8D%B7/"/>
     
-      <category term="DevOps" scheme="https://ym-first.github.io/blog/tags/DevOps/"/>
+      <category term="DevOps" scheme="https://yummyisminer.xyz/blog/tags/DevOps/"/>
     
   </entry>
   
   <entry>
     <title>“砖墙是为了挡住不够渴望的人”</title>
-    <link href="https://ym-first.github.io/blog/posts/1936ef26/"/>
-    <id>https://ym-first.github.io/blog/posts/1936ef26/</id>
+    <link href="https://yummyisminer.xyz/blog/posts/1936ef26/"/>
+    <id>https://yummyisminer.xyz/blog/posts/1936ef26/</id>
     <published>2020-04-13T00:45:43.000Z</published>
     <updated>2021-02-04T02:38:05.403Z</updated>
     
@@ -175,17 +175,17 @@
     </summary>
     
     
-      <category term="观后感" scheme="https://ym-first.github.io/blog/categories/%E8%A7%82%E5%90%8E%E6%84%9F/"/>
+      <category term="观后感" scheme="https://yummyisminer.xyz/blog/categories/%E8%A7%82%E5%90%8E%E6%84%9F/"/>
     
     
-      <category term="观后感" scheme="https://ym-first.github.io/blog/tags/%E8%A7%82%E5%90%8E%E6%84%9F/"/>
+      <category term="观后感" scheme="https://yummyisminer.xyz/blog/tags/%E8%A7%82%E5%90%8E%E6%84%9F/"/>
     
   </entry>
   
   <entry>
     <title>jmeter分布式压测及问题记录</title>
-    <link href="https://ym-first.github.io/blog/posts/270d5148/"/>
-    <id>https://ym-first.github.io/blog/posts/270d5148/</id>
+    <link href="https://yummyisminer.xyz/blog/posts/270d5148/"/>
+    <id>https://yummyisminer.xyz/blog/posts/270d5148/</id>
     <published>2020-04-12T12:22:03.000Z</published>
     <updated>2021-02-04T02:38:05.400Z</updated>
     
@@ -201,16 +201,16 @@
     
     
     
-      <category term="测试" scheme="https://ym-first.github.io/blog/tags/%E6%B5%8B%E8%AF%95/"/>
+      <category term="性能测试" scheme="https://yummyisminer.xyz/blog/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
     
-      <category term="性能测试" scheme="https://ym-first.github.io/blog/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
+      <category term="测试" scheme="https://yummyisminer.xyz/blog/tags/%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>jmeter请求参数化</title>
-    <link href="https://ym-first.github.io/blog/posts/b8d58d05/"/>
-    <id>https://ym-first.github.io/blog/posts/b8d58d05/</id>
+    <link href="https://yummyisminer.xyz/blog/posts/b8d58d05/"/>
+    <id>https://yummyisminer.xyz/blog/posts/b8d58d05/</id>
     <published>2020-04-12T10:08:43.000Z</published>
     <updated>2021-02-10T04:35:18.228Z</updated>
     
@@ -227,17 +227,17 @@
     </summary>
     
     
-      <category term="性能测试" scheme="https://ym-first.github.io/blog/categories/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
+      <category term="性能测试" scheme="https://yummyisminer.xyz/blog/categories/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
     
     
-      <category term="性能测试" scheme="https://ym-first.github.io/blog/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
+      <category term="性能测试" scheme="https://yummyisminer.xyz/blog/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>Dubbo接口框架相关概念</title>
-    <link href="https://ym-first.github.io/blog/posts/f0c13426/"/>
-    <id>https://ym-first.github.io/blog/posts/f0c13426/</id>
+    <link href="https://yummyisminer.xyz/blog/posts/f0c13426/"/>
+    <id>https://yummyisminer.xyz/blog/posts/f0c13426/</id>
     <published>2020-04-12T03:11:30.000Z</published>
     <updated>2021-02-04T02:38:05.399Z</updated>
     
@@ -258,16 +258,16 @@
     
     
     
-      <category term="测试" scheme="https://ym-first.github.io/blog/tags/%E6%B5%8B%E8%AF%95/"/>
+      <category term="测试" scheme="https://yummyisminer.xyz/blog/tags/%E6%B5%8B%E8%AF%95/"/>
     
-      <category term="接口测试" scheme="https://ym-first.github.io/blog/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/"/>
+      <category term="接口测试" scheme="https://yummyisminer.xyz/blog/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>Dubbo接口测试</title>
-    <link href="https://ym-first.github.io/blog/posts/81c88605/"/>
-    <id>https://ym-first.github.io/blog/posts/81c88605/</id>
+    <link href="https://yummyisminer.xyz/blog/posts/81c88605/"/>
+    <id>https://yummyisminer.xyz/blog/posts/81c88605/</id>
     <published>2020-04-03T05:30:40.000Z</published>
     <updated>2021-02-04T02:38:05.399Z</updated>
     
@@ -280,19 +280,19 @@
     </summary>
     
     
-      <category term="接口测试" scheme="https://ym-first.github.io/blog/categories/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/"/>
+      <category term="接口测试" scheme="https://yummyisminer.xyz/blog/categories/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/"/>
     
     
-      <category term="测试" scheme="https://ym-first.github.io/blog/tags/%E6%B5%8B%E8%AF%95/"/>
+      <category term="测试" scheme="https://yummyisminer.xyz/blog/tags/%E6%B5%8B%E8%AF%95/"/>
     
-      <category term="接口测试" scheme="https://ym-first.github.io/blog/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/"/>
+      <category term="接口测试" scheme="https://yummyisminer.xyz/blog/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>ym</title>
-    <link href="https://ym-first.github.io/blog/posts/8c27cda5/"/>
-    <id>https://ym-first.github.io/blog/posts/8c27cda5/</id>
+    <link href="https://yummyisminer.xyz/blog/posts/8c27cda5/"/>
+    <id>https://yummyisminer.xyz/blog/posts/8c27cda5/</id>
     <published>2020-03-12T08:00:33.000Z</published>
     <updated>2021-02-04T02:38:05.402Z</updated>
     
