@@ -1,4 +1,5 @@
 (function(w, d) {
+	const t=1;
 	const body = d.body,
 		$ = d.querySelector.bind(d),
 		$$ = d.querySelectorAll.bind(d),
