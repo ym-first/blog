@@ -189,6 +189,6 @@ lightbox: true
 githubEmojis:
   enable: true
   className: github-emoji
-  unicode: false
+  unicode: true
   styles:
   localEmojis:
