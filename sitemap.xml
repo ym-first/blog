@@ -23,6 +23,13 @@
   </url>
   
   <url>
+    <loc>https://yummyisminer.xyz/blog/tags/index.html</loc>
+    
+    <lastmod>2021-02-04</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yummyisminer.xyz/blog/about/index.html</loc>
     
     <lastmod>2021-02-04</lastmod>
@@ -31,13 +38,6 @@
   
   <url>
     <loc>https://yummyisminer.xyz/blog/categories/index.html</loc>
-    
-    <lastmod>2021-02-04</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yummyisminer.xyz/blog/tags/index.html</loc>
     
     <lastmod>2021-02-04</lastmod>
     
@@ -109,85 +109,85 @@
 
   <url>
     <loc>https://yummyisminer.xyz/blog</loc>
-    <lastmod>2021-03-01</lastmod>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://yummyisminer.xyz/blog/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2021-03-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yummyisminer.xyz/blog/tags/%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2021-03-01</lastmod>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://yummyisminer.xyz/blog/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2021-03-01</lastmod>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://yummyisminer.xyz/blog/tags/%E5%8D%8F%E8%AE%AE/</loc>
-    <lastmod>2021-03-01</lastmod>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://yummyisminer.xyz/blog/tags/python/</loc>
-    <lastmod>2021-03-01</lastmod>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://yummyisminer.xyz/blog/tags/socket/</loc>
-    <lastmod>2021-03-01</lastmod>
+    <lastmod>2021-03-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yummyisminer.xyz/blog/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://yummyisminer.xyz/blog/tags/%E8%A7%82%E5%90%8E%E6%84%9F/</loc>
-    <lastmod>2021-03-01</lastmod>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://yummyisminer.xyz/blog/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-03-01</lastmod>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://yummyisminer.xyz/blog/tags/%E6%95%8F%E6%8D%B7/</loc>
-    <lastmod>2021-03-01</lastmod>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://yummyisminer.xyz/blog/tags/DevOps/</loc>
-    <lastmod>2021-03-01</lastmod>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://yummyisminer.xyz/blog/tags/%E8%A6%86%E7%9B%96%E7%8E%87%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2021-03-01</lastmod>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -195,36 +195,36 @@
 
   
   <url>
-    <loc>https://yummyisminer.xyz/blog/categories/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2021-03-01</lastmod>
+    <loc>https://yummyisminer.xyz/blog/categories/%E7%BD%91%E7%BB%9C/</loc>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://yummyisminer.xyz/blog/categories/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2021-03-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yummyisminer.xyz/blog/categories/%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2021-03-01</lastmod>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://yummyisminer.xyz/blog/categories/%E8%A7%82%E5%90%8E%E6%84%9F/</loc>
-    <lastmod>2021-03-01</lastmod>
+    <lastmod>2021-03-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yummyisminer.xyz/blog/categories/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://yummyisminer.xyz/blog/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-03-01</lastmod>
+    <lastmod>2021-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
