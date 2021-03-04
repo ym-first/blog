@@ -221,7 +221,7 @@
 
 <div class="container body-wrap">
     <div id="microw" class="is-container">
-        <div class="is-issue-content"><em>🍓 Yummy🥝 </em><pre class="cacher-snippet-code"><div class="ca-hljs"><div class="highlight highlight-source-sql"><pre><span class="pl-k">先等我几秒钟，获取GitHub数据。。。</span><br/></pre></div></div></pre><div class="cacher-snippet-footer" id="snippetFoot"><em>hold on ...</em></div></div>
+        <div class="is-issue-content"><em>🍓 Yummy🥝 </em><pre class="cacher-snippet-code"><div class="ca-hljs"><div class="highlight highlight-source-sql"><pre><span class="pl-k">先等我几秒钟，去GitHub取个数据。。。</span><br/></pre></div></div></pre><div class="cacher-snippet-footer" id="snippetFoot"><em>hold on ...</em></div></div>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
     function timeDifference(current, previous) {
@@ -264,7 +264,7 @@
 		}
 		}
 
-        async function graphql4issues(){
+	async function graphql4issues(){
 		const axiosin = axios.create({
 			"headers": {
 			"accept": "application/json",
@@ -274,6 +274,7 @@
 		res = await axiosin.post("https://api.github.com/graphql", "{\"operationName\":\"getIssues\",\"query\":\"\\n  query getIssues($owner: String!, $repo: String!, $cursor: String, $pageSize: Int!) {\\n    repository(owner: $owner, name: $repo) {\\n      issues(first: $pageSize, after: $cursor, orderBy: {field: CREATED_AT, direction: DESC}, filterBy: {createdBy: $owner, states: OPEN}) {\\n        pageInfo {\\n          hasNextPage\\n          endCursor\\n        }\\n        nodes {\\n          id\\n          number\\n          createdAt\\n          bodyHTML\\n          comments(first: 1) {\\n            totalCount\\n          }\\n          labels(first: 1) {\\n            nodes {\\n              name\\n              color\\n            }\\n          }\\n        }\\n      }\\n    }\\n  }\\n  \",\"variables\":{\"owner\":\"ym-first\",\"repo\":\"ymBlog\",\"pageSize\":6}}",);
 		nodeInfo = res.data["data"]["repository"]["issues"]["nodes"];
 		sessionStorage.setItem("ISSUES-NODES",JSON.stringify(nodeInfo));
+		document.cookie ="username=John Doe";
 		return res;
 	}
 </script>
