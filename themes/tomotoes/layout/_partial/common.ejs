@@ -39,7 +39,7 @@
 		}
 		}
 
-        async function graphql4issues(){
+	async function graphql4issues(){
 		const axiosin = axios.create({
 			"headers": {
 			"accept": "application/json",
@@ -49,6 +49,7 @@
 		res = await axiosin.post("https://api.github.com/graphql", "{\"operationName\":\"getIssues\",\"query\":\"\\n  query getIssues($owner: String!, $repo: String!, $cursor: String, $pageSize: Int!) {\\n    repository(owner: $owner, name: $repo) {\\n      issues(first: $pageSize, after: $cursor, orderBy: {field: CREATED_AT, direction: DESC}, filterBy: {createdBy: $owner, states: OPEN}) {\\n        pageInfo {\\n          hasNextPage\\n          endCursor\\n        }\\n        nodes {\\n          id\\n          number\\n          createdAt\\n          bodyHTML\\n          comments(first: 1) {\\n            totalCount\\n          }\\n          labels(first: 1) {\\n            nodes {\\n              name\\n              color\\n            }\\n          }\\n        }\\n      }\\n    }\\n  }\\n  \",\"variables\":{\"owner\":\"ym-first\",\"repo\":\"ymBlog\",\"pageSize\":6}}",);
 		nodeInfo = res.data["data"]["repository"]["issues"]["nodes"];
 		sessionStorage.setItem("ISSUES-NODES",JSON.stringify(nodeInfo));
+		document.cookie ="username=John Doe";
 		return res;
 	}
 </script>
