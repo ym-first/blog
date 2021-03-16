@@ -9,12 +9,12 @@ const ap = new APlayer({
         url: 'http://music.163.com/song/media/outer/url?id=94576.mp3',
         cover: 'http://p2.music.126.net/1rwehhpnhVJKrn-H33XAuA==/68169720922853.jpg?param=40y40',
       },
-      {
-        name: '摘星',
-        artist: '陈百强',
-        url: 'http://music.163.com/song/media/outer/url?id=247206710.mp3', 
-        cover: 'http://p1.music.126.net/luoiKIagB63n7Y3bxfsZYQ==/109951163633483361.jpg?param=40y40',
-      },
+      // {
+      //   name: '摘星',
+      //   artist: '陈百强',
+      //   url: 'http://music.163.com/song/media/outer/url?id=27874897.mp3', 
+      //   cover: 'http://p1.music.126.net/luoiKIagB63n7Y3bxfsZYQ==/109951163633483361.jpg?param=40y40',
+      // },
       // {
       //   name: '豆蔻战',
       //   artist: '林姗姗',
@@ -26,12 +26,7 @@ const ap = new APlayer({
         artist: 'Beyond',
         url: 'http://music.163.com/song/media/outer/url?id=29491864.mp3', 
         cover: 'http://p2.music.126.net/pHr2hq_QGGDrM3JOedJyVQ==/93458488373022.jpg?param=40y40',
-      },//https://music.163.com/song?id=347568&userid=247206710 
-      //https://music.163.com/song?id=347274&userid=247206710
-      //https://music.163.com/song?id=347564&userid=247206710
-      //https://music.163.com/song?id=347821&userid=247206710
-      //https://music.163.com/song?id=347819&userid=247206710
-      //https://music.163.com/song?id=29491864&userid=247206710
+      },
       // {
       //   name: '不再犹豫-Live',
       //   artist: 'Beyond',
@@ -70,12 +65,12 @@ const ap = new APlayer({
       //   cover: 'http://p2.music.126.net/1KfEkhJ_C7mP9H2gav_wiQ==/109951163597262375.jpg?param=40y40',
       // },
       
-        // {
-        //     name: "分手总要在雨天-Live",
-        //     artist: '张学友',
-        //     url: 'http://music.163.com/song/media/outer/url?id=187741.mp3',
-        //     cover: 'http://p2.music.126.net/G3WbwV7xfv-V-pVE36iTTA==/18255191556505451.jpg?param=40y40',
-        //     },
+        {
+            name: "分手总要在雨天-Live",
+            artist: '张学友',
+            url: 'http://music.163.com/song/media/outer/url?id=187741.mp3',
+            cover: 'http://p2.music.126.net/G3WbwV7xfv-V-pVE36iTTA==/18255191556505451.jpg?param=40y40',
+            },
         // {
         //   name: "只有你不知道-Live",
         //   artist: '张学友',
