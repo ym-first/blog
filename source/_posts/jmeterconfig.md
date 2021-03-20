@@ -18,6 +18,8 @@ date: 2020-04-12 18:08:43
     * 补充：
         * 1.也可以通过bean shell调用UUID的randomUUID()方法来实现参数化
         * <a href="https://blog.csdn.net/lirong_s/article/details/79914532">参考资料</a>
+* 也可以使用随机函数拼接当前时间
+    * ${__Random(1000000,100000000000000,random)}${__time(yyyyMMddHHmmss,time)} 
 
 ## 问题二：
 ### 下单请求，需要MD5加密，怎么解决？
