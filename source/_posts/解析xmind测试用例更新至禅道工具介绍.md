@@ -1,12 +1,12 @@
 ---
-title: 解析xmind测试用例更新至禅道工具介绍
+title: 解析xmind用例更新至禅道工具
 abbrlink: c841b6f0
 date: 2022-04-20 21:21:38
 tags:
 ---
 ### 背景
 按照约定的格式编写xmind用例，提交到指定的gitlab项目，可自动触发Jenkins构建，调用解析和发送请求脚本，自动新增后更新禅道用例，并将对应的禅道用例id写到原xmind文件中，就不用再手动在禅道复制一遍用例，也有利于用例格式的规范统一。
-
+<!-- more -->
 #### 使用流程
 1. git clone  到本地
 2. 编写符合格式的xmind用例
@@ -49,7 +49,7 @@ tags:
 	- 必须要先有步骤，否则，即使用例后接的节点以==开头，也会认为是步骤
 	- 预期结果非必填，不写，预期结果则为空
 	
-6. 用例优先级就用1 2 3![](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/70e4978e881398a70d6df63cc783d81b)![](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/eb27819aeb5e5d9770362c8d6cc8d44e)![](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/583e97cf07504f8cb0def8282860f370)这些图标作为标记
+6. 用例优先级就用1 2 3这些图标作为标记
 
 7. 如有前置步骤，则在用例节点中加上备注![](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/50391c2e1c9cf18954efb6e5e8a53d67)
 
