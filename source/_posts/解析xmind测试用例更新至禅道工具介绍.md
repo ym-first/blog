@@ -1,0 +1,64 @@
+---
+title: 解析xmind测试用例更新至禅道工具介绍
+abbrlink: c841b6f0
+date: 2022-04-20 21:21:38
+tags:
+---
+### 背景
+按照约定的格式编写xmind用例，提交到指定的gitlab项目，可自动触发Jenkins构建，调用解析和发送请求脚本，自动新增后更新禅道用例，并将对应的禅道用例id写到原xmind文件中，就不用再手动在禅道复制一遍用例，也有利于用例格式的规范统一。
+
+#### 使用流程
+1. git clone  到本地
+2. 编写符合格式的xmind用例
+3. 用例放到xmindtestcases项目对应的目录下
+4. 如果要用自己的账号访问禅道，先到sh目录下找到对应的bat或sh脚本执行，根据提示输入用户名密码
+5. 确认用例符合格式且完成后，git commit 、git push 提交用例和第4步生成的s.txt文件
+
+注意：
+1. 自动触发jerkins的job 【xmind提交触发更新禅道用例】 进行构建，构建结果可到Jenkins上查看
+2. 构建完成后，即可到禅道查看已写入的用例(目前50条以内的用例，都能在1分钟内完成)
+3. 如果是提交非xmind用例，不会触发构建
+4. 构建最后一步会将写了禅道用例id 的xmind再提交到gitlab，message为 【提交增加用例ID后的xmind】 ，而构建会过滤掉message包含 【提交增加用例ID后的xmind】 的提交，所以提交时，message不要写成 【提交增加用例ID后的xmind】 
+5. 构建完之后，再git pull，同步最新的用例，因为此时最新的用例会有用例ID
+
+####  统一提交地址：
+![](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/680faf2d26c4e791ad02c04058ccd4b9)
+	 1. 目录名即为产品名，需要与禅道上的产品名完全一致，用例所属哪个产品就上传到哪个目录，如果没有对应的目录，自己新建一个即可。
+	 
+	 2. 其中sh目录是一些协助脚本，目前有bat、sh格式的脚本，由于发送禅道请求时，默认使用yangmin的账号，如需登录自己的账号，则需要执行对应的bat或者sh脚本，根据提示输入用户名、密码，接着脚本使用你的用户名密码登录禅道，如果登录成功，用户名密码会存到项目下的一个文件，但提交时会自动忽略该文件，不会上传到gitlab，最后获取本次登录的sessionid存到一个文件中。
+	 
+	 3. 提交xmind用例和新生成的存了sessionid的s.txt文件即可触发构建。
+
+#### xmind用例格式要求
+##### 示例
+[BOS IoT融合接入管理组件.xmind](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/57e78acb72d9fba399cf34eb336e11d3 "[BOS IoT融合接入管理组件.xmind")
+![](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/e3ca1a1b0fb2420f3399bfc350871959)
+1. 文件名和第一个主题名无限制
+
+2. 第一个主题后紧接的那一层节点，均作为模块名，对应于禅道上的模块名，其中父子模块以/分隔，脚本中会遍历每一层模块名，查找对应的模块id，如果找不到，会创建对应的模块，直到遍历完给定的模块。
+	- 如：/业务组件/IoT融合管理组件/IoT融合场景，先查业务组件——》再查业务组件下的IoT融合管理组件——》再查IoT融合管理组件下的IoT融合场景![](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/eaeb700a5117f06ce82c7d0c03f3075e)
+	
+3. 每个模块下出去的分支即作为用例名的一部分，直到遇到有优先级标记的节点，然后模块名后面的节点到标记为用例的节点的内容会用 - 进行拼接。
+	 - 如：点位管理-点位列表-点位属性（用例1）
+	 - 若该用例没有步骤，那么即使不用优先级标记，也会把这一条路径作为一条用例，如上图的用例8![](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/5946bd0e66f9118e52a806a14e4aa695)
+	 
+4. 用例节点后紧接的节点作为步骤名，也可以有下一个分支，跟用例名一样，节点名之间用 - 拼接
+	- 如用例1实际是有4个步骤，最后2个步骤分别为 步骤3-步骤3子路径1 步骤3-步骤3子路径2![](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/fa2104f66a17e3756d013f64c732a604)
+	
+5. 步骤节点后，如果接的节点以==开头，则视为预期结果
+	- 必须要先有步骤，否则，即使用例后接的节点以==开头，也会认为是步骤
+	- 预期结果非必填，不写，预期结果则为空
+	
+6. 用例优先级就用1 2 3![](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/70e4978e881398a70d6df63cc783d81b)![](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/eb27819aeb5e5d9770362c8d6cc8d44e)![](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/583e97cf07504f8cb0def8282860f370)这些图标作为标记
+
+7. 如有前置步骤，则在用例节点中加上备注![](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/50391c2e1c9cf18954efb6e5e8a53d67)
+
+8. 模块名后的第一个节点可以为空，脚本中有处理，但尽量不要留空
+
+9.  每一条路径只能有1条用例，且当遇到第一个优先级标记，即标记为一条用例，后面紧接的节点即使有优先级标记，也会忽略
+
+10. 执行完脚本后，会在原来的xmind文件中，对应的用例节点中加上标签，记录写到禅道中的用例id，下次就会直接取该用例id找禅道的用例，并更新，所以也支持修改用例名。
+![](http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/580199ea0b1685cf55d33787efcdd56f)
+11. 用例节点内容最好不要为空，否则用例名最后是_，且可能还会有其他问题，如有需要，后期可做兼容。
+12. todo：对于删除用例，暂未支持，后续会将每一轮执行后，将涉及的用例ID存放到一个地方，下次提交，如果原来的用例ID在新提交的文件中找不到，则会找到禅道对应的用例，进行标记，后续再人工统一删除。
+13. todo：也考虑增加直接在xmind执行用例支持（暂未实现），commit message 暂定为执行用例，✅为通过，❌为失败，执行完后，会将这些标记删除，然后再提交到gitlab
