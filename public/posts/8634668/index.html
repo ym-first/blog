@@ -6,7 +6,7 @@
     
     
     
-    <title>解析xmind用例更新至禅道工具 | M.Y_敏兒 | True nobility is being superior to your former self.</title>
+    <title>之前用Java写的接口测试框架实现 | M.Y_敏兒 | True nobility is being superior to your former self.</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     
     <meta name="theme-color" content="#77AAFF">
@@ -39,25 +39,19 @@
 
 
     
-    <meta name="description" content="背景按照约定的格式编写xmind用例，提交到指定的gitlab项目，可自动触发Jenkins构建，调用解析和发送请求脚本，自动新增后更新禅道用例，并将对应的禅道用例id写到原xmind文件中，就不用再手动在禅道复制一遍用例，也有利于用例格式的规范统一。">
+    <meta name="description" content="翻笔记看到自己以前用Java写的接口测试框架实现流程图，跟现在所在的公司用的实现思路完全不一样，当然入职后也在现公司的框架基础上，做了很多优化，后续有机会再另外脱敏整理（内部文档是有整理的），先记录下这个以前写的。。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="解析xmind用例更新至禅道工具">
-<meta property="og:url" content="https://yummyisminer.xyz/blog/posts/c841b6f0/index.html">
+<meta property="og:title" content="之前用Java写的接口测试框架实现">
+<meta property="og:url" content="https://yummyisminer.xyz/blog/posts/8634668/index.html">
 <meta property="og:site_name" content="M.Y_敏兒">
-<meta property="og:description" content="背景按照约定的格式编写xmind用例，提交到指定的gitlab项目，可自动触发Jenkins构建，调用解析和发送请求脚本，自动新增后更新禅道用例，并将对应的禅道用例id写到原xmind文件中，就不用再手动在禅道复制一遍用例，也有利于用例格式的规范统一。">
+<meta property="og:description" content="翻笔记看到自己以前用Java写的接口测试框架实现流程图，跟现在所在的公司用的实现思路完全不一样，当然入职后也在现公司的框架基础上，做了很多优化，后续有机会再另外脱敏整理（内部文档是有整理的），先记录下这个以前写的。。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/680faf2d26c4e791ad02c04058ccd4b9">
-<meta property="og:image" content="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/e3ca1a1b0fb2420f3399bfc350871959">
-<meta property="og:image" content="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/eaeb700a5117f06ce82c7d0c03f3075e">
-<meta property="og:image" content="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/5946bd0e66f9118e52a806a14e4aa695">
-<meta property="og:image" content="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/fa2104f66a17e3756d013f64c732a604">
-<meta property="og:image" content="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/50391c2e1c9cf18954efb6e5e8a53d67">
-<meta property="og:image" content="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/580199ea0b1685cf55d33787efcdd56f">
-<meta property="article:published_time" content="2022-04-20T13:21:38.000Z">
-<meta property="article:modified_time" content="2022-04-20T13:46:51.532Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24egy1h1i902rzjxj20u013dwls.jpg">
+<meta property="article:published_time" content="2022-04-22T01:36:03.000Z">
+<meta property="article:modified_time" content="2022-04-22T01:43:31.093Z">
 <meta property="article:author" content="M.Y_敏兒">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/680faf2d26c4e791ad02c04058ccd4b9">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24egy1h1i902rzjxj20u013dwls.jpg">
     
         <link rel="alternate" type="application/atom+xml" title="M.Y_敏兒" href="/blog/atom.xml">
     
@@ -177,7 +171,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">解析xmind用例更新至禅道工具</div>
+        <div class="flex-col header-title ellipsis">之前用Java写的接口测试框架实现</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -216,22 +210,15 @@
 
 <div class="container body-wrap">
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">背景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#使用流程"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">使用流程</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#统一提交地址："><span class="post-toc-number">1.2.</span> <span class="post-toc-text">统一提交地址：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#xmind用例格式要求"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">xmind用例格式要求</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#示例"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">示例</span></a></li></ol></li></ol></li></ol>
-        </nav>
-    </aside>
-   
-<article id="post-解析xmind测试用例更新至禅道工具介绍"
+<article id="post-以前用Java写的接口测试框架实现"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">解析xmind用例更新至禅道工具</h1>
+        <h1 class="post-card-title">之前用Java写的接口测试框架实现</h1>
         <div class="post-meta">
             <i class="icon icon-lg icon-calendar-o"></i>
             发表于
-            <time class="post-time" title="2022-04-20 21:21:38" datetime="2022-04-20T13:21:38.000Z"  itemprop="datePublished">2022-04-20</time>
+            <time class="post-time" title="2022-04-22 09:36:03" datetime="2022-04-22T01:36:03.000Z"  itemprop="datePublished">2022-04-22</time>
 
             <br id="mybreak"/>
             
@@ -246,130 +233,30 @@
         </div>
         <div class="post-count-custom">
             <i class="icon icon-lg icon-comment-o"></i>
-            阅读本文可能花费您&nbsp;<span class="post-count">4</span>&nbsp;分钟
+            阅读本文可能花费您&nbsp;<span class="post-count">1</span>&nbsp;分钟
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>按照约定的格式编写xmind用例，提交到指定的gitlab项目，可自动触发Jenkins构建，调用解析和发送请求脚本，自动新增后更新禅道用例，并将对应的禅道用例id写到原xmind文件中，就不用再手动在禅道复制一遍用例，也有利于用例格式的规范统一。</p>
+            <p>翻笔记看到自己以前用Java写的接口测试框架实现流程图，跟现在所在的公司用的实现思路完全不一样，当然入职后也在现公司的框架基础上，做了很多优化，后续有机会再另外脱敏整理（内部文档是有整理的），先记录下这个以前写的。。</p>
 <a id="more"></a>
-<h4 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h4><ol>
-<li>git clone  到本地</li>
-<li>编写符合格式的xmind用例</li>
-<li>用例放到xmindtestcases项目对应的目录下</li>
-<li>如果要用自己的账号访问禅道，先到sh目录下找到对应的bat或sh脚本执行，根据提示输入用户名密码</li>
-<li>确认用例符合格式且完成后，git commit 、git push 提交用例和第4步生成的s.txt文件</li>
-</ol>
-<p>注意：</p>
-<ol>
-<li>自动触发jerkins的job 【xmind提交触发更新禅道用例】 进行构建，构建结果可到Jenkins上查看</li>
-<li>构建完成后，即可到禅道查看已写入的用例(目前50条以内的用例，都能在1分钟内完成)</li>
-<li>如果是提交非xmind用例，不会触发构建</li>
-<li>构建最后一步会将写了禅道用例id 的xmind再提交到gitlab，message为 【提交增加用例ID后的xmind】 ，而构建会过滤掉message包含 【提交增加用例ID后的xmind】 的提交，所以提交时，message不要写成 【提交增加用例ID后的xmind】 </li>
-<li>构建完之后，再git pull，同步最新的用例，因为此时最新的用例会有用例ID</li>
-</ol>
-<h4 id="统一提交地址："><a href="#统一提交地址：" class="headerlink" title="统一提交地址："></a>统一提交地址：</h4><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/680faf2d26c4e791ad02c04058ccd4b9" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<pre><code>1. 目录名即为产品名，需要与禅道上的产品名完全一致，用例所属哪个产品就上传到哪个目录，如果没有对应的目录，自己新建一个即可。
-
-2. 其中sh目录是一些协助脚本，目前有bat、sh格式的脚本，由于发送禅道请求时，默认使用yangmin的账号，如需登录自己的账号，则需要执行对应的bat或者sh脚本，根据提示输入用户名、密码，接着脚本使用你的用户名密码登录禅道，如果登录成功，用户名密码会存到项目下的一个文件，但提交时会自动忽略该文件，不会上传到gitlab，最后获取本次登录的sessionid存到一个文件中。
-
-3. 提交xmind用例和新生成的存了sessionid的s.txt文件即可触发构建。</code></pre><h4 id="xmind用例格式要求"><a href="#xmind用例格式要求" class="headerlink" title="xmind用例格式要求"></a>xmind用例格式要求</h4><h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><p><a href="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/57e78acb72d9fba399cf34eb336e11d3" target="_blank" rel="noopener" title="[BOS IoT融合接入管理组件.xmind">BOS IoT融合接入管理组件.xmind</a></p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/e3ca1a1b0fb2420f3399bfc350871959" alt="" title="">
+                    <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h1i902rzjxj20u013dwls.jpg" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
-<ol>
-<li><p>文件名和第一个主题名无限制</p>
-</li>
-<li><p>第一个主题后紧接的那一层节点，均作为模块名，对应于禅道上的模块名，其中父子模块以/分隔，脚本中会遍历每一层模块名，查找对应的模块id，如果找不到，会创建对应的模块，直到遍历完给定的模块。</p>
-<ul>
-<li>如：/业务组件/IoT融合管理组件/IoT融合场景，先查业务组件——》再查业务组件下的IoT融合管理组件——》再查IoT融合管理组件下的IoT融合场景<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/eaeb700a5117f06ce82c7d0c03f3075e" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></li>
-</ul>
-</li>
-<li><p>每个模块下出去的分支即作为用例名的一部分，直到遇到有优先级标记的节点，然后模块名后面的节点到标记为用例的节点的内容会用 - 进行拼接。</p>
-<ul>
-<li>如：点位管理-点位列表-点位属性（用例1）</li>
-<li>若该用例没有步骤，那么即使不用优先级标记，也会把这一条路径作为一条用例，如上图的用例8<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/5946bd0e66f9118e52a806a14e4aa695" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></li>
-</ul>
-</li>
-<li><p>用例节点后紧接的节点作为步骤名，也可以有下一个分支，跟用例名一样，节点名之间用 - 拼接</p>
-<ul>
-<li>如用例1实际是有4个步骤，最后2个步骤分别为 步骤3-步骤3子路径1 步骤3-步骤3子路径2<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/fa2104f66a17e3756d013f64c732a604" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></li>
-</ul>
-</li>
-<li><p>步骤节点后，如果接的节点以==开头，则视为预期结果</p>
-<ul>
-<li>必须要先有步骤，否则，即使用例后接的节点以==开头，也会认为是步骤</li>
-<li>预期结果非必填，不写，预期结果则为空</li>
-</ul>
-</li>
-<li><p>用例优先级就用1 2 3这些图标作为标记</p>
-</li>
-<li><p>如有前置步骤，则在用例节点中加上备注</p><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/50391c2e1c9cf18954efb6e5e8a53d67" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure><p></p>
-</li>
-<li><p>模块名后的第一个节点可以为空，脚本中有处理，但尽量不要留空</p>
-</li>
-<li><p>每一条路径只能有1条用例，且当遇到第一个优先级标记，即标记为一条用例，后面紧接的节点即使有优先级标记，也会忽略</p>
-</li>
-<li><p>执行完脚本后，会在原来的xmind文件中，对应的用例节点中加上标签，记录写到禅道中的用例id，下次就会直接取该用例id找禅道的用例，并更新，所以也支持修改用例名。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://test-doc.rickricks.net/server/index.php?s=/api/attachment/visitFile/sign/580199ea0b1685cf55d33787efcdd56f" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></li>
-<li><p>用例节点内容最好不要为空，否则用例名最后是_，且可能还会有其他问题，如有需要，后期可做兼容。</p>
-</li>
-<li><p>todo：对于删除用例，暂未支持，后续会将每一轮执行后，将涉及的用例ID存放到一个地方，下次提交，如果原来的用例ID在新提交的文件中找不到，则会找到禅道对应的用例，进行标记，后续再人工统一删除。</p>
-</li>
-<li><p>todo：也考虑增加直接在xmind执行用例支持（暂未实现），commit message 暂定为执行用例，✅为通过，❌为失败，执行完后，会将这些标记删除，然后再提交到gitlab</p>
-</li>
-</ol>
-
         </div>
 
         <blockquote class="post-copyright">
     <div class="content">
         
 <span class="post-time">
-    最后更新：<time datetime="2022-04-20T13:46:51.532Z" itemprop="dateUpdated">2022-04-20 21:46:51</time>
+    最后更新：<time datetime="2022-04-22T01:43:31.093Z" itemprop="dateUpdated">2022-04-22 09:43:31</time>
 </span>
 
 
         
-        原文链接：<a href="/blog/posts/c841b6f0/" target="_blank" rel="external">https://yummyisminer.xyz/blog/posts/c841b6f0/</a>
+        原文链接：<a href="/blog/posts/8634668/" target="_blank" rel="external">https://yummyisminer.xyz/blog/posts/8634668/</a>
         
     </div>
     <footer>
@@ -399,7 +286,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://yummyisminer.xyz/blog/posts/c841b6f0/&title=《解析xmind用例更新至禅道工具》 — M.Y_敏兒&pic=https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://yummyisminer.xyz/blog/posts/8634668/&title=《之前用Java写的接口测试框架实现》 — M.Y_敏兒&pic=https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -409,22 +296,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://yummyisminer.xyz/blog/posts/c841b6f0/&title=《解析xmind用例更新至禅道工具》 — M.Y_敏兒&source=背景按照约定的格式编写xmind用例，提交到指定的gitlab项目，可自动触发Jenkins构建，调用解析和发送请求脚本，自动新增后更新禅道用例，并将对应..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://yummyisminer.xyz/blog/posts/8634668/&title=《之前用Java写的接口测试框架实现》 — M.Y_敏兒&source=翻笔记看到自己以前用Java写的接口测试框架实现流程图，跟现在所在的公司用的实现思路完全不一样，当然入职后也在现公司的框架基础上，做了很多优化，后续有机会..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://yummyisminer.xyz/blog/posts/c841b6f0/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://yummyisminer.xyz/blog/posts/8634668/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《解析xmind用例更新至禅道工具》 — M.Y_敏兒&url=https://yummyisminer.xyz/blog/posts/c841b6f0/&via=https://yummyisminer.xyz/blog" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《之前用Java写的接口测试框架实现》 — M.Y_敏兒&url=https://yummyisminer.xyz/blog/posts/8634668/&via=https://yummyisminer.xyz/blog" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://yummyisminer.xyz/blog/posts/c841b6f0/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://yummyisminer.xyz/blog/posts/8634668/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -444,21 +331,13 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/blog/posts/8634668/" id="post-prev" class="post-nav-link">
-        <h4 class="title" >
-          上一篇：之前用Java写的接口测试框架实现
-        </h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/blog/posts/e6f54ca7/" id="post-next" class="post-nav-link">
-        <h4 class="title" data-hover="下一篇：通过behave学习BDD">下一篇：通过behave学习BDD</h4>
+      <a href="/blog/posts/c841b6f0/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：解析xmind用例更新至禅道工具">下一篇：解析xmind用例更新至禅道工具</h4>
       </a>
     </div>
   
@@ -574,7 +453,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://yummyisminer.xyz/blog/posts/c841b6f0/&title=《解析xmind用例更新至禅道工具》 — M.Y_敏兒&pic=https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://yummyisminer.xyz/blog/posts/8634668/&title=《之前用Java写的接口测试框架实现》 — M.Y_敏兒&pic=https://tva1.sinaimg.cn/large/00831rSTgy1gdhqoqzl0uj30b60aigm3.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -584,22 +463,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://yummyisminer.xyz/blog/posts/c841b6f0/&title=《解析xmind用例更新至禅道工具》 — M.Y_敏兒&source=背景按照约定的格式编写xmind用例，提交到指定的gitlab项目，可自动触发Jenkins构建，调用解析和发送请求脚本，自动新增后更新禅道用例，并将对应..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://yummyisminer.xyz/blog/posts/8634668/&title=《之前用Java写的接口测试框架实现》 — M.Y_敏兒&source=翻笔记看到自己以前用Java写的接口测试框架实现流程图，跟现在所在的公司用的实现思路完全不一样，当然入职后也在现公司的框架基础上，做了很多优化，后续有机会..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://yummyisminer.xyz/blog/posts/c841b6f0/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://yummyisminer.xyz/blog/posts/8634668/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《解析xmind用例更新至禅道工具》 — M.Y_敏兒&url=https://yummyisminer.xyz/blog/posts/c841b6f0/&via=https://yummyisminer.xyz/blog" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《之前用Java写的接口测试框架实现》 — M.Y_敏兒&url=https://yummyisminer.xyz/blog/posts/8634668/&via=https://yummyisminer.xyz/blog" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://yummyisminer.xyz/blog/posts/c841b6f0/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://yummyisminer.xyz/blog/posts/8634668/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -610,7 +489,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p class="wechatshare">扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3aS27DMAxF0ex/0+60RSDnPlIpYOpqVBi2o+OByt/rhdf1tn5fX92zeur9/tWVzUuGDBmPZZAfJlu5v4d8DnJ9SZUhQ8YBjNUJdr+Vzv382fv7ZciQISN9dQcsQ4YMGbsY98EcyTE7SBkyZJzMIEksB9TS2rSEJ0OGjHMYvOr+/39/pb8hQ4aMRzGucH1vW2kr9M+uZMiQMZqR/gzfHA/4dqXEMmTImMogm+sMYfDENX1b/I1lyJDxcEa/3N/JNHnbYMmTIUPGMQxO4i2BvfWxuBYoQ4aMEQz+8ySY67Q8yaGM3iZDhoyhjNrRmbYQamW7IACVIUPGUEZn2Ct9atdBjJJYGTJkDGKkZfpagYynprXinQwZMk5g8BftGvbixb5aOU+GDBmTGLXCFsGkjQT+NlSlkyFDxiBGbXUORz52lo6ayZAhYyqjVsqvIWuFvOC7ypAhYzSjX0rjRX++XX7sypAhYzajhiGB3d7DHeFlyJBxAKM2wJqW8EgazBsGQXtAhgwZIxhpwFdrVe7KRmXIkHEygwdtF167imvxKJgMGTJGMK5w8W/TCSLjIQ8ZMmSMZqQDFummyQGdBoitmREZMmQ8lkEO2XTWjJTn0sHZD8/KkCHjAEbn4EsbkLVQ8gNShgwZMtrNyP5wBiq6yZAhQwYO3dJtpa3Nbf83ZMiQ8SgGSWJTWKe1+cVcXIYMGQ9k8OOyHybW2pO8CChDhoxxjB9ieyy6MxV8YQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aS27EIBAFwLn/pZ3tbIxfN4wiQ7GKJpahvGj1h88nXtfX+v5l/OT4+btn7t68YGFgYLyWcQ3XeIN84/z9499vd8TAwDiAcbfx+JkkNOewfF8MDAyMHiNJFvMPgYGBgTHDGKeMeeH6zwEXAwPjhYz81b0+WBX2w1ocAwPjhYyZo/z675/MNzAwMF7FuIorH0b2hpRXa2FgYOzNqLbS5htn4/f0hgoYGBjnMPILEMlL85ZcHrg/vS+NgYGxBaOatFXfkJBmUlIMDIyTGXk7fj7gLgi1GBgYWzOqBWpy3CTdzIea0X8xMDC2ZsxfvGg2yFoD1AVDTQwMjC0YvSSyNwDoBfqH02JgYGzEGBelSXnZSwfzzxcNOzEwMA5g9K55VYvMakJZgGFgYGzNSA5XLSDzFn/1Ekaz/sbAwNiCUW3H94LmqjHnw+4YGBjbMZIgO79ZAus14ArZKAYGxhaMJGmrXhRLQnmvSMbAwDiHUd14PgOdGV5GpTUGBsamjPyga8va5AyFE2JgYBzDSDaulrj5xYsqBgMD40xGL1GrNuN6g9KHVBIDA2NTxlVceYNsJsUsl9AYGBhbM/LVO26eLPb6ZmUMBgbGaxkzR5wZRlavgDykiRgYGAcw8uJ27fBgGRIDAwNj+uLpfHEbNd0wMDAw4gFn3izLRwKLAy4GBsYLGUkR27sqUb2omgRoDAyM0xh56Zg366uHWDUqwMDA2I7xB2yUxgRDdsmvAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 
