@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://yummyisminer.xyz/blog/"/>
-  <updated>2022-04-22T01:43:31.093Z</updated>
+  <updated>2022-04-22T01:44:26.806Z</updated>
   <id>https://yummyisminer.xyz/blog/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://yummyisminer.xyz/blog/posts/8634668/"/>
     <id>https://yummyisminer.xyz/blog/posts/8634668/</id>
     <published>2022-04-22T01:36:03.000Z</published>
-    <updated>2022-04-22T01:43:31.093Z</updated>
+    <updated>2022-04-22T01:44:26.806Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog/assets/css/APlayer.min.css"><script src="/blog/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>翻笔记看到自己以前用Java写的接口测试框架实现流程图，跟现在所在的公司用的实现思路完全不一样，当然入职后也在现公司的框架基础上，做了很多优化，后续有机会再另外脱敏整理（内部文档是有整理的），先记录下这个以前写的。。</p><a id="more"></a><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h1i902rzjxj20u013dwls.jpg" alt="" title="">                </div>                <div class="image-caption"></div>            </figure>]]></content>
     

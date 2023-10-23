@@ -1,0 +1,10 @@
+{"name":"hexo","hostname":"yangdeMacBook-Pro.local","pid":79306,"level":20,"msg":"Writing database to /Users/yangmini/my_blog/blog/db.json","time":"2023-10-22T11:21:24.879Z","v":0}
+{"name":"hexo","hostname":"yangdeMacBook-Pro.local","pid":79306,"level":20,"msg":"Hexo version: \u001b[35m4.2.0\u001b[39m","time":"2023-10-22T11:21:24.895Z","v":0}
+{"name":"hexo","hostname":"yangdeMacBook-Pro.local","pid":79306,"level":20,"msg":"Working directory: \u001b[35m~/my_blog/blog/\u001b[39m","time":"2023-10-22T11:21:24.895Z","v":0}
+{"name":"hexo","hostname":"yangdeMacBook-Pro.local","pid":79306,"level":20,"msg":"Config loaded: \u001b[35m~/my_blog/blog/_config.yml\u001b[39m","time":"2023-10-22T11:21:25.033Z","v":0}
+{"name":"hexo","hostname":"yangdeMacBook-Pro.local","pid":79306,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-filter-emoji\u001b[39m","time":"2023-10-22T11:21:25.086Z","v":0}
+{"name":"hexo","hostname":"yangdeMacBook-Pro.local","pid":79982,"level":20,"msg":"Writing database to /Users/yangmini/my_blog/blog/db.json","time":"2023-10-22T11:35:19.069Z","v":0}
+{"name":"hexo","hostname":"yangdeMacBook-Pro.local","pid":79982,"level":20,"msg":"Hexo version: \u001b[35m4.2.0\u001b[39m","time":"2023-10-22T11:35:19.084Z","v":0}
+{"name":"hexo","hostname":"yangdeMacBook-Pro.local","pid":79982,"level":20,"msg":"Working directory: \u001b[35m~/my_blog/blog/\u001b[39m","time":"2023-10-22T11:35:19.084Z","v":0}
+{"name":"hexo","hostname":"yangdeMacBook-Pro.local","pid":79982,"level":20,"msg":"Config loaded: \u001b[35m~/my_blog/blog/_config.yml\u001b[39m","time":"2023-10-22T11:35:19.196Z","v":0}
+{"name":"hexo","hostname":"yangdeMacBook-Pro.local","pid":79982,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-abbrlink\u001b[39m","time":"2023-10-22T11:35:19.391Z","v":0}
