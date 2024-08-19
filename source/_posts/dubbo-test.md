@@ -14,7 +14,7 @@ date: 2020-04-03 13:30:40
 <!-- more -->
 * (1) dubbo项目中，增加hessian方式序列化，及相关依赖。下图为xml配置方式示例。
     * <a href="https://dubbo.apache.org/zh-cn/docs/user/references/protocol/hessian.html">官方配置hessian协议及依赖例子</a>
-    * <a href="https://dubbo.apache.org/zh-cn/docs/user/demos/multi-protocols.html">官方配置多协议例子</a>![](https://tva1.sinaimg.cn/large/00831rSTgy1gdboopoouuj30po0h5dif.jpg)
+    * <a href="https://dubbo.apache.org/zh-cn/docs/user/demos/multi-protocols.html">官方配置多协议例子</a>![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/00831rSTgy1gdboopoouuj30po0h5dif.jpg)
 
 * (2) 获取接口地址（可在管理台查看）、方法及方法的入参。
 * (3) 安装 python-hessian               

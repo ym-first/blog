@@ -8,7 +8,7 @@ favicon: /favicon.png
 monochrome: true
 
 # view setting https://cn.gravatar.com/avatar/35fef74d731255cd569c2c2b0b9e87e4?s=200
-avatar: https://tva1.sinaimg.cn/large/00831rSTgy1gdfqkouezmj30b60aiwkf.jpg
+avatar: https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/00831rSTgy1gdfqkouezmj30b60aiwkf.jpg
 avatarLink: /blog/about/
 maxContentWidth: 1000px # set the main content column's max-width property. keep it blank to unlimited the width
 copyright: # the copyright text in the footer, could be richtext

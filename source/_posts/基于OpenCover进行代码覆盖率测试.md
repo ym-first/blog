@@ -41,13 +41,13 @@ tags:
 
 
 ## 未使用OpenCover时，被测程序的正常运行流程：
-![](https://tva1.sinaimg.cn/large/0081Kckwgy1glabzct7wqj30ga03fmx3.jpg)
+![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/0081Kckwgy1glabzct7wqj30ga03fmx3.jpg)
 
 ## 使用OpenCover、ReportGenerator后，被测程序的运行流程：
-![](https://tva1.sinaimg.cn/large/0081Kckwgy1glac00ut37j30hd06ldg3.jpg)
+![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/0081Kckwgy1glac00ut37j30hd06ldg3.jpg)
 * 1)命令行调用OpenCover.Console.exe
 * 2)OpenCover使用SentrySdk收集崩溃报告
-![](https://tva1.sinaimg.cn/large/0081Kckwgy1glac1j082fj30jp0hxwfy.jpg)
+![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/0081Kckwgy1glac1j082fj30jp0hxwfy.jpg)
 * 3)解析命令行中传入的参数（被测程序路径、要打印使用说明、是否启动服务、过滤信息等）
 * 4)处理过滤器信息，如果命令行中未传-filter参数，则默认匹配分析所有的类和方法——>创建性能计数器
 * 5)得到输出xml报告的全路径
@@ -58,7 +58,7 @@ tags:
 * 10)访问站点测试被测程序
 * 11)关闭IIS Express, 得到运行结果同时，也得到xml覆盖率结果
 * 12)ReportGenerator将xml转成HTML
-* ![](https://tva1.sinaimg.cn/large/0081Kckwgy1glacgqgvjyj316b0mcaig.jpg)
+* ![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/0081Kckwgy1glacgqgvjyj316b0mcaig.jpg)
 
 ## OpenCover和ReportGenerator的主要配置流程：
 ### 以测试站点程序为例:
@@ -73,7 +73,7 @@ H:\白盒测试\Debug\Opencover\OpenCover.Console.exe -target:"C:\Program Files 
 ```python
 H:\白盒测试\Debug\ReportGenerator\ReportGenerator.exe -reports:H:\白盒测试\xml\白盒测试.xml -targetdir:H:\白盒测试\xml\html
 ```
-* ![](https://tva1.sinaimg.cn/large/0081Kckwgy1glaci6hhr3j310r0fxwhk.jpg)
+* ![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/0081Kckwgy1glaci6hhr3j310r0fxwhk.jpg)
 
 ## ReportGenerator概述：
 * ReportGenerator用于将OpenCover，PartCover，Visual Studio或NCover生成的XML报告转换为各种格式的友好可读报告。
@@ -90,11 +90,11 @@ G:\Opencover所在路径\OpenCover.Console.exe -service:byname -target:安装好
 
 ### 报告部分截图
 * 包含语句覆盖和分支覆盖情况。点击相应的页面，会进入对应程序，可看到具体覆盖到哪一行代码。
-![](https://tva1.sinaimg.cn/large/0081Kckwgy1glac4ottr3j30s30hbaay.jpg)
+![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/0081Kckwgy1glac4ottr3j30s30hbaay.jpg)
 
 ### 代码覆盖详情截图
 * 绿色表示完全覆盖，橙色表示该行代码还有分支未覆盖到，红色则未覆盖。
-![](https://tva1.sinaimg.cn/large/0081Kckwgy1glac58dbfij30nf08qglt.jpg)
+![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/0081Kckwgy1glac58dbfij30nf08qglt.jpg)
 
 <a href="https://github.com/OpenCover/opencover/wiki/Service-Support">文档中的描述  </a><a href="https://www.cnblogs.com/tylerzhou/p/9076537.html">参考资料1  </a><a href="https://www.cnblogs.com/SivilTaram/p/vs_opencover_unit_coverage.html">参考资料2</a>
 
@@ -141,7 +141,7 @@ Then you can use ReportGenerator to merge the coverage results.
 
 ## FAQ:
 ### 1）若提示
-* ![](https://tva1.sinaimg.cn/large/0081Kckwgy1glae8bzjk4j30hr02e0sn.jpg)
+* ![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/0081Kckwgy1glae8bzjk4j30hr02e0sn.jpg)
 * 原因有三：　
 （1）未走到相关代码
 （2）缺少对应的pdb文件

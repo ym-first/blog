@@ -15,15 +15,15 @@ date: 2020-04-12 20:22:03
 * 1.压力机：
     * 1）执行当前压力机下jmeter安装包bin目录下的jmeter-server的批处理文件，此时该机器上启动一个java进程，并随机分配端口，监听来自调度机的请求。
     * 但是这里我们需要配置成固定端口方式，否则调度机远程启动压力机时，会报错。
-    ![](https://tva1.sinaimg.cn/large/007S8ZIlly1gdr9ci02nnj307z043dfr.jpg)
+    ![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdr9ci02nnj307z043dfr.jpg)
     * 配置固定端口：打开bin目录下的jmeter.properties文件，更改server_port、server.rmi.localport的端口为要配置的端口。
-    ![](https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfakhypej30lx0d5gms.jpg)
+    ![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfakhypej30lx0d5gms.jpg)
 * 2.调度机：
     * 打开jmeter安装包bin目录下的jmeter.properties文件，更改remote_hosts为，压力机ip及执行jmeter-server后启动的端口。
-    ![](https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfazm678j30g708y3z2.jpg)
+    ![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfazm678j30g708y3z2.jpg)
 * 开始测试：
     * 1.调度机正常配置好要测试的地址、参数、监听器等后，选择远程启动，就可以用刚刚配置好的压力机，进行压测了。
-    ![](https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfbhswnnj30ju09m0tp.jpg)
+    ![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfbhswnnj30ju09m0tp.jpg)
 
 ## 补充Linux上的配置：
 * 1、启动slave server 命令：jmeter-server -Djava.rmi.sver.hostname=192.168.0.64
@@ -31,7 +31,7 @@ date: 2020-04-12 20:22:03
 ## 遇到的问题及解决：
 ### 问题一：
 * jmeter4.0，启动slave报错 “java.io.FileNotFoundException: rmi_keystore.jks (没有那个文件或目录)”
-![](https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfbvioh4j30j002p0su.jpg)
+![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfbvioh4j30j002p0su.jpg)
 * 解决：
     * 方法一：slave的jmeter.properties中，设置“server.rmi.ssl.disable=true”
         * 原因：jmeter4.0以上的版本，默认启用RMI连接的安全通信，需要创建密钥库。所以将SSL禁用即可。

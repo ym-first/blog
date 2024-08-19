@@ -20,8 +20,8 @@ date: 2020-12-29 18:30:15
 5. 再进入发送队列, 
 6. 再进入网卡的环形缓冲区, 
 7. 然后网卡驱动调用DMA引擎, 把数据从网卡通过网线发送出去
-* ![](https://tva1.sinaimg.cn/large/0081Kckwgy1gm530l9s8uj313k0pqkge.jpg)
-* ![](https://tva1.sinaimg.cn/large/0081Kckwgy1gm4zdvk5cnj30wo0gq7ha.jpg)
+* ![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/0081Kckwgy1gm530l9s8uj313k0pqkge.jpg)
+* ![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/0081Kckwgy1gm4zdvk5cnj30wo0gq7ha.jpg)
 
 ## 网络中数据接收的过程
 1. 数据到达服务端的网络接口, 先是检查数据包中的目的Mac地址跟网卡的Mac地址是否匹配, 
@@ -30,7 +30,7 @@ date: 2020-12-29 18:30:15
 4. 然后这些数据就以sk_buff的形式进入IP层, tcp层, 
 5. 在tcp层如果这个数据包是请求连接的syn包, 那么会先放到tcp的半连接队列, 等收到ack包的时候, 才放到tcp的全连接队列, 
 6. 然后进入tcp接收缓冲, 再到达应用层
-* ![](https://tva1.sinaimg.cn/large/0081Kckwgy1gm5jf4oadbj30pq0u614l.jpg)
+* ![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/0081Kckwgy1gm5jf4oadbj30pq0u614l.jpg)
 ## python版服务端的简单实现
 ```python
 # coding=utf-8
@@ -194,7 +194,7 @@ if __name__ == "__main__":
 ```
 
 ## whireshark 抓包截图
-* ![](https://tva1.sinaimg.cn/large/0081Kckwgy1gm4ysa57cpj31rg0igdpc.jpg)
+* ![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/0081Kckwgy1gm4ysa57cpj31rg0igdpc.jpg)
 1. 如图, 客户端调用connect后, 发送请求与服务端建立连接的syn包, 包含一个客户端维护的序列号
 2. 服务端收到syn包后, 也回一个混合了syn和ack的数据包, 其中包含服务端维护的序列号, 而ack包是作为对客户端syn包的确认回应, 所以ack号则是客户端的序列号+1,
 3. 客户端收到服务端的syn+ack后, 再对该包确认回应而发送ack包, 此时序列号+1, ack号=服务端序列号+1,

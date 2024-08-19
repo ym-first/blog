@@ -36,7 +36,7 @@ INSTALLED_APPS += ['behave_django']
 2) .feature文件中就是用Gerkin语言写的各个行为场景
 3) environment.py会在执行用例前, 执行里面的代码, 一般全局的前置条件和后置条件的逻辑在这个文件中定义.
 4) 目录下再创建steps目录, steps下就是各种需求例子的实现逻辑代码. 
-![](https://tva1.sinaimg.cn/large/0081Kckwgy1gm72on9jlcj306b04jdgi.jpg)
+![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/0081Kckwgy1gm72on9jlcj306b04jdgi.jpg)
 ### .feature文件的内容格式. 
 * 其中双引号引起来的内容会被提取作为变量的值
 * 格式为 As-a /I want to/So that 的内容不会被执行, 重点在于使用者和需求的背景
@@ -109,7 +109,7 @@ def wait(fun):
 ```bash
 python manage.py behave
 ```
-![](https://tva1.sinaimg.cn/large/0081Kckwgy1gm734noye0j30hc09vadc.jpg)
+![](https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/0081Kckwgy1gm734noye0j30hc09vadc.jpg)
 
 ## 启发
 * 暂时的理解: BDD主要就是用来澄清需求, 使业务、开发、测试三方对需求的理解都一致, 所以应该一般require文件部分的内容由业务人员编写, 用来限定验收条件, 然后大家针对这些验收条件进行评审, 发现模糊的描述, 确认各种“如果xxx, 就xxx”的情况, 接着测试人员可以基于require文件编写对应的操作和验证实现方法, 每开发一个功能, 都需要跑通这些验收用例, 提前并持续不断的提供反馈, 降低后期返工的概率.
