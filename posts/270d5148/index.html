@@ -46,18 +46,18 @@
 <meta property="og:site_name" content="M.Y_敏兒">
 <meta property="og:description" content="问题描述: 需要使用jmeter模拟大并发的情况时，单台压测机不能满足需求，可进行分布式压测。 简单来说就是，多台机器同时安装jmeter，选择一台机器作为调度机，其他作为压力机。进行相应的配置后，就可以用调度机操控压力机发起请求。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gdr9ci02nnj307z043dfr.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfakhypej30lx0d5gms.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfazm678j30g708y3z2.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfbhswnnj30ju09m0tp.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfbvioh4j30j002p0su.jpg">
+<meta property="og:image" content="https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdr9ci02nnj307z043dfr.jpg">
+<meta property="og:image" content="https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfakhypej30lx0d5gms.jpg">
+<meta property="og:image" content="https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfazm678j30g708y3z2.jpg">
+<meta property="og:image" content="https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfbhswnnj30ju09m0tp.jpg">
+<meta property="og:image" content="https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfbvioh4j30j002p0su.jpg">
 <meta property="article:published_time" content="2020-04-12T12:22:03.000Z">
-<meta property="article:modified_time" content="2021-02-04T02:38:05.400Z">
+<meta property="article:modified_time" content="2024-08-19T11:25:07.301Z">
 <meta property="article:author" content="M.Y_敏兒">
 <meta property="article:tag" content="测试">
 <meta property="article:tag" content="性能测试">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/007S8ZIlly1gdr9ci02nnj307z043dfr.jpg">
+<meta name="twitter:image" content="https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdr9ci02nnj307z043dfr.jpg">
     
         <link rel="alternate" type="application/atom+xml" title="M.Y_敏兒" href="/blog/atom.xml">
     
@@ -258,16 +258,16 @@
 <h2 id="如何配置（以Windows为例）："><a href="#如何配置（以Windows为例）：" class="headerlink" title="如何配置（以Windows为例）："></a>如何配置（以Windows为例）：</h2><ul>
 <li>1.压力机：<ul>
 <li>1）执行当前压力机下jmeter安装包bin目录下的jmeter-server的批处理文件，此时该机器上启动一个java进程，并随机分配端口，监听来自调度机的请求。</li>
-<li>但是这里我们需要配置成固定端口方式，否则调度机远程启动压力机时，会报错。<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gdr9ci02nnj307z043dfr.jpg" alt=""></li>
-<li>配置固定端口：打开bin目录下的jmeter.properties文件，更改server_port、server.rmi.localport的端口为要配置的端口。<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfakhypej30lx0d5gms.jpg" alt=""></li>
+<li>但是这里我们需要配置成固定端口方式，否则调度机远程启动压力机时，会报错。<br><img src="https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdr9ci02nnj307z043dfr.jpg" alt=""></li>
+<li>配置固定端口：打开bin目录下的jmeter.properties文件，更改server_port、server.rmi.localport的端口为要配置的端口。<br><img src="https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfakhypej30lx0d5gms.jpg" alt=""></li>
 </ul>
 </li>
 <li>2.调度机：<ul>
-<li>打开jmeter安装包bin目录下的jmeter.properties文件，更改remote_hosts为，压力机ip及执行jmeter-server后启动的端口。<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfazm678j30g708y3z2.jpg" alt=""></li>
+<li>打开jmeter安装包bin目录下的jmeter.properties文件，更改remote_hosts为，压力机ip及执行jmeter-server后启动的端口。<br><img src="https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfazm678j30g708y3z2.jpg" alt=""></li>
 </ul>
 </li>
 <li>开始测试：<ul>
-<li>1.调度机正常配置好要测试的地址、参数、监听器等后，选择远程启动，就可以用刚刚配置好的压力机，进行压测了。<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfbhswnnj30ju09m0tp.jpg" alt=""></li>
+<li>1.调度机正常配置好要测试的地址、参数、监听器等后，选择远程启动，就可以用刚刚配置好的压力机，进行压测了。<br><img src="https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfbhswnnj30ju09m0tp.jpg" alt=""></li>
 </ul>
 </li>
 </ul>
@@ -278,7 +278,7 @@
 <li>jmeter4.0，启动slave报错 “java.io.FileNotFoundException: rmi_keystore.jks (没有那个文件或目录)”<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfbvioh4j30j002p0su.jpg" alt="" title="">
+                    <img src="https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/007S8ZIlly1gdrfbvioh4j30j002p0su.jpg" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></li>
@@ -311,7 +311,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新：<time datetime="2021-02-04T02:38:05.400Z" itemprop="dateUpdated">2021-02-04 10:38:05</time>
+    最后更新：<time datetime="2024-08-19T11:25:07.301Z" itemprop="dateUpdated">2024-08-19 19:25:07</time>
 </span>
 
 
