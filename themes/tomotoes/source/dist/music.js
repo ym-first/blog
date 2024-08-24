@@ -3,6 +3,12 @@ const ap = new APlayer({
     // mini: true,
     autoplay: false,
     audio: [{
+            name: "On Your Mask",
+            artist: 'CHAGE and ASKA',
+            url: 'http://music.163.com/song/media/outer/url?id=444676.mp3',
+            cover: 'https://p2.music.126.net/H4cVz3-qKtYDSHZZ-XFoYw==/734473767376838.jpg?param=40y40',
+        },
+        {
             name: "雨中的恋人们",
             artist: '黄凯芹',
             url: 'http://music.163.com/song/media/outer/url?id=94576.mp3',
@@ -20,13 +26,6 @@ const ap = new APlayer({
         //     url: 'http://music.163.com/song/media/outer/url?id=28936113.mp3',
         //     cover: 'http://p2.music.126.net/0ZBYdn9Hm7_R-Z50pOwF6A==/8891750533913724.jpg?param=40y40',
         // },
-        {
-            name: "On Your Mask",
-            artist: 'CHAGE and ASKA',
-            url: 'http://music.163.com/song/media/outer/url?id=444676.mp3',
-            cover: 'https://p2.music.126.net/H4cVz3-qKtYDSHZZ-XFoYw==/734473767376838.jpg?param=40y40',
-        },
-
         {
             name: "分手总要在雨天-Live",
             artist: '张学友',
