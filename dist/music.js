@@ -3,7 +3,7 @@ const ap = new APlayer({
     // mini: true,
     autoplay: false,
     audio: [{
-            name: "On Your Mask",
+            name: "On Your Mark",
             artist: 'CHAGE and ASKA',
             url: 'http://music.163.com/song/media/outer/url?id=444676.mp3',
             cover: 'https://p2.music.126.net/H4cVz3-qKtYDSHZZ-XFoYw==/734473767376838.jpg?param=40y40',
