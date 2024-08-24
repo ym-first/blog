@@ -41,7 +41,7 @@ const ap = new APlayer({
     ]
 });
 
-// 手动触发播放列表展开事件
+// 触发播放列表展开事件
 setTimeout(() => {
     document.querySelector('#aplayer > div.aplayer-body > div.aplayer-info > div.aplayer-controller > div.aplayer-time > button.aplayer-icon.aplayer-icon-menu').click();
 }, 1000); // 1秒后执行点击操作
