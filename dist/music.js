@@ -20,12 +20,6 @@ const ap = new APlayer({
             url: 'http://music.163.com/song/media/outer/url?id=29491864.mp3',
             cover: 'http://p2.music.126.net/pHr2hq_QGGDrM3JOedJyVQ==/93458488373022.jpg?param=40y40',
         },
-        // {
-        //     name: "不要怕-Live",
-        //     artist: '吉克隽逸',
-        //     url: 'http://music.163.com/song/media/outer/url?id=28936113.mp3',
-        //     cover: 'http://p2.music.126.net/0ZBYdn9Hm7_R-Z50pOwF6A==/8891750533913724.jpg?param=40y40',
-        // },
         {
             name: "分手总要在雨天-Live",
             artist: '张学友',
