@@ -6,13 +6,13 @@
     
     
     
-    <title>之前用Java写的接口测试框架实现 | M.Y_敏兒 | True nobility is being superior to your former self.</title>
+    <title>自定义XMind转metersphere支持的Excel格式工具 | M.Y_敏兒 | True nobility is being superior to your former self.</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     
     <meta name="theme-color" content="#77AAFF">
     
     
-    <meta name="keywords" content="">
+    <meta name="keywords" content="自动化">
     
     
 
@@ -39,19 +39,24 @@
 
 
     
-    <meta name="description" content="翻笔记看到自己以前用Java写的接口测试框架实现流程图，跟现在所在的公司用的实现思路完全不一样，当然入职后也在现公司的框架基础上，做了很多优化，后续有机会再另外脱敏整理（内部文档是有整理的），先记录下这个以前写的。。">
+    <meta name="description" content="1、目前metersphere支持的xmind用例格式，对于用例标题只能写在一个节点上，而不支持多级节点拼接，不好发散测试点，且需要手动复制前缀">
 <meta property="og:type" content="article">
-<meta property="og:title" content="之前用Java写的接口测试框架实现">
-<meta property="og:url" content="https://yummyisminer.xyz/blog/posts/8634668/index.html">
+<meta property="og:title" content="自定义XMind转metersphere支持的Excel格式工具">
+<meta property="og:url" content="https://yummyisminer.xyz/blog/posts/c1b447ed/index.html">
 <meta property="og:site_name" content="M.Y_敏兒">
-<meta property="og:description" content="翻笔记看到自己以前用Java写的接口测试框架实现流程图，跟现在所在的公司用的实现思路完全不一样，当然入职后也在现公司的框架基础上，做了很多优化，后续有机会再另外脱敏整理（内部文档是有整理的），先记录下这个以前写的。。">
+<meta property="og:description" content="1、目前metersphere支持的xmind用例格式，对于用例标题只能写在一个节点上，而不支持多级节点拼接，不好发散测试点，且需要手动复制前缀">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/e6c9d24egy1h1i902rzjxj20u013dwls.jpg">
-<meta property="article:published_time" content="2022-04-22T01:36:03.000Z">
-<meta property="article:modified_time" content="2024-08-19T11:25:07.302Z">
+<meta property="og:image" content="https://p.ipic.vip/b31n2v.png">
+<meta property="og:image" content="https://p.ipic.vip/1me7q3.png">
+<meta property="og:image" content="https://p.ipic.vip/b4jure.png">
+<meta property="og:image" content="https://p.ipic.vip/racr2q.png">
+<meta property="og:image" content="https://p.ipic.vip/7nyqeq.png">
+<meta property="article:published_time" content="2025-10-08T02:22:27.000Z">
+<meta property="article:modified_time" content="2025-10-08T02:37:00.524Z">
 <meta property="article:author" content="M.Y_敏兒">
+<meta property="article:tag" content="自动化">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/e6c9d24egy1h1i902rzjxj20u013dwls.jpg">
+<meta name="twitter:image" content="https://p.ipic.vip/b31n2v.png">
     
         <link rel="alternate" type="application/atom+xml" title="M.Y_敏兒" href="/blog/atom.xml">
     
@@ -171,7 +176,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">之前用Java写的接口测试框架实现</div>
+        <div class="flex-col header-title ellipsis">自定义XMind转metersphere支持的Excel格式工具</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -210,21 +215,20 @@
 
 <div class="container body-wrap">
     
-<article id="post-以前用Java写的接口测试框架实现"
+<article id="post-自定义XMind转metersphere支持的Excel格式工具"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">之前用Java写的接口测试框架实现</h1>
+        <h1 class="post-card-title">自定义XMind转metersphere支持的Excel格式工具</h1>
         <div class="post-meta">
             <i class="icon icon-lg icon-calendar-o"></i>
             发表于
-            <time class="post-time" title="2022-04-22 09:36:03" datetime="2022-04-22T01:36:03.000Z"  itemprop="datePublished">2022-04-22</time>
+            <time class="post-time" title="2025-10-08 10:22:27" datetime="2025-10-08T02:22:27.000Z"  itemprop="datePublished">2025-10-08</time>
 
             <br id="mybreak"/>
             
-<script>
-	mybreak.style="display:none";
-</script>
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/blog/categories/%E5%B7%A5%E5%85%B7/">工具</a></li></ul>
 
 
             <i>·</i>
@@ -233,15 +237,46 @@
         </div>
         <div class="post-count-custom">
             <i class="icon icon-lg icon-comment-o"></i>
-            阅读本文可能花费您&nbsp;<span class="post-count">1</span>&nbsp;分钟
+            阅读本文可能花费您&nbsp;<span class="post-count">2</span>&nbsp;分钟
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>翻笔记看到自己以前用Java写的接口测试框架实现流程图，跟现在所在的公司用的实现思路完全不一样，当然入职后也在现公司的框架基础上，做了很多优化，后续有机会再另外脱敏整理（内部文档是有整理的），先记录下这个以前写的。。</p>
-<a id="more"></a>
+            <p>1、目前metersphere支持的xmind用例格式，对于用例标题只能写在一个节点上，而不支持多级节点拼接，不好发散测试点，且需要手动复制前缀</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="https://image.baidu.com/search/down?url=https://tva1.sinaimg.cn/large/e6c9d24egy1h1i902rzjxj20u013dwls.jpg" alt="" title="">
+                    <img src="https://p.ipic.vip/b31n2v.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<a id="more"></a>
+<p>   2、目前metersphere支持的xmind用例格式，不支持标记左移用例，及上传前自动统计用例数和左移比例<br> </p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://p.ipic.vip/1me7q3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>针对这些问题，刚入职的时候写了个格式转换工具（xmind-》Excel），一直用到现在，效果如下，需要的话，可联系我了解更多。<p></p>
+<p>主要功能：<br>1、支持多个节点拼接用例标题<br>      1）用例标题写在多个节点的话，以绿色旗子作为用例标题开始的标记，以1、2、3等级标记作为一个用例优先级和用例标题的结束<br>      2）如果不需要写在多个节点的话，只需要标记用例优先级表示一个用例标题<br>      3）绿色旗子或者等级标记之前的节点作为模块名，依然保持一个节点一个模块<br>      4）xmind本身支持批量添加标志。shift选中需要的节点，再打标记，就会把选中的节点都加上这些标记<br>2、支持任意单位下（模块、用例），标记冒烟、左移<br>      1）在需要的模块、用例中，使用「左指」在对应的节点上标记左移。该节点及其子节点的用例都会一并标记；<br>            metersphere筛选「是否左移」选择「不属于是」的时候，有些「是否左移」值为空的用例会筛选不到。因此最后生成的Excel文件中，没标记左移的也会将「是否左移」列的值标记为否<br>      2）等级标记为7的用例，作为p0用例，会统计为冒烟用例，<br>            也支持使用xmind的标签功能添加标签，如果标签为「冒烟」，也会统计这部分的用例<br>3、最后生成符合metersphere用例格式的Excel用例，控制台会输出总用例数、冒烟用例数、左移用例数、左移比例<br>     1）如果一个需求拆成多个xmind文件写，也支持一起转换，然后汇总统计<br>4、如果已经习惯现有xmind格式，也兼容支持只使用标记左移并统计的功能<br>5、如果不需要生成Excel用例的，可加一个灰色人头像标志跳过</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://p.ipic.vip/b4jure.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>6、每条用例至少要有步骤。如果只有用例标题，这条不会生成Excel用例<br>7、在节点上加一个「笔记」，里面内容以 pc： 开头的话，就作为这个节点及子节点之后所有用例的前置条件<br>      也兼容跟步骤平级的节点上，写 pc：前置条件内容，以最小粒度的前置条件为准</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://p.ipic.vip/racr2q.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>使用</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://p.ipic.vip/7nyqeq.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
@@ -251,12 +286,12 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新：<time datetime="2024-08-19T11:25:07.302Z" itemprop="dateUpdated">2024-08-19 19:25:07</time>
+    最后更新：<time datetime="2025-10-08T02:37:00.524Z" itemprop="dateUpdated">2025-10-08 10:37:00</time>
 </span>
 
 
         
-        原文链接：<a href="/blog/posts/8634668/" target="_blank" rel="external">https://yummyisminer.xyz/blog/posts/8634668/</a>
+        原文链接：<a href="/blog/posts/c1b447ed/" target="_blank" rel="external">https://yummyisminer.xyz/blog/posts/c1b447ed/</a>
         
     </div>
     <footer>
@@ -278,6 +313,8 @@
 
         <div class="post-footer">
             
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a></li></ul>
+
 
             
 <div class="page-share-wrap">
@@ -286,7 +323,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://yummyisminer.xyz/blog/posts/8634668/&title=《之前用Java写的接口测试框架实现》 — M.Y_敏兒&pic=https://yummyisminer.xyz/blog/img/yuanbao.png" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://yummyisminer.xyz/blog/posts/c1b447ed/&title=《自定义XMind转metersphere支持的Excel格式工具》 — M.Y_敏兒&pic=https://yummyisminer.xyz/blog/img/yuanbao.png" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -296,22 +333,24 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://yummyisminer.xyz/blog/posts/8634668/&title=《之前用Java写的接口测试框架实现》 — M.Y_敏兒&source=翻笔记看到自己以前用Java写的接口测试框架实现流程图，跟现在所在的公司用的实现思路完全不一样，当然入职后也在现公司的框架基础上，做了很多优化，后续有机会..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://yummyisminer.xyz/blog/posts/c1b447ed/&title=《自定义XMind转metersphere支持的Excel格式工具》 — M.Y_敏兒&source=1、目前metersphere支持的xmind用例格式，对于用例标题只能写在一个节点上，而不支持多级节点拼接，不好发散测试点，且需要手动复制前缀
+
+   ..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://yummyisminer.xyz/blog/posts/8634668/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://yummyisminer.xyz/blog/posts/c1b447ed/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《之前用Java写的接口测试框架实现》 — M.Y_敏兒&url=https://yummyisminer.xyz/blog/posts/8634668/&via=https://yummyisminer.xyz/blog" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《自定义XMind转metersphere支持的Excel格式工具》 — M.Y_敏兒&url=https://yummyisminer.xyz/blog/posts/c1b447ed/&via=https://yummyisminer.xyz/blog" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://yummyisminer.xyz/blog/posts/8634668/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://yummyisminer.xyz/blog/posts/c1b447ed/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -331,21 +370,13 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/blog/posts/c1b447ed/" id="post-prev" class="post-nav-link">
-        <h4 class="title" >
-          上一篇：自定义XMind转metersphere支持的Excel格式工具
-        </h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/blog/posts/c841b6f0/" id="post-next" class="post-nav-link">
-        <h4 class="title" data-hover="下一篇：解析xmind用例更新至禅道工具">下一篇：解析xmind用例更新至禅道工具</h4>
+      <a href="/blog/posts/8634668/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：之前用Java写的接口测试框架实现">下一篇：之前用Java写的接口测试框架实现</h4>
       </a>
     </div>
   
@@ -461,7 +492,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://yummyisminer.xyz/blog/posts/8634668/&title=《之前用Java写的接口测试框架实现》 — M.Y_敏兒&pic=https://yummyisminer.xyz/blog/img/yuanbao.png" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://yummyisminer.xyz/blog/posts/c1b447ed/&title=《自定义XMind转metersphere支持的Excel格式工具》 — M.Y_敏兒&pic=https://yummyisminer.xyz/blog/img/yuanbao.png" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -471,22 +502,24 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://yummyisminer.xyz/blog/posts/8634668/&title=《之前用Java写的接口测试框架实现》 — M.Y_敏兒&source=翻笔记看到自己以前用Java写的接口测试框架实现流程图，跟现在所在的公司用的实现思路完全不一样，当然入职后也在现公司的框架基础上，做了很多优化，后续有机会..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://yummyisminer.xyz/blog/posts/c1b447ed/&title=《自定义XMind转metersphere支持的Excel格式工具》 — M.Y_敏兒&source=1、目前metersphere支持的xmind用例格式，对于用例标题只能写在一个节点上，而不支持多级节点拼接，不好发散测试点，且需要手动复制前缀
+
+   ..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://yummyisminer.xyz/blog/posts/8634668/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://yummyisminer.xyz/blog/posts/c1b447ed/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《之前用Java写的接口测试框架实现》 — M.Y_敏兒&url=https://yummyisminer.xyz/blog/posts/8634668/&via=https://yummyisminer.xyz/blog" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《自定义XMind转metersphere支持的Excel格式工具》 — M.Y_敏兒&url=https://yummyisminer.xyz/blog/posts/c1b447ed/&via=https://yummyisminer.xyz/blog" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://yummyisminer.xyz/blog/posts/8634668/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://yummyisminer.xyz/blog/posts/c1b447ed/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -497,7 +530,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p class="wechatshare">扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aS27EIBAFwLn/pZ3tbIxfN4wiQ7GKJpahvGj1h88nXtfX+v5l/OT4+btn7t68YGFgYLyWcQ3XeIN84/z9499vd8TAwDiAcbfx+JkkNOewfF8MDAyMHiNJFvMPgYGBgTHDGKeMeeH6zwEXAwPjhYz81b0+WBX2w1ocAwPjhYyZo/z675/MNzAwMF7FuIorH0b2hpRXa2FgYOzNqLbS5htn4/f0hgoYGBjnMPILEMlL85ZcHrg/vS+NgYGxBaOatFXfkJBmUlIMDIyTGXk7fj7gLgi1GBgYWzOqBWpy3CTdzIea0X8xMDC2ZsxfvGg2yFoD1AVDTQwMjC0YvSSyNwDoBfqH02JgYGzEGBelSXnZSwfzzxcNOzEwMA5g9K55VYvMakJZgGFgYGzNSA5XLSDzFn/1Ekaz/sbAwNiCUW3H94LmqjHnw+4YGBjbMZIgO79ZAus14ArZKAYGxhaMJGmrXhRLQnmvSMbAwDiHUd14PgOdGV5GpTUGBsamjPyga8va5AyFE2JgYBzDSDaulrj5xYsqBgMD40xGL1GrNuN6g9KHVBIDA2NTxlVceYNsJsUsl9AYGBhbM/LVO26eLPb6ZmUMBgbGaxkzR5wZRlavgDykiRgYGAcw8uJ27fBgGRIDAwNj+uLpfHEbNd0wMDAw4gFn3izLRwKLAy4GBsYLGUkR27sqUb2omgRoDAyM0xh56Zg366uHWDUqwMDA2I7xB2yUxgRDdsmvAAAAAElFTkSuQmCC" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACI0lEQVR42u3ay27CMBAF0P7/T6fbboB7PaFS7OMVognxodLgefz8xOv6s96/k9+bXHnzwsDAeCzjerteXdNuN3nK5C4MDIwTGK+2NQm4yV/bu16+j4GBgRE88v0m8lCOgYGBMWfcdeBbC9MYGBgnM/LA936jyUru+mIujoGB8UBGXnX//9df6W9gYGA8inGN110NzsmuMDAw9mbcVeJfG9RoX2NgYJzMmLQt146PeThOEl0MDIy9GW2xPkcmzc5k8CIK+hgYGFsz8jQySUQnX0Ry/Ye7MDAwNmVMAG0ZbjKW8eF4ioGBcQCjHYBYG3JdOzhGKTQGBsYBjLZ8n1+/lsrWIyAYGBgHM9Y2tDZgMaqbYWBgbM3Ii/L5hyaPzIc5irEPDAyMTRltW3FSdJu3EIrGAAYGxnaMfGosCbWTsbCi7zoZfsPAwHgsI39knlgmqe98LAMDA+McRjs2kcS9NmRjYGBgJFMK9bFs0Ji8oVKIgYFxAKMNl/lhbq0BkLc/i4QWAwPj4Yy8ELaWdk6KekVZEAMDY2vG2iBXm9zmoxvtlR/+JxgYGFswrnLdGyKTw190DMXAwNiaMQmLa6Ngk0GNtsyHgYGxEyNvYeYHu0lbdA2MgYFxAiNJXNtxivnXVPxWYGBgYJTUdpijbWSOAi4GBsbWjHYr80ZmUW7DwMA4gNEWxXJqG2TbpgUGBsYJjLXUMSG1LYS8hTnqb2BgYDyJ8QubI1bklQ56+QAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 
